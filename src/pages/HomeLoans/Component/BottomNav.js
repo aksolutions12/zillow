@@ -3,12 +3,11 @@ import { Link } from "react-router-dom";
 
 const BottomNav = ({ activeTab }) => {
   const tabNames = [
-    { name: "The Process", link: "/agentFinder/agents" },
+    { name: "The Buying Process", link: "/agentFinder/agents" },
     { name: "Affordability Calculator", link: "/agentFinder/homeimprovement" },
     { name: "Loans Options", link: "/agentFinder/builders" },
-    { name: "Inspectors", link: "/agentFinder/inspectors" },
-    { name: "Photographers", link: "/agentFinder/photographers" },
-    { name: "Other", link: "/agentFinder/other" },
+    { name: "Refinance", link: "/agentFinder/inspectors" },
+    { name: "My Dashboard", link: "/agentFinder/photographers" },
   ];
 
   return (
@@ -17,8 +16,10 @@ const BottomNav = ({ activeTab }) => {
         <Link
           key={name}
           to={link}
-          className={`tab text-black w-full sm:w-auto font-normal pl-4 lg:text-base md:text-base md:font-normal leading-tight md:leading-normal tracking-normal md:tracking-wide ${
-            activeTab === name ? "underline font-bold text-blue-800 " : ""
+          className={`tab text-blue-700 w-full sm:w-auto font-bold pl-4 lg:text-base md:text-base md:font-sbold leading-tight md:leading-normal tracking-normal md:tracking-wide ${
+            activeTab === name
+              ? "font-bold text-blue-800 hover:text-blue-900 hover:underline"
+              : "hover:text-blue-900 hover:underline"
           }`}
         >
           {name}
