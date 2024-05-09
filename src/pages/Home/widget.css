@@ -1,0 +1,14 @@
+.widget-container {
+  display: flex;
+  justify-content: center;
+}
+
+.search-icon.focused {
+  background-color: #f2faff;
+}
+
+.widgetBackground {
+  background-image: url("../../assets/images/womenonporch.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
