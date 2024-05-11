@@ -15,6 +15,8 @@ import Photographers from "./pages/AgentFinder/Photographers";
 import Other from "./pages/AgentFinder/Other";
 import Builder from "./pages/AgentFinder/Builder";
 import HomeLoans from "./pages/HomeLoans/HomeLoans";
+import Refinance from "./pages/HomeLoans/Refinance/Refinance";
+import HomeAgentPremium from "./pages/ZillowAgentPremium/HomeAgentPremium";
 
 const App = () => {
   return (
@@ -50,8 +52,12 @@ const App = () => {
 
           <Route path="/agentFinder/builders" element={<Builder />} />
 
-          {/* HelpPage */}
+          {/* Home Loans Section */}
           <Route path="/homeloans" element={<HomeLoans />} />
+          <Route path="/homeloans/refinance" element={<Refinance />} />
+
+          {/* Agent Premium */}
+          <Route path="/agentPremium" element={<HomeAgentPremium />} />
 
           <Route path="*" element={<NotFoundPage />} />
           {/* Catch-all route for not found */}

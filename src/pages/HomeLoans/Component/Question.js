@@ -22,7 +22,7 @@ const Question = () => {
       </div>
 
       {/* Second Div */}
-      <div className="flex flex-row item-center gap-4 ">
+      <div id="buyingProcess" className="flex flex-row item-center gap-4 ">
         <div className="w-1/2 flex items-center">
           <div
             id="accordion-collapse"

@@ -9,12 +9,22 @@ import MeetCards from "./Component/MeetCards";
 import Question from "./Component/Question";
 import MoreQuestions from "./Component/MoreQuestions";
 import LoanOptions from "./Component/LoanOptions";
+import ReviewsSection from "./Component/ReviewsSection";
+import JourneySection from "./Component/JourneySection";
+import CalculateSection from "./Component/CalculateSection";
 
 const HomeLoans = () => {
+  const scrollToSection = (link) => {
+    const section = document.querySelector(link);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <Navbar logoUrl={logoUrl} />
-      <BottomNav />
+      <BottomNav scrollToSection={scrollToSection} />
       <HeroLoans
         title="Get home on your budget with Zillow Home Loans"
         subtitle="Start your home buying journey with confidence by getting pre-qualified with Zillow Home Loans."
@@ -24,7 +34,10 @@ const HomeLoans = () => {
       <MeetCards />
       <Question />
       <MoreQuestions />
+      <CalculateSection />
       <LoanOptions />
+      <ReviewsSection />
+      <JourneySection />
 
       <FooterLoans />
     </>

@@ -8,7 +8,7 @@ const PurchaseSection = ({ cards }) => (
       {cards.map((card, index) => (
         <div
           key={index}
-          className="border bg-white border-slate-200 rounded-lg shadow-sm divide-y divide-slate-200"
+          className="border bg-white border-slate-200 rounded-lg shadow-sm divide-y divide-slate-200 shadow-md"
         >
           <div className="p-6 flex items-center flex-col text-center">
             <h2 className="text-xl leading-6 font-bold text-slate-900">
@@ -60,7 +60,7 @@ const RefinanceSection = ({ cards }) => (
       {cards.map((card, index) => (
         <div
           key={index}
-          className="border bg-white border-slate-200 rounded-lg shadow-sm divide-y divide-slate-200"
+          className="border bg-white border-slate-200 rounded-lg shadow-sm divide-y divide-slate-200 shadow-md"
         >
           <div className="p-6 flex items-center flex-col text-center">
             <h2 className="text-xl leading-6 font-bold text-slate-900">

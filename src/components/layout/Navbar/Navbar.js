@@ -1,8 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { theme } from "../../../styles/theme/theme";
 import { Link } from "react-router-dom";
-import DropNav from "./DropNav";
+import BuyDrop from "./BuyDrop";
+import { buydropdata } from "../../../data/BuyDrop";
+import { rentfropdata } from "../../../data/RentDrop";
+import { selldropdata } from "../../../data/SellDrop";
+import { agentdropdata } from "../../../data/AgentDrop";
+import { homeloandrop } from "../../../data/HomeLoansDrop";
 
 const NavbarWrapper = styled.nav`
   position: relative;
@@ -12,10 +17,6 @@ const NavbarWrapper = styled.nav`
   justify-content: space-between;
   padding: 20px;
   height: 90px;
-
-  @media (max-width: ${theme.breakpoints.md}) {
-    justify-content: center;
-  }
 `;
 
 const Logo = styled.img`
@@ -63,51 +64,53 @@ const HamburgerIcon = styled.div`
   }
 `;
 
-const DropNavWrapper = styled.div`
+const BuyDropWrapper = styled.div`
   position: absolute;
-  top: calc(100% + 5px);
+  top: 100%;
   left: 0;
+  width: 100%;
+  background: ${theme.colors.white};
   z-index: 999;
 `;
 
-const HorizontalLine = styled.div`
-  position: absolute;
-  top: calc(100% + 2px);
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: ${theme.colors.gray}; /* Adjust the color as needed */
-`;
-
 const Navbar = ({ logoUrl }) => {
-  const [showDropNav, setShowDropNav] = useState(false);
-  const dropNavRef = useRef(null);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+
+  const handleDropdownHover = (dropdown) => {
+    setActiveDropdown(dropdown);
+  };
+
+  const handleDropdownLeave = () => {
+    setActiveDropdown(null);
+  };
 
   const toggleHamburger = () => {
-    setShowDropNav(!showDropNav);
-  };
-
-  const handleMouseEnter = () => {
-    setShowDropNav(true);
-  };
-
-  const handleMouseLeave = () => {
-    setShowDropNav(false);
+    setActiveDropdown(activeDropdown === "hamburger" ? null : "hamburger");
   };
 
   return (
     <NavbarWrapper>
-      <NavList onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        <NavItem hideOnMobile>Buy</NavItem>
-        <NavItem hideOnMobile>Rent</NavItem>
-        <NavItem hideOnMobile>Sell</NavItem>
-        <NavItem hideOnMobile>
+      <NavList>
+        <NavItem hideOnMobile onMouseEnter={() => handleDropdownHover("buy")}>
+          Buy
+        </NavItem>
+        <NavItem hideOnMobile onMouseEnter={() => handleDropdownHover("rent")}>
+          Rent
+        </NavItem>
+        <NavItem hideOnMobile onMouseEnter={() => handleDropdownHover("sell")}>
+          Sell
+        </NavItem>
+        <NavItem
+          hideOnMobile
+          onMouseEnter={() => handleDropdownHover("homeloan")}
+        >
           <Link to="/homeloans">Home Loans</Link>
         </NavItem>
-        <NavItem hideOnMobile>
+        <NavItem hideOnMobile onMouseEnter={() => handleDropdownHover("agent")}>
           <Link to="/agentFinder/agents">Agent Finder</Link>
         </NavItem>
       </NavList>
+
       <Link to="/">
         <Logo src={logoUrl} alt="Logo" />
       </Link>
@@ -123,21 +126,37 @@ const Navbar = ({ logoUrl }) => {
         <NavItem hideOnMobile>SignUp</NavItem>
       </NavList>
 
-      <HamburgerIcon onClick={toggleHamburger}>
-        {showDropNav ? "✕" : "☰"}
-      </HamburgerIcon>
-
-      {/* Render DropNav component and horizontal line outside of Navbar */}
-      {showDropNav && (
-        <>
-          <DropNavWrapper ref={dropNavRef}>
-            <DropNav />
-          </DropNavWrapper>
-          <HorizontalLine />
-        </>
+      {activeDropdown && (
+        <BuyDropWrapper
+          onMouseEnter={() => handleDropdownHover(activeDropdown)}
+          onMouseLeave={handleDropdownLeave}
+        >
+          <BuyDrop headings={getDropdownData(activeDropdown)} />
+        </BuyDropWrapper>
       )}
+
+      <HamburgerIcon onClick={toggleHamburger}>
+        {activeDropdown === "hamburger" ? "✕" : "☰"}
+      </HamburgerIcon>
     </NavbarWrapper>
   );
+};
+
+const getDropdownData = (activeDropdown) => {
+  switch (activeDropdown) {
+    case "buy":
+      return buydropdata;
+    case "rent":
+      return rentfropdata;
+    case "sell":
+      return selldropdata;
+    case "agent":
+      return agentdropdata;
+    case "homeloan":
+      return homeloandrop;
+    default:
+      return [];
+  }
 };
 
 export default Navbar;

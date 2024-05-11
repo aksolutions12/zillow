@@ -5,12 +5,36 @@ import Card2 from "../../components/Card/Card2";
 const CardsSection = () => {
   // Data for the cards
   const cardData = [
-    { heading: "Real Estate Trends", buttonText: "Get Started" },
-    { heading: "Property Management", buttonText: "Get Started" },
-    { heading: "Home Buying Guide", buttonText: "Get Started" },
-    { heading: "Investment Strategies", buttonText: "Get Started" },
-    { heading: "Interior Design Tips", buttonText: "Get Started" },
-    { heading: "Renting vs Buying", buttonText: "Get Started" },
+    {
+      heading: "I’m an agent or broker",
+      buttonText: "Get Started",
+      link: "/agentPremium",
+    },
+    {
+      heading: "I’m a property manager",
+      buttonText: "Get Started",
+      link: "/property-management",
+    },
+    {
+      heading: "I’m a landlord",
+      buttonText: "Get Started",
+      link: "/home-buying-guide",
+    },
+    {
+      heading: "I’m a lender or loan officer",
+      buttonText: "Get Started",
+      link: "/investment-strategies",
+    },
+    {
+      heading: "I’m a builder",
+      buttonText: "Get Started",
+      link: "/interior-design-tips",
+    },
+    {
+      heading: "I am a brand or local advertiser",
+      buttonText: "Get Started",
+      link: "/renting-vs-buying",
+    },
   ];
 
   return (
@@ -22,6 +46,7 @@ const CardsSection = () => {
               imageURL={imageURL}
               title={data.heading}
               buttonText={data.buttonText}
+              link={data.link}
             />
           </div>
         ))}
