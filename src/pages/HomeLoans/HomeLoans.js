@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/layout/Navbar/Navbar";
 import logoUrl from "../../assets/images/zhl-logo-default.png";
 import FooterLoans from "./Component/FooterLoans";
@@ -14,17 +14,32 @@ import JourneySection from "./Component/JourneySection";
 import CalculateSection from "./Component/CalculateSection";
 
 const HomeLoans = () => {
+  const [isMobile, setIsMobile] = useState(false);
   const scrollToSection = (link) => {
     const section = document.querySelector(link);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
     }
   };
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+
+    // Initial check
+    handleResize();
+
+    // Listen to window resize events
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <>
       <Navbar logoUrl={logoUrl} />
-      <BottomNav scrollToSection={scrollToSection} />
+      {!isMobile && <BottomNav scrollToSection={scrollToSection} />}
       <HeroLoans
         title="Get home on your budget with Zillow Home Loans"
         subtitle="Start your home buying journey with confidence by getting pre-qualified with Zillow Home Loans."

@@ -25,12 +25,14 @@ const AboutRecommendations = () => {
           don't miss out.
         </p>
       </div>
-      <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {dropdownData.map((data, index) => (
-          <div key={index} className="relative">
-            <Dropdown mainName={data.mainName} options={data.options} />
-          </div>
-        ))}
+      <div className="flex items-center justify-center">
+        <div className="relative grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 ">
+          {dropdownData.map((data, index) => (
+            <div key={index} className="relative">
+              <Dropdown mainName={data.mainName} options={data.options} />
+            </div>
+          ))}
+        </div>
       </div>
       <div style={{ marginBottom: dropdownHeight }} />{" "}
       {/* Adjusts spacing based on dropdown height */}

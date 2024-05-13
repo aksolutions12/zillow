@@ -21,20 +21,25 @@ const Question = () => {
         </p>
       </div>
 
-      {/* Second Div */}
-      <div id="buyingProcess" className="flex flex-row item-center gap-4 ">
-        <div className="w-1/2 flex items-center">
+      {/* Second Div - Responsive Accordion */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        {/* Image on small screens, accordion on large screens */}
+        <div className="w-full sm:w-1/2 order-1 sm:order-2">
+          <img src={questionomg} alt="Questionsimg" />
+        </div>
+
+        <div className="w-full sm:w-1/2 order-2 sm:order-1">
           <div
             id="accordion-collapse"
             data-accordion="collapse"
-            className="w-full "
+            className="w-full rounded-lg shadow-md overflow-hidden"
           >
             {accordionData.map((accordion, index) => (
               <div key={index}>
                 <h2>
                   <button
                     type="button"
-                    className="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                    className="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-black border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
                     onClick={() => handleAccordionClick(index)}
                     aria-expanded={activeAccordion === index ? "true" : "false"}
                     aria-controls={`accordion-collapse-body-${index + 1}`}
@@ -60,32 +65,26 @@ const Question = () => {
                     </svg>
                   </button>
                 </h2>
+
                 <div
                   id={`accordion-collapse-body-${index + 1}`}
                   className={`${
                     activeAccordion === index ? "block" : "hidden"
-                  }`}
+                  } p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900`}
                   aria-labelledby={`accordion-collapse-heading-${index + 1}`}
                 >
-                  <div className="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                    <p className="mb-2 text-gray-500 dark:text-gray-400">
-                      {accordion.answer}
-                    </p>
-                  </div>
+                  <p className="mb-2 text-gray-500 dark:text-gray-400">
+                    {accordion.answer}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
-
-        <div className="w-1/2">
-          <img src={questionomg} alt="Questionsimg" />
-        </div>
       </div>
     </div>
   );
 };
-
 const accordionData = [
   {
     question: "Prepare your finances",

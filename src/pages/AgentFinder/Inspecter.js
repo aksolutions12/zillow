@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/layout/Navbar/Navbar";
 import Footer from "../../components/layout/Footer/Footer";
 import BottomNav from "./BottomNav/BottomNav";
@@ -10,10 +10,26 @@ import logoUrl from "../../assets/images/zil-logo.png";
 
 const Inspecter = () => {
   const specialties = ["Pest Inspection", "General Inspection"];
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+
+    // Initial check
+    handleResize();
+
+    // Listen to window resize events
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <>
       <Navbar logoUrl={logoUrl} />
-      <BottomNav activeTab="Inspectors" />
+      {!isMobile && <BottomNav hideOnMobile activeTab="Inspectors" />}
       <FindSection
         heading="Find home inspectors in your area."
         placeholder="Home Inspector Name"

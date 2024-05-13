@@ -2,21 +2,36 @@ import React from "react";
 import styled from "styled-components";
 
 const Input = styled.input`
-  width: 204px;
+  /* Base styles */
+  width: 100%;
   height: 43px;
   border-radius: 4px;
   border: 1px solid #d1d5db;
   padding: 10px;
   font-size: 14px;
+
+  /* Responsive adjustments */
+  @media (min-width: 768px) {
+    /* Medium screens and above */
+    width: 204px; /* Adjust width for larger screens if needed */
+  }
 `;
 
 const Select = styled.select`
-  width: 204px;
+  /* Base styles */
+  width: 100%;
   height: 43px;
   border-radius: 4px;
   border: 1px solid #d1d5db;
   padding: 10px;
   font-size: 14px;
+  appearance: none; /* Remove default browser select styles */
+
+  /* Responsive adjustments */
+  @media (min-width: 768px) {
+    /* Medium screens and above */
+    width: 204px; /* Adjust width for larger screens if needed */
+  }
 `;
 
 const FindSection = ({ heading, placeholder, specialties }) => {
@@ -25,9 +40,10 @@ const FindSection = ({ heading, placeholder, specialties }) => {
   return (
     <div className="bg-white p-4">
       <h2 className="text-4xl font-bold mb-4">{heading}</h2>
-      <div className="flex flex-wrap flex-row items-center bg-gray-100 p-5 ">
+
+      <div className="flex flex-wrap flex-row items-center bg-gray-100 p-5">
         {/* Location Input */}
-        <div className="lg:w-1/4 md:w-1/2 sm:w-full">
+        <div className="w-full mb-4">
           <label
             htmlFor="input-location"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -38,7 +54,7 @@ const FindSection = ({ heading, placeholder, specialties }) => {
         </div>
 
         {/* Name Input */}
-        <div className="lg:w-1/4 md:w-1/2 sm:w-full">
+        <div className="w-full mb-4">
           <label
             htmlFor="input-name"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -49,7 +65,7 @@ const FindSection = ({ heading, placeholder, specialties }) => {
         </div>
 
         {/* Specialties Select */}
-        <div className="lg:w-1/4 md:w-1/2 sm:w-full">
+        <div className="w-full mb-4">
           <label
             htmlFor="select-specialties"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -69,7 +85,7 @@ const FindSection = ({ heading, placeholder, specialties }) => {
         </div>
 
         {/* Languages Select */}
-        <div className="lg:w-1/4 md:w-1/2 sm:w-full">
+        <div className="w-full mb-4">
           <label
             htmlFor="select-languages"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"

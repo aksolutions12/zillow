@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/layout/Navbar/Navbar";
 import Footer from "../../components/layout/Footer/Footer";
 import BottomNav from "./BottomNav/BottomNav";
@@ -11,10 +11,28 @@ import logoUrl from "../../assets/images/zil-logo.png";
 
 const AgentFinder = () => {
   const specialties = ["Buyer's Agent", "Consulting"];
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+
+    // Initial check
+    handleResize();
+
+    // Listen to window resize events
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
       <Navbar logoUrl={logoUrl} />
-      <BottomNav activeTab="Agents" />
+      {!isMobile && <BottomNav hideOnMobile activeTab="Agents" />}
       <HeroAgent
         title="A great agent makes all the difference"
         subtitle="There's a reason 89% of buyers used an agent last year — a local agent has the inside scoop on your market and can guide you through the buying process from start to finish."

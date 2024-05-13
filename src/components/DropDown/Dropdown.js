@@ -8,7 +8,7 @@ const Dropdown = ({ mainName, options }) => {
     <div className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="text-zinc-800 font-semibold py-4 px-4 flex items-center relative"
+        className="text-zinc-800 font-semibold py-4  flex items-center relative"
         style={{ width: "270px", height: "24px" }}
       >
         <span className="flex-1">{mainName}</span>

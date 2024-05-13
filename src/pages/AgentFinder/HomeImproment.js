@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/layout/Navbar/Navbar";
 import Footer from "../../components/layout/Footer/Footer";
 import BottomNav from "./BottomNav/BottomNav";
@@ -9,11 +9,27 @@ import findstory from "../../assets/images/find agent.png";
 import logoUrl from "../../assets/images/zil-logo.png";
 
 const HomeImproment = () => {
+  const [isMobile, setIsMobile] = useState(false);
   const specialties = ["Engineering", "Carpentry"];
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+
+    // Initial check
+    handleResize();
+
+    // Listen to window resize events
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <>
       <Navbar logoUrl={logoUrl} />
-      <BottomNav activeTab="Home Improvement" />
+      {!isMobile && <BottomNav hideOnMobile activeTab="Home Improvement" />}
       <FindSection
         heading="Find a Home Improvement Professional"
         placeholder="Enter Professional Name"

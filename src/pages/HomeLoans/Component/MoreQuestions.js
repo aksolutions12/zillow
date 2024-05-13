@@ -12,11 +12,11 @@ export default function MoreQuestions() {
           full list of financing steps in our article about the mortgage
           application process.
         </p>
-        <div className="flex gap-4 justify-center w-full ">
-          <button className="bg-blue-500 hover:bg-blue-600 w-72 text-white font-bold py-2 px-4 rounded transition duration-300">
+        <div className="flex flex-col lg:flex-row md:flex-row sm:flex-col gap-4 justify-center w-full">
+          <button className="bg-blue-500 hover:bg-blue-600 w-full lg:w-72 text-white font-bold py-2 px-4 rounded transition duration-300">
             Get pre-qualified
           </button>
-          <OutlinedButton className=" w-72 text-white border border-white hover:bg-white  font-bold py-2 px-4 rounded transition duration-300">
+          <OutlinedButton className="w-full lg:w-72 text-white border border-white hover:bg-white font-bold py-2 px-4 rounded transition duration-300">
             See the full list →
           </OutlinedButton>
         </div>

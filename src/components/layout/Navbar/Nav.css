@@ -1,0 +1,17 @@
+const MobileMenu = styled.nav`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 90px;
+  left: 0;
+  background: ${theme.colors.white};
+  width: 100%;
+  padding: 20px;
+  border-bottom: 1px solid ${theme.colors.gray};
+
+  @media (min-width: ${theme.breakpoints.md}) {
+    display: none;
+  }
+`;
+
+// Rest of your styled-components and the getDropdownData function remain unchanged

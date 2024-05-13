@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/layout/Navbar/Navbar";
 import Footer from "../../components/layout/Footer/Footer";
 import BottomNav from "./BottomNav/BottomNav";
@@ -15,10 +15,27 @@ const Photographers = () => {
     "Zillow Video Walkthrough",
     "Zillow Selected Photographer",
   ];
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+
+    // Initial check
+    handleResize();
+
+    // Listen to window resize events
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <>
       <Navbar logoUrl={logoUrl} />
-      <BottomNav activeTab="Photographers" />
+      {!isMobile && <BottomNav hideOnMobile activeTab="Photographers" />}
       <HeroAgent
         title="Elevate your listings with immersive media"
         subtitle="Listing Media Services empowers agents to capture the true essence of a home with high-quality media. From stunning high-quality photography, virtual tours, and complementary interactive floor plans."

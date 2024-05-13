@@ -8,6 +8,7 @@ import { rentfropdata } from "../../../data/RentDrop";
 import { selldropdata } from "../../../data/SellDrop";
 import { agentdropdata } from "../../../data/AgentDrop";
 import { homeloandrop } from "../../../data/HomeLoansDrop";
+import { Menu, Close } from "@mui/icons-material"; // Importing icons from MUI
 
 const NavbarWrapper = styled.nav`
   position: relative;
@@ -17,6 +18,13 @@ const NavbarWrapper = styled.nav`
   justify-content: space-between;
   padding: 20px;
   height: 90px;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    background: ${(props) =>
+      props.transparent ? "transparent" : theme.colors.white};
+    padding: 10px;
+    height: auto;
+  }
 `;
 
 const Logo = styled.img`
@@ -25,15 +33,19 @@ const Logo = styled.img`
   margin: 0 20px;
 
   @media (max-width: ${theme.breakpoints.md}) {
-    margin: 0;
+    margin: 0 auto;
   }
 `;
 
 const NavList = styled.ul`
   display: flex;
   list-style: none;
-  margin: 0 20px;
+  margin: 0;
   position: relative;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    display: none;
+  }
 `;
 
 const NavItem = styled.li`
@@ -71,10 +83,23 @@ const BuyDropWrapper = styled.div`
   width: 100%;
   background: ${theme.colors.white};
   z-index: 999;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: ${theme.colors.white};
+    z-index: 999;
+    overflow-y: auto;
+    padding: 20px;
+  }
 `;
 
 const Navbar = ({ logoUrl }) => {
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleDropdownHover = (dropdown) => {
     setActiveDropdown(dropdown);
@@ -84,49 +109,73 @@ const Navbar = ({ logoUrl }) => {
     setActiveDropdown(null);
   };
 
-  const toggleHamburger = () => {
-    setActiveDropdown(activeDropdown === "hamburger" ? null : "hamburger");
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
   };
 
   return (
-    <NavbarWrapper>
-      <NavList>
-        <NavItem hideOnMobile onMouseEnter={() => handleDropdownHover("buy")}>
-          Buy
-        </NavItem>
-        <NavItem hideOnMobile onMouseEnter={() => handleDropdownHover("rent")}>
-          Rent
-        </NavItem>
-        <NavItem hideOnMobile onMouseEnter={() => handleDropdownHover("sell")}>
-          Sell
-        </NavItem>
-        <NavItem
-          hideOnMobile
-          onMouseEnter={() => handleDropdownHover("homeloan")}
-        >
-          <Link to="/homeloans">Home Loans</Link>
-        </NavItem>
-        <NavItem hideOnMobile onMouseEnter={() => handleDropdownHover("agent")}>
-          <Link to="/agentFinder/agents">Agent Finder</Link>
-        </NavItem>
-      </NavList>
+    <NavbarWrapper transparent={!mobileMenuOpen}>
+      {mobileMenuOpen && (
+        <HamburgerIcon onClick={toggleMobileMenu}>
+          <Close />
+        </HamburgerIcon>
+      )}
+      {!mobileMenuOpen && (
+        <HamburgerIcon onClick={toggleMobileMenu}>
+          <Menu />
+        </HamburgerIcon>
+      )}
+
+      {!mobileMenuOpen && (
+        <NavList>
+          <NavItem hideOnMobile onMouseEnter={() => handleDropdownHover("buy")}>
+            Buy
+          </NavItem>
+          <NavItem
+            hideOnMobile
+            onMouseEnter={() => handleDropdownHover("rent")}
+          >
+            Rent
+          </NavItem>
+          <NavItem
+            hideOnMobile
+            onMouseEnter={() => handleDropdownHover("sell")}
+          >
+            Sell
+          </NavItem>
+          <NavItem
+            hideOnMobile
+            onMouseEnter={() => handleDropdownHover("homeloan")}
+          >
+            <Link to="/homeloans">Home Loans</Link>
+          </NavItem>
+          <NavItem
+            hideOnMobile
+            onMouseEnter={() => handleDropdownHover("agent")}
+          >
+            <Link to="/agentFinder/agents">Agent Finder</Link>
+          </NavItem>
+        </NavList>
+      )}
 
       <Link to="/">
         <Logo src={logoUrl} alt="Logo" />
       </Link>
 
-      <NavList>
-        <NavItem hideOnMobile>Manage Rentals</NavItem>
-        <NavItem hideOnMobiles>
-          <Link to="/advertise">Advertise</Link>
-        </NavItem>
-        <NavItem hideOnMobile>
-          <Link to="/help">Help</Link>
-        </NavItem>
-        <NavItem hideOnMobile>SignUp</NavItem>
-      </NavList>
+      {!mobileMenuOpen && (
+        <NavList>
+          <NavItem hideOnMobile>Manage Rentals</NavItem>
+          <NavItem hideOnMobile>
+            <Link to="/advertise">Advertise</Link>
+          </NavItem>
+          <NavItem hideOnMobile>
+            <Link to="/help">Help</Link>
+          </NavItem>
+          <NavItem hideOnMobile>SignUp</NavItem>
+        </NavList>
+      )}
 
-      {activeDropdown && (
+      {activeDropdown && !mobileMenuOpen && (
         <BuyDropWrapper
           onMouseEnter={() => handleDropdownHover(activeDropdown)}
           onMouseLeave={handleDropdownLeave}
@@ -134,10 +183,6 @@ const Navbar = ({ logoUrl }) => {
           <BuyDrop headings={getDropdownData(activeDropdown)} />
         </BuyDropWrapper>
       )}
-
-      <HamburgerIcon onClick={toggleHamburger}>
-        {activeDropdown === "hamburger" ? "✕" : "☰"}
-      </HamburgerIcon>
     </NavbarWrapper>
   );
 };

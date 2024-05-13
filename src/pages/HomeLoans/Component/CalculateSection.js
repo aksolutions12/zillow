@@ -17,13 +17,13 @@ const CalculateSection = () => {
   return (
     <div id="affordabilityCalculator" className=" flex-col py-4 bg-white ">
       <div className="flex items-center flex-col">
-        <div className="pt-10">
-          <h1 className="font-bold text-3xl">
+        <div className="pt-10 ">
+          <h1 className="font-bold text-3xl text-center">
             Take the next step with an Affordability Calculator
           </h1>
         </div>
       </div>
-      <div className="flex flex-row items-center">
+      <div className="flex flex-row items-center pl-10">
         <div>
           <img src={Calculteimg} className="w-28 h-28" alt="Calculteimg" />
         </div>
