@@ -11,6 +11,7 @@ import footerart from "../../../assets/images/footer-art.svg";
 import { Rowing } from "@mui/icons-material";
 import Icon from "@mui/material/Icon";
 const FooterWrapper = styled.footer`
+  background-color: white;
   text-align: center;
   padding: 20px;
 `;

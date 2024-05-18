@@ -38,12 +38,12 @@ const FindSection = ({ heading, placeholder, specialties }) => {
   const languages = ["English", "Spanish", "French", "German"];
 
   return (
-    <div className="bg-white p-4">
+    <div className="bg-gray-50 p-4 mt-5">
       <h2 className="text-4xl font-bold mb-4">{heading}</h2>
 
-      <div className="flex flex-wrap flex-row items-center bg-gray-100 p-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 bg-gray-100 p-5">
         {/* Location Input */}
-        <div className="w-full mb-4">
+        <div className="mb-4">
           <label
             htmlFor="input-location"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -54,7 +54,7 @@ const FindSection = ({ heading, placeholder, specialties }) => {
         </div>
 
         {/* Name Input */}
-        <div className="w-full mb-4">
+        <div className="mb-4">
           <label
             htmlFor="input-name"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -65,7 +65,7 @@ const FindSection = ({ heading, placeholder, specialties }) => {
         </div>
 
         {/* Specialties Select */}
-        <div className="w-full mb-4">
+        <div className="mb-4">
           <label
             htmlFor="select-specialties"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -85,7 +85,7 @@ const FindSection = ({ heading, placeholder, specialties }) => {
         </div>
 
         {/* Languages Select */}
-        <div className="w-full mb-4">
+        <div className="mb-4">
           <label
             htmlFor="select-languages"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"

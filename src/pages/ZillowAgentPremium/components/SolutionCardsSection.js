@@ -13,11 +13,11 @@ export default function SolutionCardsSection() {
   return (
     <div className="bg-white py-24">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
+        <div className=" flex flex-col items-center text-center">
           <h2 className="text-3xl leading-9 font-extrabold text-zinc-900">
             Find the right real estate solution for you
           </h2>
-          <p className="mt-4 text-lg leading-6 text-zinc-600">
+          <p className="mt-4 text-base leading-6 text-zinc-600 w-1/2 ">
             Whether you work independently or lead a large team of agents, we
             have tailored options to grow your real estate network.
           </p>

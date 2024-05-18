@@ -19,8 +19,8 @@ export const buydropdata = [
     subparts: [
       { name: "Buyer's Guide", link: "#" },
       { name: "Foreclosure Center", link: "#" },
-      { name: "Real Estate App", link: "#" },
-      { name: "Down Payment Assistance", link: "#" },
+      { name: "Real Estate App", link: "/buy/appdownload" },
+      { name: "Down Payment Assistance", link: "/downPayment" },
     ],
   },
 ];

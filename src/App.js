@@ -17,6 +17,10 @@ import Builder from "./pages/AgentFinder/Builder";
 import HomeLoans from "./pages/HomeLoans/HomeLoans";
 import Refinance from "./pages/HomeLoans/Refinance/Refinance";
 import HomeAgentPremium from "./pages/ZillowAgentPremium/HomeAgentPremium";
+import BlogHome from "./pages/ZillowAgentPremium/Blog/BlogHome";
+import BlogCategory from "./pages/ZillowAgentPremium/Blog/Components/BlogCategory";
+import AppDownloadHome from "./pages/Other Pages/AppDownload/AppDownloadHome";
+import DownPayementHome from "./pages/Other Pages/DownPayement/DownPayementHome";
 
 const App = () => {
   return (
@@ -25,6 +29,8 @@ const App = () => {
         <GlobalStyles />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/buy/appdownload" element={<AppDownloadHome />} />
+          <Route path="/downPayment" element={<DownPayementHome />} />
 
           {/* Advertise Section */}
           <Route path="/advertise" element={<Advertise />} />
@@ -58,6 +64,8 @@ const App = () => {
 
           {/* Agent Premium */}
           <Route path="/agentPremium" element={<HomeAgentPremium />} />
+          <Route path="/agentResources/blog" element={<BlogHome />} />
+          <Route path="/category/:categoryName" element={<BlogCategory />} />
 
           <Route path="*" element={<NotFoundPage />} />
           {/* Catch-all route for not found */}

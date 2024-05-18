@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled, { createGlobalStyle } from "styled-components";
 import { theme } from "../../../styles/theme/theme";
 import { Link } from "react-router-dom";
 import BuyDrop from "./BuyDrop";
@@ -9,6 +9,7 @@ import { selldropdata } from "../../../data/SellDrop";
 import { agentdropdata } from "../../../data/AgentDrop";
 import { homeloandrop } from "../../../data/HomeLoansDrop";
 import { Menu, Close } from "@mui/icons-material"; // Importing icons from MUI
+import RespNav from "./RespNav";
 
 const NavbarWrapper = styled.nav`
   position: relative;
@@ -18,7 +19,7 @@ const NavbarWrapper = styled.nav`
   justify-content: space-between;
   padding: 20px;
   height: 90px;
-
+  z-index: ${(props) => (props.transparent ? "999" : "1")};
   @media (max-width: ${theme.breakpoints.md}) {
     background: ${(props) =>
       props.transparent ? "transparent" : theme.colors.white};
@@ -100,6 +101,7 @@ const BuyDropWrapper = styled.div`
 const Navbar = ({ logoUrl }) => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const handleDropdownHover = (dropdown) => {
     setActiveDropdown(dropdown);
@@ -111,6 +113,32 @@ const Navbar = ({ logoUrl }) => {
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+    document.body.classList.toggle("no-scroll", !mobileMenuOpen);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+      setMobileMenuOpen(false);
+    };
+
+    // Initial check
+    handleResize();
+
+    // Listen to window resize events
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  const GlobalStyle = createGlobalStyle`
+  body.no-scroll {
+    overflow: hidden;
+  }
+`;
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -125,6 +153,8 @@ const Navbar = ({ logoUrl }) => {
           <Menu />
         </HamburgerIcon>
       )}
+
+      {isMobile && mobileMenuOpen && <RespNav closeMenu={closeMobileMenu} />}
 
       {!mobileMenuOpen && (
         <NavList>

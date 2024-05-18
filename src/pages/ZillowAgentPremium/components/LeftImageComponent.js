@@ -2,7 +2,7 @@ import React from "react";
 
 export default function LeftImageComponent({ imageUrl, title, description }) {
   return (
-    <div className="flex items-center bg-white p-16 py-24 lg:flex-row md:flex-col sm:flex-col">
+    <div className="flex flex-col  lg:flex-row justify-center items-center p-10 space-x-10 bg-white">
       <div className="w-full lg:w-1/2 md:w-full sm:w-full mb-6 lg:mb-0 md:mb-0 sm:mb-0">
         <img
           src={imageUrl}
