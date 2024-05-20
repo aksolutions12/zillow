@@ -10,7 +10,7 @@ export const buydropdata = [
       { name: "For sale by owner", link: "#" },
       { name: "Recent home sales", link: "#" },
       { name: "Open houses", link: "#" },
-      { name: "All homes", link: "#" },
+      { name: "All homes", link: "/allHomes" },
     ],
   },
   {

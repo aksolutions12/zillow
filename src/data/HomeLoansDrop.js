@@ -11,7 +11,10 @@ export const homeloandrop = [
     subpartsClass: "grid grid-cols-2 gap-4",
     subparts: [
       { name: "Discover Zillow Home Loans", link: "/homeloans" },
-      { name: "Estimate your monthly payment", link: "#" },
+      {
+        name: "Estimate your monthly payment",
+        link: "/mortgages/mortgagescalculator",
+      },
       { name: "See how much you qualify for", link: "#" },
     ],
   },
@@ -19,7 +22,10 @@ export const homeloandrop = [
     title: "Just getting started",
     subpartsClass: "flex flex-col gap-2",
     subparts: [
-      { name: "Calculate your budget", link: "#" },
+      {
+        name: "Calculate your budget",
+        link: "/mortgages/affordabilitycalculator",
+      },
       { name: "Learn about the mortgage process", link: "#" },
     ],
   },
@@ -29,7 +35,10 @@ export const homeloandrop = [
     subparts: [
       { name: "See today's rates", link: "#" },
       { name: "Refinance your home", link: "#" },
-      { name: "Calculate your refinance savings", link: "#" },
+      {
+        name: "Calculate your refinance savings",
+        link: "/mortgages/refinancecalculator",
+      },
     ],
   },
 ];

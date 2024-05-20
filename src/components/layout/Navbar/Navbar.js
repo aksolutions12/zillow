@@ -25,6 +25,7 @@ const NavbarWrapper = styled.nav`
       props.transparent ? "transparent" : theme.colors.white};
     padding: 10px;
     height: auto;
+    justify-content: flex-start;
   }
 `;
 
@@ -34,7 +35,11 @@ const Logo = styled.img`
   margin: 0 20px;
 
   @media (max-width: ${theme.breakpoints.md}) {
-    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    top: 50%; // Center vertically within the NavbarWrapper
+    transform: translate(-50%, -50%); // Adjust both horizontally and vertically
+    height: 35px;
   }
 `;
 
@@ -45,7 +50,19 @@ const NavList = styled.ul`
   position: relative;
 
   @media (max-width: ${theme.breakpoints.md}) {
-    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; // Align items to the right
+    padding: 20px;
+    background: ${theme.colors.white};
+    width: 200px; // Set a fixed width for the sidebar
+    height: 100vh;
+    transform: ${(props) =>
+      props.open ? "translateX(0)" : "translateX(100%)"};
+    transition: transform 0.3s ease-in-out;
   }
 `;
 
@@ -95,6 +112,16 @@ const BuyDropWrapper = styled.div`
     z-index: 999;
     overflow-y: auto;
     padding: 20px;
+  }
+`;
+const SignInLink = styled(Link)`
+  display: none;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    display: flex;
+    color: blue;
+    position: static; // Changed from absolute to static
+    margin-left: auto; // Make sure it's above other elements
   }
 `;
 
@@ -155,6 +182,7 @@ const Navbar = ({ logoUrl }) => {
       )}
 
       {isMobile && mobileMenuOpen && <RespNav closeMenu={closeMobileMenu} />}
+      <SignInLink to="/signin">Sign in</SignInLink>
 
       {!mobileMenuOpen && (
         <NavList>
@@ -171,7 +199,7 @@ const Navbar = ({ logoUrl }) => {
             hideOnMobile
             onMouseEnter={() => handleDropdownHover("sell")}
           >
-            Sell
+            <Link to="/sell">Sell</Link>
           </NavItem>
           <NavItem
             hideOnMobile
@@ -201,7 +229,7 @@ const Navbar = ({ logoUrl }) => {
           <NavItem hideOnMobile>
             <Link to="/help">Help</Link>
           </NavItem>
-          <NavItem hideOnMobile>SignUp</NavItem>
+          <NavItem hideOnMobile>Sign in</NavItem>
         </NavList>
       )}
 

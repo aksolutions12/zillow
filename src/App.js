@@ -21,6 +21,14 @@ import BlogHome from "./pages/ZillowAgentPremium/Blog/BlogHome";
 import BlogCategory from "./pages/ZillowAgentPremium/Blog/Components/BlogCategory";
 import AppDownloadHome from "./pages/Other Pages/AppDownload/AppDownloadHome";
 import DownPayementHome from "./pages/Other Pages/DownPayement/DownPayementHome";
+import AllHomesPage from "./pages/Other Pages/All Homes/AllHomesPage";
+import AllRentalBuildings from "./pages/Other Pages/AllRental Buildings/AllRentalBuildings";
+import SellHome from "./pages/Sell/SellHome/SellHome";
+import WorthPage from "./pages/Sell/HowMuchWorth/WorthPage";
+import PostSaleOwnerPage from "./pages/Sell/PostSaleByOwner/PostSaleOwnerPage";
+import MortgageCalculator from "./pages/HomeLoans/MortgagesCalculators/MortgageCalculator";
+import AffordabilityCalculatorPage from "./pages/HomeLoans/Affordability Calculator/AffordabilityCalculatorPage";
+import RefinanceCalculatorPage from "./pages/HomeLoans/Refinance Calculator/RefinanceCalculatorPage";
 
 const App = () => {
   return (
@@ -30,7 +38,14 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/buy/appdownload" element={<AppDownloadHome />} />
+
+          <Route path="/sell" element={<SellHome />} />
+          <Route path="/howmuchworth" element={<WorthPage />} />
+          <Route path="/postsalebyowner" element={<PostSaleOwnerPage />} />
+
           <Route path="/downPayment" element={<DownPayementHome />} />
+          <Route path="/allHomes" element={<AllHomesPage />} />
+          <Route path="/allrentalBuildings" element={<AllRentalBuildings />} />
 
           {/* Advertise Section */}
           <Route path="/advertise" element={<Advertise />} />
@@ -61,6 +76,20 @@ const App = () => {
           {/* Home Loans Section */}
           <Route path="/homeloans" element={<HomeLoans />} />
           <Route path="/homeloans/refinance" element={<Refinance />} />
+
+          {/* Mortgages Pages */}
+          <Route
+            path="/mortgages/mortgagescalculator"
+            element={<MortgageCalculator />}
+          />
+          <Route
+            path="/mortgages/affordabilitycalculator"
+            element={<AffordabilityCalculatorPage />}
+          />
+          <Route
+            path="/mortgages/refinancecalculator"
+            element={<RefinanceCalculatorPage />}
+          />
 
           {/* Agent Premium */}
           <Route path="/agentPremium" element={<HomeAgentPremium />} />

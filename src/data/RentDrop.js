@@ -7,7 +7,7 @@ export const rentfropdata = [
       { name: "Apartment for Rent", link: "#" },
       { name: "Houses for rent", link: "#" },
       { name: "All Rental listings", link: "#" },
-      { name: "All Rental buildings", link: "#" },
+      { name: "All Rental buildings", link: "/allrentalBuildings" },
     ],
   },
   {

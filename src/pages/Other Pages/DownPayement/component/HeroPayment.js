@@ -8,7 +8,7 @@ const HeroPayment = () => {
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="absolute inset-0 bg-black opacity-50 "></div>
-      <div className="relative z-10 text-white px-5 ">
+      <div className="relative z-5 text-white px-5 ">
         <h1 className="text-3xl lg:text-5xl font-bold mb-4">
           How To Get Down Payment Assistance
         </h1>
