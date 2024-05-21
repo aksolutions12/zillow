@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../components/layout/Navbar/Navbar";
 import Footer from "../../components/layout/Footer/Footer";
 import BottomNav from "./BottomNav/BottomNav";
-import HeroAgent from "./Components/HeroAgent";
-import FindSection from "./Components/FindSection";
 import AboutRecommendations from "../Home/AboutRecommendations";
-import FindGuideSection from "./Components/FindGuideSection";
-import findstory from "../../assets/images/find agent.png";
 import logoUrl from "../../assets/images/zil-logo.png";
+import SearchOther from "./SearchComponents/SearchOther";
 
 const Other = () => {
   const specialties = ["Appraisal", "Commercial", "Escrow"];
@@ -31,19 +28,12 @@ const Other = () => {
     <>
       <Navbar logoUrl={logoUrl} />
       <BottomNav activeTab="Other" />
-      <FindSection
+      <SearchOther
         heading="Find a Real Estate Professional"
         placeholder="Professional Name"
         specialties={specialties}
       />
-      ;
-      <FindGuideSection
-        imageUrl={findstory}
-        title="Find professionals in your area."
-        description="
-        To get started, enter your location or search for a specific professional by name."
-        resources={[]}
-      />
+
       <AboutRecommendations />
       <Footer />
     </>

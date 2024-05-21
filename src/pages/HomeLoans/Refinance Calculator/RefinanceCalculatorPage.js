@@ -11,6 +11,7 @@ import RefinanceCost from "./component/RefinanceCost";
 import RefinaceCalculate from "./component/RefinaceCalculate";
 import Reasonrefinance from "./component/Reasonrefinance";
 import RefinanceQuestions from "./component/RefinanceQuestions";
+import RefinanceArticles from "./component/RefinanceArticles";
 
 const RefinanceCalculatorPage = () => {
   return (
@@ -24,6 +25,7 @@ const RefinanceCalculatorPage = () => {
         <RefinaceCalculate />
         <Reasonrefinance />
         <RefinanceQuestions />
+        <RefinanceArticles />
       </div>
       <MortgageItems />
       <MortgageStateSection />

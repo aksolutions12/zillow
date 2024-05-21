@@ -29,6 +29,7 @@ import PostSaleOwnerPage from "./pages/Sell/PostSaleByOwner/PostSaleOwnerPage";
 import MortgageCalculator from "./pages/HomeLoans/MortgagesCalculators/MortgageCalculator";
 import AffordabilityCalculatorPage from "./pages/HomeLoans/Affordability Calculator/AffordabilityCalculatorPage";
 import RefinanceCalculatorPage from "./pages/HomeLoans/Refinance Calculator/RefinanceCalculatorPage";
+import LenderDirectoryPage from "./pages/HomeLoans/Lender Directory/LenderDirectoryPage";
 
 const App = () => {
   return (
@@ -89,6 +90,10 @@ const App = () => {
           <Route
             path="/mortgages/refinancecalculator"
             element={<RefinanceCalculatorPage />}
+          />
+          <Route
+            path="/mortgages/lenderdirectory"
+            element={<LenderDirectoryPage />}
           />
 
           {/* Agent Premium */}

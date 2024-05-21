@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import BuilderList from "./BuilderList"; // Import BuilderList component
+import FindGuideSection from "./FindGuideSection"; // Import FindGuideSection component
+
+import findstory from "../../../assets/images/find agent.png";
 
 const Input = styled.input`
   width: 340px; /* Adjusted width */
@@ -24,6 +28,12 @@ const Button = styled.button`
 `;
 
 const BuilderSearch = ({ heading, placeholder }) => {
+  const [showBuilderList, setShowBuilderList] = useState(false);
+
+  const handleSearch = () => {
+    setShowBuilderList(true);
+  };
+
   return (
     <div className="bg-white p-4">
       <h2 className="text-4xl font-bold mb-4">{heading}</h2>
@@ -49,9 +59,22 @@ const BuilderSearch = ({ heading, placeholder }) => {
           </label>
           <Input type="text" id="input-name" placeholder={placeholder} />
           {/* Add button here */}
-          <Button className="ml-4">Search</Button>
+          <Button className="ml-4" onClick={handleSearch}>
+            Search
+          </Button>
         </div>
       </div>
+      {/* Conditionally render BuilderList or FindGuideSection */}
+      {showBuilderList ? (
+        <BuilderList />
+      ) : (
+        <FindGuideSection
+          imageUrl={findstory}
+          title="Find home builders in your area"
+          description="To get started, enter your location or search for a specific home builder by name."
+          resources={[]}
+        />
+      )}
     </div>
   );
 };

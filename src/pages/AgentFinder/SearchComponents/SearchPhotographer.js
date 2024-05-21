@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import AgentList from "./AgentList";
-import FindGuideSection from "./FindGuideSection";
+import FindGuideSection from "../Components/FindGuideSection";
 
 import findstory from "../../../assets/images/find agent.png";
+import CommonList from "../Components/CommonList";
+import { detailscommon } from "../../../data/CommonListData";
+import PhotographerList from "../Components/PhotographerList";
+import { photographers } from "../../../data/photographerList";
 // Styled Components
 const Container = styled.div`
   padding: 24px;
@@ -64,7 +67,7 @@ const Button = styled.button`
   height: 100%; /* Match height to inputs */
 `;
 
-const FindSection = ({ heading, placeholder, specialties }) => {
+const SearchPhotographer = ({ heading, placeholder, specialties }) => {
   const languages = ["English", "Spanish", "French", "German"];
   const [showAgentList, setShowAgentList] = useState(false);
 
@@ -115,15 +118,16 @@ const FindSection = ({ heading, placeholder, specialties }) => {
         </div>
       </FormContainer>
       {showAgentList ? (
-        <AgentList />
+        <PhotographerList photographer={photographers} />
       ) : (
         <FindGuideSection
           imageUrl={findstory}
-          title="Find agents in your area."
-          description="To get started, enter your location or search for a specific agent by name."
+          title="Find photographers in your area."
+          description="To get started, enter your location or search for a specific photographer by name."
           resources={[
-            "Whether you are looking to rent, buy or sell your home, Zillow's directory of local real estate agents and brokers connects you with professionals who can help meet your needs. Because the real estate market is unique, it's important to choose a real estate agent or broker with local expertise to guide you through the process of renting, buying or selling your next home. Our directory helps you find real estate professionals who specialize in buying, selling, foreclosures, or relocation - among many other options. Alternatively, you could work with a local agent or real estate broker who provides an entire suite of buying and selling services.",
-            "No matter what type of real estate needs you have, finding the local real estate professional you want to work with is the first step. The real estate directory lets you view and compare real estate agents, read reviews, see an agent's current listings and past sales, and contact agents directly from their profile pages on Zillow.",
+            "Planning to sell or rent your home? Professional photography can make all the difference between a successful listing and one that struggles to attract interest. Fortunately, Zillow's directory of real estate photographers makes it easy to find a photographer with the experience and expertise to present your home in its best possible light.",
+            "Zillow's guide to real estate photographers includes portfolio samples to help you connect with a professional who understands your home's unique appeal. If you're putting a home up for sale , your listing needs professional photography services including HDR imaging and video. And most importantly, you need a real estate photographer who can capture the details that make potential buyers say wow! ",
+            "So put away your smartphone camera and take a look at Zillow's network of real estate photographers. When you see the pop-off-the-screen effect that a skilled real estate photographer can have on your home listing, it will be a truly eye-opening experience.",
             "Zillow is the leading real estate and rental marketplace dedicated to empowering consumers with data, inspiration and knowledge around the place they call home, and connecting them with the best local professionals who can help.",
           ]}
         />
@@ -132,4 +136,4 @@ const FindSection = ({ heading, placeholder, specialties }) => {
   );
 };
 
-export default FindSection;
+export default SearchPhotographer;

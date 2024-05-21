@@ -39,6 +39,10 @@ export const homeloandrop = [
         name: "Calculate your refinance savings",
         link: "/mortgages/refinancecalculator",
       },
+      {
+        name: "Browse lenders in your area",
+        link: "/mortgages/lenderdirectory",
+      },
     ],
   },
 ];

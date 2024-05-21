@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import AgentList from "./AgentList";
-import FindGuideSection from "./FindGuideSection";
+import FindGuideSection from "../Components/FindGuideSection";
 
 import findstory from "../../../assets/images/find agent.png";
+import CommonList from "../Components/CommonList";
+import { detailscommon } from "../../../data/CommonListData";
 // Styled Components
 const Container = styled.div`
   padding: 24px;
@@ -64,7 +65,7 @@ const Button = styled.button`
   height: 100%; /* Match height to inputs */
 `;
 
-const FindSection = ({ heading, placeholder, specialties }) => {
+const SearchInspectors = ({ heading, placeholder, specialties }) => {
   const languages = ["English", "Spanish", "French", "German"];
   const [showAgentList, setShowAgentList] = useState(false);
 
@@ -115,15 +116,16 @@ const FindSection = ({ heading, placeholder, specialties }) => {
         </div>
       </FormContainer>
       {showAgentList ? (
-        <AgentList />
+        <CommonList details={detailscommon} />
       ) : (
         <FindGuideSection
           imageUrl={findstory}
-          title="Find agents in your area."
-          description="To get started, enter your location or search for a specific agent by name."
+          title="Find property managers in your area."
+          description="To get started, enter your location or search for a specific home inspector by name."
           resources={[
-            "Whether you are looking to rent, buy or sell your home, Zillow's directory of local real estate agents and brokers connects you with professionals who can help meet your needs. Because the real estate market is unique, it's important to choose a real estate agent or broker with local expertise to guide you through the process of renting, buying or selling your next home. Our directory helps you find real estate professionals who specialize in buying, selling, foreclosures, or relocation - among many other options. Alternatively, you could work with a local agent or real estate broker who provides an entire suite of buying and selling services.",
-            "No matter what type of real estate needs you have, finding the local real estate professional you want to work with is the first step. The real estate directory lets you view and compare real estate agents, read reviews, see an agent's current listings and past sales, and contact agents directly from their profile pages on Zillow.",
+            "Anyone who knows real estate knows that a home can look great on the surface, but...what's lurking inside the walls? Home inspections can be the most nerve-wracking part of the buying process, but they don't have to be. Choosing a licensed inspector with a reputation for honesty and thoroughness can help ensure an inspection report that both buyer and seller can believe in.",
+            "There's no better way to find the right certified inspector than with Zillow's directory of home inspectors. We have an extensive listing of home inspectors and home inspection companies, complete with reviews, profiles and contact information. You need home inspectors who understand the unique real estate market and know how to conduct a building inspection that meets the standards local buyers and sellers expect",
+            "The real estate experts at Zillow offer powerful tools for finding home inspection companies that can identify potential problems before you proceed with your home purchase. Everyone will breathe easier when that home inspection report is complete, and it all starts right here at Zillow",
             "Zillow is the leading real estate and rental marketplace dedicated to empowering consumers with data, inspiration and knowledge around the place they call home, and connecting them with the best local professionals who can help.",
           ]}
         />
@@ -132,4 +134,4 @@ const FindSection = ({ heading, placeholder, specialties }) => {
   );
 };
 
-export default FindSection;
+export default SearchInspectors;
