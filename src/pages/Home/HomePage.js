@@ -41,6 +41,7 @@ const HomePage = () => {
 
       <Widget />
       <GetRecommendations />
+
       <CardsRow />
       <AboutRecommendations />
       <Footer />

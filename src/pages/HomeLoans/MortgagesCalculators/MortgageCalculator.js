@@ -13,11 +13,13 @@ import MortgagesQuestions from "./Components/MortgagesQuestions";
 import RelatedArticles from "./Components/RelatedArticles";
 import MortgageItems from "./Components/MortgageItems";
 import MortgageStateSection from "./Components/MortgageStateSection";
+import MortCalculator from "./Components/MortCalculator";
 
 const MortgageCalculator = () => {
   return (
     <>
       <Navbar logoUrl={logoUrl} />
+      <MortCalculator />
       <div className="w-full bg-white p-5">
         <ExploreCalculators />
 

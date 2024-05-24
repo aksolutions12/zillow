@@ -30,6 +30,7 @@ import MortgageCalculator from "./pages/HomeLoans/MortgagesCalculators/MortgageC
 import AffordabilityCalculatorPage from "./pages/HomeLoans/Affordability Calculator/AffordabilityCalculatorPage";
 import RefinanceCalculatorPage from "./pages/HomeLoans/Refinance Calculator/RefinanceCalculatorPage";
 import LenderDirectoryPage from "./pages/HomeLoans/Lender Directory/LenderDirectoryPage";
+import RentAffordability from "./pages/Rent/RentAffordability/RentAffordability";
 
 const App = () => {
   return (
@@ -46,7 +47,12 @@ const App = () => {
 
           <Route path="/downPayment" element={<DownPayementHome />} />
           <Route path="/allHomes" element={<AllHomesPage />} />
+
           <Route path="/allrentalBuildings" element={<AllRentalBuildings />} />
+          <Route
+            path="/rent-affordability-calculator"
+            element={<RentAffordability />}
+          />
 
           {/* Advertise Section */}
           <Route path="/advertise" element={<Advertise />} />

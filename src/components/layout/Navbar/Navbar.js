@@ -10,6 +10,7 @@ import { agentdropdata } from "../../../data/AgentDrop";
 import { homeloandrop } from "../../../data/HomeLoansDrop";
 import { Menu, Close } from "@mui/icons-material"; // Importing icons from MUI
 import RespNav from "./RespNav";
+import LoginSignUp from "../../Login/LoginSignUp";
 
 const NavbarWrapper = styled.nav`
   position: relative;
@@ -129,6 +130,15 @@ const Navbar = ({ logoUrl }) => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleSignInClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   const handleDropdownHover = (dropdown) => {
     setActiveDropdown(dropdown);
@@ -182,7 +192,9 @@ const Navbar = ({ logoUrl }) => {
       )}
 
       {isMobile && mobileMenuOpen && <RespNav closeMenu={closeMobileMenu} />}
-      <SignInLink to="/signin">Sign in</SignInLink>
+      <SignInLink onClick={handleSignInClick}>Sign in</SignInLink>
+
+      {isModalOpen && <LoginSignUp onClose={handleCloseModal} />}
 
       {!mobileMenuOpen && (
         <NavList>
@@ -229,7 +241,9 @@ const Navbar = ({ logoUrl }) => {
           <NavItem hideOnMobile>
             <Link to="/help">Help</Link>
           </NavItem>
-          <NavItem hideOnMobile>Sign in</NavItem>
+          <NavItem hideOnMobile onClick={handleSignInClick}>
+            Sign in
+          </NavItem>
         </NavList>
       )}
 

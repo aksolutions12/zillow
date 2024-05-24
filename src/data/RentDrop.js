@@ -22,7 +22,10 @@ export const rentfropdata = [
     title: "Resources",
     subpartsClass: "flex flex-col gap-2",
     subparts: [
-      { name: "Affordability Calculator", link: "#" },
+      {
+        name: "Affordability Calculator",
+        link: "/rent-affordability-calculator",
+      },
       { name: "Renters guide", link: "#" },
     ],
   },

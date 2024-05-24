@@ -33,7 +33,7 @@ export default function ExploreMore() {
           </p>
         </div>
 
-        <div className="text-center p-4">
+        <div className="text-center  py-4">
           <AiFillDollarCircle
             size={70}
             className=" text-blue-800 mx-auto mb-6"

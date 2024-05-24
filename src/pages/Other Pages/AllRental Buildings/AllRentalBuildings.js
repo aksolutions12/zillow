@@ -12,8 +12,9 @@ const AllRentalBuildings = () => {
         {" "}
         <h1>Browse Rental Buildings by State/Province</h1>
       </div>
-
-      <StatesSection />
+      <div className="bg-white">
+        <StatesSection />
+      </div>
 
       <Footer />
     </>

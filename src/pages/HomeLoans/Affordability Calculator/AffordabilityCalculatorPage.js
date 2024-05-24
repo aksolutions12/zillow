@@ -12,11 +12,13 @@ import Affordabilityquestion from "./components/Affordabilityquestion";
 import AffordabilityArticles from "./components/AffordabilityArticles";
 import MortgageItems from "../MortgagesCalculators/Components/MortgageItems";
 import MortgageStateSection from "../MortgagesCalculators/Components/MortgageStateSection";
+import CalculatorSection from "./components/CalculatorSection";
 
 const AffordabilityCalculatorPage = () => {
   return (
     <>
       <Navbar logoUrl={logoUrl} />
+      <CalculatorSection />
       <div className="w-full bg-white p-5">
         <ExploreMore />
         <ParticipatingContent />

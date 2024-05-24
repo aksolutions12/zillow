@@ -12,11 +12,13 @@ import RefinaceCalculate from "./component/RefinaceCalculate";
 import Reasonrefinance from "./component/Reasonrefinance";
 import RefinanceQuestions from "./component/RefinanceQuestions";
 import RefinanceArticles from "./component/RefinanceArticles";
+import RefCalculatorSection from "./component/RefCalculatorSection";
 
 const RefinanceCalculatorPage = () => {
   return (
     <>
       <Navbar logoUrl={logoUrl} />
+      <RefCalculatorSection />
       <div className="w-full bg-white p-5">
         <ExploreCalculators />
         <ParticipatingContent />
