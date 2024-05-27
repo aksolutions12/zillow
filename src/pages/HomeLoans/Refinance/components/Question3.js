@@ -3,10 +3,11 @@ import { PiSignpostLight } from "react-icons/pi";
 import { PiTagThin } from "react-icons/pi";
 import { PiTreePalmThin } from "react-icons/pi";
 
-const Question3 = () => {
+const Question3 = ({ onNext }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
+    onNext();
   };
   return (
     <div className="text-center py-10 bg-white">

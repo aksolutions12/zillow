@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { TfiClose } from "react-icons/tfi";
 import { MdDone } from "react-icons/md";
 
-const Question11 = () => {
+const Question11 = ({ onNext }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
+    onNext();
   };
   return (
     <div className="text-center py-10 bg-white">

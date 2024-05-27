@@ -23,7 +23,7 @@ const MortCalculator = () => {
   return (
     <div className="w-full bg-white">
       <div className="p-5">
-        <h1 className="text-5xl font-bold mb-2">Affordability Calculator</h1>
+        <h1 className="text-5xl font-bold mb-2">Mortgage Calculator</h1>
         <p className="mb-4">
           Use Zillow's affordability calculator to estimate a comfortable
           mortgage amount based on your current budget. Enter details about your

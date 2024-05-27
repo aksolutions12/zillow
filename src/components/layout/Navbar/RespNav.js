@@ -6,6 +6,7 @@ import { rentfropdata } from "../../../data/RentDrop";
 import { selldropdata } from "../../../data/SellDrop";
 import { agentdropdata } from "../../../data/AgentDrop";
 import { homeloandrop } from "../../../data/HomeLoansDrop";
+import { managedrops } from "../../../data/ManageDrops";
 
 const RespNav = ({ closeMenu }) => {
   useEffect(() => {
@@ -35,6 +36,7 @@ const RespNav = ({ closeMenu }) => {
         <NavLinkWithIcon text="Sell" dropdownData={selldropdata} />
         <NavLinkWithIcon text="Home Loans" dropdownData={homeloandrop} />
         <NavLinkWithIcon text="Agent finder" dropdownData={agentdropdata} />
+        <NavLinkWithIcon text="Manage Rentals" dropdownData={managedrops} />
         <NavLinkWithoutIcon text="Advertise" />
         <NavLinkWithoutIcon text="Help" />
       </div>

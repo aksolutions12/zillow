@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import usStates from "../../../../data/usStates";
 
-const Question1 = () => {
+const Question1 = ({ onNext }) => {
   const [selectedState, setSelectedState] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
@@ -10,8 +10,12 @@ const Question1 = () => {
     setIsButtonDisabled(event.target.value === "");
   };
 
+  const handleNext = () => {
+    onNext(); // Call the onNext function passed from the parent component
+  };
+
   return (
-    <div className="bg-white dark:bg-zinc-800 rounded-lg p-8 max-w-md w-full">
+    <div className="bg-white dark:bg-zinc-800 flex flex-col item-center justify-center rounded-lg p-8 max-w-md w-full">
       <h2 className="text-2xl font-bold text-center text-zinc-900 dark:text-zinc-100 mb-4">
         Where is your home located?
       </h2>
@@ -33,6 +37,7 @@ const Question1 = () => {
         </select>
       </div>
       <button
+        onClick={handleNext}
         className={`w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 ${
           isButtonDisabled && "opacity-50 cursor-not-allowed"
         }`}

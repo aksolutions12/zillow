@@ -159,14 +159,14 @@ const Footer = () => {
           Contact XYZ, Inc. Brokerage
         </BlueText>
       </FooterParagraph>
-      <FooterParagraph className="md:mx-40 lg:mx-80">
+      <p className="text-xs font-light text-center p-5 px-4 lg:px-16 w-full ">
         For listings in Canada, the trademarks REALTOR®, REALTORS®, and the
         REALTOR® logo are controlled by The Canadian Real Estate Association
         (CREA) and identify real estate professionals who are members of CREA.
         The trademarks MLS®, Multiple Listing Service® and the associated logos
         are owned by CREA and identify the quality of services provided by real
         estate professionals who are members of CREA. Used under license.
-      </FooterParagraph>{" "}
+      </p>{" "}
       <CenteredContainer>
         <div className="flex flex-row gap-5 items-center justify-center md:justify-start md:gap-10 pt-5">
           <Logo src={logoImage} alt="Logo" />

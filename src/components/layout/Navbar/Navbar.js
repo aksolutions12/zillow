@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import { theme } from "../../../styles/theme/theme";
 import { Link } from "react-router-dom";
 import BuyDrop from "./BuyDrop";
+import ManagerRentalDrop from "./ManagerRentalDrop"; // Import ManagerRentalDrop component
 import { buydropdata } from "../../../data/BuyDrop";
 import { rentfropdata } from "../../../data/RentDrop";
 import { selldropdata } from "../../../data/SellDrop";
@@ -115,6 +116,7 @@ const BuyDropWrapper = styled.div`
     padding: 20px;
   }
 `;
+
 const SignInLink = styled(Link)`
   display: none;
 
@@ -168,11 +170,6 @@ const Navbar = ({ logoUrl }) => {
     // Cleanup
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  const GlobalStyle = createGlobalStyle`
-  body.no-scroll {
-    overflow: hidden;
-  }
-`;
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
@@ -199,13 +196,13 @@ const Navbar = ({ logoUrl }) => {
       {!mobileMenuOpen && (
         <NavList>
           <NavItem hideOnMobile onMouseEnter={() => handleDropdownHover("buy")}>
-            Buy
+            <Link to="/buyhome">Buy</Link>
           </NavItem>
           <NavItem
             hideOnMobile
             onMouseEnter={() => handleDropdownHover("rent")}
           >
-            Rent
+            <Link to="/forrent">Rent</Link>
           </NavItem>
           <NavItem
             hideOnMobile
@@ -234,7 +231,12 @@ const Navbar = ({ logoUrl }) => {
 
       {!mobileMenuOpen && (
         <NavList>
-          <NavItem hideOnMobile>Manage Rentals</NavItem>
+          <NavItem
+            hideOnMobile
+            onMouseEnter={() => setActiveDropdown("manage")}
+          >
+            Manage Rentals
+          </NavItem>
           <NavItem hideOnMobile>
             <Link to="/advertise">Advertise</Link>
           </NavItem>
@@ -247,7 +249,9 @@ const Navbar = ({ logoUrl }) => {
         </NavList>
       )}
 
-      {activeDropdown && !mobileMenuOpen && (
+      {activeDropdown === "manage" && !mobileMenuOpen && <ManagerRentalDrop />}
+
+      {activeDropdown && !mobileMenuOpen && activeDropdown !== "manage" && (
         <BuyDropWrapper
           onMouseEnter={() => handleDropdownHover(activeDropdown)}
           onMouseLeave={handleDropdownLeave}

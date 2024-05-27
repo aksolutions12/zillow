@@ -15,7 +15,7 @@ export const homeloandrop = [
         name: "Estimate your monthly payment",
         link: "/mortgages/mortgagescalculator",
       },
-      { name: "See how much you qualify for", link: "#" },
+      { name: "See how much you qualify for", link: "/homeloans/eligibility" },
     ],
   },
   {
@@ -34,7 +34,7 @@ export const homeloandrop = [
     subpartsClass: "flex flex-col gap-2",
     subparts: [
       { name: "See today's rates", link: "#" },
-      { name: "Refinance your home", link: "#" },
+      { name: "Refinance your home", link: "/homeloans/refinance" },
       {
         name: "Calculate your refinance savings",
         link: "/mortgages/refinancecalculator",

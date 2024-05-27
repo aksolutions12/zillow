@@ -31,6 +31,14 @@ import AffordabilityCalculatorPage from "./pages/HomeLoans/Affordability Calcula
 import RefinanceCalculatorPage from "./pages/HomeLoans/Refinance Calculator/RefinanceCalculatorPage";
 import LenderDirectoryPage from "./pages/HomeLoans/Lender Directory/LenderDirectoryPage";
 import RentAffordability from "./pages/Rent/RentAffordability/RentAffordability";
+import GetQualifiedPage from "./pages/HomeLoans/GetQualified/GetQualifiedPage";
+import BuyPage from "./pages/Buy/BuyPage";
+import ForeclosuresPage from "./pages/Buy/ForeclosuresPage";
+import Openhouses from "./pages/Buy/Openhouses";
+import Newconstruction from "./pages/Buy/Newconstruction";
+import Comingsoon from "./pages/Buy/Comingsoon";
+import Forsalebyowner from "./pages/Buy/Forsalebyowner";
+import RentPage from "./pages/Rent/RentPage";
 
 const App = () => {
   return (
@@ -48,11 +56,28 @@ const App = () => {
           <Route path="/downPayment" element={<DownPayementHome />} />
           <Route path="/allHomes" element={<AllHomesPage />} />
 
+          {/* Rent Section */}
+          <Route path="/forrent" element={<RentPage />} />
+
+          <Route path="/housesforrent" element={<RentPage />} />
+          <Route path="/apartmentsforrent" element={<RentPage />} />
+          <Route path="/allrentallistings" element={<RentPage />} />
+          <Route path="/forrent" element={<RentPage />} />
           <Route path="/allrentalBuildings" element={<AllRentalBuildings />} />
           <Route
             path="/rent-affordability-calculator"
             element={<RentAffordability />}
           />
+
+          {/* Buy Section */}
+          <Route path="/buyhome" element={<BuyPage />} />
+          <Route path="/Foreclosures" element={<ForeclosuresPage />} />
+          <Route path="/Homesforsale" element={<BuyPage />} />
+          <Route path="/Openhouses" element={<Openhouses />} />
+          <Route path="/Newconstruction" element={<Newconstruction />} />
+          <Route path="/Comingsoon" element={<Comingsoon />} />
+          <Route path="/Recenthomesales" element={<Comingsoon />} />
+          <Route path="/Forsalebyowner" element={<Forsalebyowner />} />
 
           {/* Advertise Section */}
           <Route path="/advertise" element={<Advertise />} />
@@ -83,6 +108,7 @@ const App = () => {
           {/* Home Loans Section */}
           <Route path="/homeloans" element={<HomeLoans />} />
           <Route path="/homeloans/refinance" element={<Refinance />} />
+          <Route path="/homeloans/eligibility" element={<GetQualifiedPage />} />
 
           {/* Mortgages Pages */}
           <Route

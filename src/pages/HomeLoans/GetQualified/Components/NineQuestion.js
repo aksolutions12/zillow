@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 
-const Question10 = ({ onNext }) => {
+const NineQuestion = ({ onNext }) => {
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleOptionClick = (value) => {
     setSelectedOption(value);
+  };
+
+  const handleNext = () => {
     onNext();
   };
 
   return (
-    <div className="max-w-md mx-auto p-4">
+    <div className="w-full mx-auto p-4">
       <h1 className="text-2xl font-bold text-center">
-        Do you know your credit score?
+        What's your credit score? It's okay to estimate.
       </h1>
-      <p className="text-center text-zinc-600">It's ok to estimate.</p>
+      <p className="text-center text-zinc-600">
+        Your credit score affects the loan programs and interest rates you may
+        qualify for, as well as the amount you'll need to put down.
+      </p>
       <div className="mt-4 border rounded-lg overflow-hidden">
         <button
           className={`w-full py-2 border-b text-center hover:bg-zinc-100 ${
@@ -56,7 +62,7 @@ const Question10 = ({ onNext }) => {
           579 or below
         </button>
         <button
-          className={`w-full py-2 text-center hover:bg-zinc-100 ${
+          className={`w-full py-2 border-b text-center hover:bg-zinc-100 ${
             selectedOption === "I don't know" && "bg-sky-100"
           }`}
           onClick={() => handleOptionClick("I don't know")}
@@ -64,8 +70,15 @@ const Question10 = ({ onNext }) => {
           I don't know
         </button>
       </div>
+      <button
+        className={`w-full bg-blue-500 text-white py-3 rounded-lg mt-4 hover:bg-blue-600 focus:bg-blue-700`}
+        onClick={handleNext}
+        disabled={!selectedOption}
+      >
+        Next
+      </button>
     </div>
   );
 };
 
-export default Question10;
+export default NineQuestion;

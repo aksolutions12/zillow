@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 
-const Question6 = () => {
+const Question6 = ({ onNext }) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
+  };
+
+  const handleNext = () => {
+    onNext(); // Call the onNext function passed from the parent component
   };
 
   return (
@@ -26,6 +30,7 @@ const Question6 = () => {
         />
       </div>
       <button
+        onClick={handleNext}
         className={`w-full py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 focus:outline-none ${
           !inputValue && "opacity-50 cursor-not-allowed"
         }`}

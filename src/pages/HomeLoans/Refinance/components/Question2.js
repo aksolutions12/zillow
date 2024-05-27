@@ -4,11 +4,13 @@ import { PiBuildingApartment } from "react-icons/pi";
 import { BsBuildings } from "react-icons/bs";
 import { PiBuildingsThin } from "react-icons/pi";
 
-const Question2 = () => {
+const Question2 = ({ onNext }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
+    onNext();
   };
+
   return (
     <div className="text-center py-10 bg-white">
       <h2 className="text-2xl font-bold mb-4">

@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 
-const Question13 = () => {
+const Question13 = ({ onNext }) => {
   const [name, setName] = useState("");
 
   const handleNameChange = (event) => {
     setName(event.target.value);
+  };
+  const handleNext = () => {
+    onNext(); // Call the onNext function passed from the parent component
   };
 
   const isButtonDisabled = name.trim() === "";
@@ -36,6 +39,7 @@ const Question13 = () => {
           />
         </div>
         <button
+          onClick={handleNext}
           type="submit"
           className={`w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 transition-colors ${
             isButtonDisabled && "opacity-50 cursor-not-allowed"
