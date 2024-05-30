@@ -6,12 +6,12 @@ import OutlinedButton from "../../../../components/Button/OutlinedButton";
 
 export default function ExploreMore() {
   return (
-    <div className="bg-white p-8 drop-shadow-xl rounded-md mb-8">
+    <div className="bg-white p-2 lg:p-8 drop-shadow-xl rounded-md mb-8">
       <h2 className="text-3xl font-bold text-center mb-6">
         Explore more mortgage calculators
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="text-center p-4 ">
+        <div className="text-center p-0 lg:p-4 ">
           <FaTag size={70} className=" text-blue-800 mx-auto mb-6" />
 
           <OutlinedButton>Mortgage calculator</OutlinedButton>

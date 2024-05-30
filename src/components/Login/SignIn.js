@@ -1,12 +1,39 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useAuth } from "../../ContextApi/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { FaFacebookF } from "react-icons/fa";
 import { GrGoogle } from "react-icons/gr";
 import { AiFillApple } from "react-icons/ai";
 
-export default function SignIn() {
+const SignIn = ({ onClose }) => {
+  const { login } = useAuth(); // Accessing login function from AuthContext
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    // Perform validation if needed
+    if (!email || !password) {
+      setError("Please enter email and password.");
+      return;
+    }
+
+    // Simulating login process (replace with your actual login logic)
+    if (email === "omar@gmail.com" && password === "12345") {
+      login(); // Call the login function from AuthContext
+      onClose();
+      navigate("/");
+    } else {
+      setError("Invalid email or password.");
+    }
+  };
+
   return (
-    <div className="w-full mx-auto  bg-white dark:bg-zinc-800 lg:max-w-md  ">
-      <form className="space-y-4">
+    <div className="w-full mx-auto bg-white dark:bg-zinc-800 lg:max-w-md">
+      <form className="space-y-4" onSubmit={handleSignIn}>
         <div>
           <label
             htmlFor="email"
@@ -18,6 +45,8 @@ export default function SignIn() {
             type="email"
             id="email"
             name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter email"
             className="mt-1 block w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-zinc-700 dark:text-zinc-300"
           />
@@ -33,10 +62,13 @@ export default function SignIn() {
             type="password"
             id="password"
             name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter password"
             className="mt-1 block w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-zinc-700 dark:text-zinc-300"
           />
         </div>
+        {error && <p className="text-red-500">{error}</p>}
         <div>
           <button
             type="submit"
@@ -82,4 +114,6 @@ export default function SignIn() {
       </div>
     </div>
   );
-}
+};
+
+export default SignIn;

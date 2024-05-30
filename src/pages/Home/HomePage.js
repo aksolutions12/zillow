@@ -7,8 +7,11 @@ import CardsRow from "./CardsRow";
 import AboutRecommendations from "./AboutRecommendations";
 import logoUrl from "../../assets/images/zil-logo.png";
 import BuyDrop from "../../components/layout/Navbar/BuyDrop";
+import { useAuth } from "../../ContextApi/AuthContext";
+import ThreeCards from "../LearningCenter/Components/ThreeCards";
 
 const HomePage = () => {
+  const { isLoggedIn, logout } = useAuth();
   const headings = [
     {
       title: "Homes for sale",
@@ -40,7 +43,11 @@ const HomePage = () => {
       <Navbar logoUrl={logoUrl} />
 
       <Widget />
-      <GetRecommendations />
+      {isLoggedIn ? (
+        <ThreeCards heading="Homes For You" />
+      ) : (
+        <GetRecommendations />
+      )}
 
       <CardsRow />
       <AboutRecommendations />

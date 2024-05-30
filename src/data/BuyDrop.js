@@ -17,8 +17,8 @@ export const buydropdata = [
     title: "Resources",
     subpartsClass: "flex flex-col gap-2",
     subparts: [
-      { name: "Buyer's Guide", link: "#" },
-      { name: "Foreclosure Center", link: "#" },
+      { name: "Buyer's Guide", link: "/buying" },
+      { name: "Foreclosure Center", link: "/learn" },
       { name: "Real Estate App", link: "/buy/appdownload" },
       { name: "Down Payment Assistance", link: "/downPayment" },
     ],

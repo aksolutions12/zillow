@@ -12,6 +12,7 @@ import { homeloandrop } from "../../../data/HomeLoansDrop";
 import { Menu, Close } from "@mui/icons-material"; // Importing icons from MUI
 import RespNav from "./RespNav";
 import LoginSignUp from "../../Login/LoginSignUp";
+import { useAuth } from "../../../ContextApi/AuthContext";
 
 const NavbarWrapper = styled.nav`
   position: relative;
@@ -133,6 +134,7 @@ const Navbar = ({ logoUrl }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isLoggedIn, logout } = useAuth();
 
   const handleSignInClick = () => {
     setIsModalOpen(true);
@@ -153,6 +155,10 @@ const Navbar = ({ logoUrl }) => {
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
     document.body.classList.toggle("no-scroll", !mobileMenuOpen);
+  };
+
+  const handleLogout = () => {
+    logout(); // Call logout function from AuthContext
   };
 
   useEffect(() => {
@@ -233,7 +239,8 @@ const Navbar = ({ logoUrl }) => {
         <NavList>
           <NavItem
             hideOnMobile
-            onMouseEnter={() => setActiveDropdown("manage")}
+            onMouseOver={() => handleDropdownHover("manage")}
+            onMouseLeave={handleDropdownLeave}
           >
             Manage Rentals
           </NavItem>
@@ -243,8 +250,11 @@ const Navbar = ({ logoUrl }) => {
           <NavItem hideOnMobile>
             <Link to="/help">Help</Link>
           </NavItem>
-          <NavItem hideOnMobile onClick={handleSignInClick}>
-            Sign in
+          <NavItem
+            hideOnMobile
+            onClick={isLoggedIn ? handleLogout : handleSignInClick}
+          >
+            {isLoggedIn ? "Logout" : "Sign in"}
           </NavItem>
         </NavList>
       )}

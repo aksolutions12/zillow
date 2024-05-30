@@ -26,7 +26,7 @@ export const rentfropdata = [
         name: "Affordability Calculator",
         link: "/rent-affordability-calculator",
       },
-      { name: "Renters guide", link: "#" },
+      { name: "Renters guide", link: "/renting" },
     ],
   },
 ];

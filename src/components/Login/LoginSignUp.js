@@ -31,7 +31,7 @@ export default function LoginSignUp({ onClose }) {
               <Tab label="New Account" value="newAccount" />
             </TabList>
             <TabPanel value="signIn">
-              <SignIn />
+              <SignIn onClose={onClose} />
             </TabPanel>
             <TabPanel value="newAccount">
               <NewAccount />

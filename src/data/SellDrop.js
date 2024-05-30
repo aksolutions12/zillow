@@ -6,7 +6,7 @@ export const selldropdata = [
       { name: "Explore your options", link: "/sell" },
       { name: "See your Home's Zestimate", link: "/howmuchworth" },
       { name: "Home values", link: "#" },
-      { name: "Seller guide", link: "#" },
+      { name: "Seller guide", link: "/selling" },
     ],
   },
   {
