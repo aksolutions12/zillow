@@ -2,7 +2,7 @@ import React from "react";
 
 const MortgageOptionContent = () => {
   return (
-    <div className="w-full mx-auto p-8 bg-white  py-8 text-center md:text-left drop-shadow-xl  rounded-md mb-8">
+    <div className="w-full mx-auto p-8 bg-white  py-8 sm:text-center lg:text-left drop-shadow-xl  rounded-md mb-8">
       <h1 className="text-4xl font-bold mb-4">
         Mortgage options and terminology
       </h1>

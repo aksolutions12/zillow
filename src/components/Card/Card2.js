@@ -11,7 +11,7 @@ const Card2 = ({ imageURL, title, buttonText, link }) => {
         <Link to={link}>
           <img className="rounded-t-lg" src={imageURL} alt="Card" />
         </Link>
-        <div className="p-5 flex flex-col justify-center items-center pb-9">
+        <div className="pt-4 flex flex-col justify-center items-center pb-9">
           <Link to={link} className="text-center">
             <h5 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
               {title}

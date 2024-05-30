@@ -13,7 +13,7 @@ const CardsSection = () => {
     {
       heading: "I’m a property manager",
       buttonText: "Get Started",
-      link: "/property-management",
+      link: "/advertiseManager",
     },
     {
       heading: "I’m a landlord",
@@ -23,7 +23,7 @@ const CardsSection = () => {
     {
       heading: "I’m a lender or loan officer",
       buttonText: "Get Started",
-      link: "/investment-strategies",
+      link: "/loanorLenderOfficer",
     },
     {
       heading: "I’m a builder",

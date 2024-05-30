@@ -46,6 +46,8 @@ import SellingPage from "./pages/LearningCenter/SellingPage";
 import FinancingPage from "./pages/LearningCenter/FinancingPage";
 import OwningPage from "./pages/LearningCenter/OwningPage";
 import { AuthProvider } from "./ContextApi/AuthContext";
+import ManagerAdvertise from "./pages/Advertise/PropertyManager/ManagerAdvertise";
+import OfficerPage from "./pages/Advertise/Loan officer/OfficerPage";
 
 const App = () => {
   return (
@@ -100,6 +102,8 @@ const App = () => {
 
             {/* Advertise Section */}
             <Route path="/advertise" element={<Advertise />} />
+            <Route path="/advertiseManager" element={<ManagerAdvertise />} />
+            <Route path="/loanorLenderOfficer" element={<OfficerPage />} />
 
             {/* HelpPage  Section */}
             <Route path="/help" element={<HelpPage />} />

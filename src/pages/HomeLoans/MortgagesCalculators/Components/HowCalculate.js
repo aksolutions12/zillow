@@ -1,6 +1,6 @@
 export default function HowCalculate() {
   return (
-    <div className="w-full mx-auto bg-white p-8 py-8 text-center md:text-left drop-shadow-xl  rounded-md mb-8">
+    <div className="w-full mx-auto bg-white p-8 py-8 sm:text-center lg:text-start md:text-left drop-shadow-xl  rounded-md mb-8">
       <h1 className="text-4xl font-bold mb-4">
         How to calculate mortgage payments
       </h1>

@@ -1,6 +1,6 @@
 export default function StartResearch() {
   return (
-    <div className="w-full mx-auto bg-white px-4 sm:px-6 lg:px-8 dark:border-white rounded-md py-8 drop-shadow-xl  rounded-md mb-8">
+    <div className="w-full mx-auto bg-white px-4 sm:px-6 lg:px-8 dark:border-white rounded-md py-8 drop-shadow-xl   mb-8">
       <h1 className="text-4xl font-bold text-zinc-900 dark:text-white mt-10 mb-5">
         Start your home buying research with a mortgage calculator
       </h1>
@@ -10,11 +10,11 @@ export default function StartResearch() {
         additional ways to use our mortgage calculator:
       </p>
       <div className="space-y-10">
-        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-5 ">
+        <div className="flex flex-col lg:flex-row items-center lg:items-left gap-5 ">
           <div className="text-white bg-blue-900 rounded-full min-w-[4rem] h-16 w-16 flex items-center justify-center mr-4 font-bold text-xl">
             1
           </div>
-          <div className="flex flex-col text-center lg:text-left">
+          <div className="flex flex-col sm:text-center lg:text-left">
             <h2 className="text-xl font-semibold text-zinc-900 dark:text-white">
               Assess down payment scenarios
             </h2>
@@ -30,7 +30,7 @@ export default function StartResearch() {
           <div className="text-white bg-blue-900 rounded-full min-w-[4rem] h-16 w-16 flex items-center justify-center mr-4 font-bold text-xl">
             2
           </div>
-          <div className="flex flex-col text-center lg:text-left">
+          <div className="flex flex-col sm:text-center lg:text-left">
             <h2 className="text-xl font-semibold text-zinc-900 dark:text-white">
               Calculate mortgage rates
             </h2>
@@ -52,7 +52,7 @@ export default function StartResearch() {
           <div className="text-white bg-blue-900 rounded-full min-w-[4rem] h-16 w-16 flex items-center justify-center mr-4 font-bold text-xl">
             3
           </div>
-          <div className="flex flex-col text-center lg:text-left">
+          <div className="flex flex-col sm:text-center lg:text-left">
             <h2 className="text-xl font-semibold text-zinc-900 dark:text-white">
               Evaluate affordability
             </h2>
@@ -69,7 +69,7 @@ export default function StartResearch() {
           <div className="text-white bg-blue-900 rounded-full min-w-[4rem] h-16 w-16 flex items-center justify-center mr-4 font-bold text-xl">
             4
           </div>
-          <div className="flex flex-col text-center lg:text-left">
+          <div className="flex flex-col sm:text-center lg:text-left">
             <h2 className="text-xl font-semibold text-zinc-900 dark:text-white">
               Sample loan programs
             </h2>
