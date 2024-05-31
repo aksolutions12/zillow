@@ -48,6 +48,11 @@ import OwningPage from "./pages/LearningCenter/OwningPage";
 import { AuthProvider } from "./ContextApi/AuthContext";
 import ManagerAdvertise from "./pages/Advertise/PropertyManager/ManagerAdvertise";
 import OfficerPage from "./pages/Advertise/Loan officer/OfficerPage";
+import BrandAdvertisngPage from "./pages/Advertise/Brand Advertising/BrandAdvertisngPage";
+import MediaPlacementPage from "./pages/Advertise/MediaPlacement/MediaPlacementPage";
+import CustomHome from "./pages/Advertise/Custom Home/CustomHome";
+import AdTargetingPage from "./pages/Advertise/Ad Targeting/AdTargetingPage";
+import LocalAdvertising from "./pages/Advertise/LocalAdvertising/LocalAdvertising";
 
 const App = () => {
   return (
@@ -104,6 +109,11 @@ const App = () => {
             <Route path="/advertise" element={<Advertise />} />
             <Route path="/advertiseManager" element={<ManagerAdvertise />} />
             <Route path="/loanorLenderOfficer" element={<OfficerPage />} />
+            <Route path="/brandadvertising" element={<BrandAdvertisngPage />} />
+            <Route path="/mediaplacement" element={<MediaPlacementPage />} />
+            <Route path="/customHome" element={<CustomHome />} />
+            <Route path="/adtargeting" element={<AdTargetingPage />} />
+            <Route path="/localAdvertising" element={<LocalAdvertising />} />
 
             {/* HelpPage  Section */}
             <Route path="/help" element={<HelpPage />} />

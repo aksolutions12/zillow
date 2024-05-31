@@ -20,16 +20,16 @@ export default function RightImageSection({
       </div>
 
       {/* Content */}
-      <div className="md:w-1/2 sm:order-2 lg:order-1 mb-6 md:mb-0 gap-2 sm:text-center lg:text-start">
+      <div className="md:w-1/2 sm:order-2 lg:order-1 mb-6 md:mb-0 gap-2 pl-4 sm:text-center lg:text-start">
         <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">
           {title}
         </h2>
-        <p className="mt-4 mb-3 text-zinc-600 dark:text-zinc-300">
+        <p className="mt-4 mb-4 text-zinc-600 dark:text-zinc-300">
           {description}
         </p>
         <Link
           to={buttonLink}
-          className="mt-10 px-8 py-2 border border-blue-500 text-blue-500 rounded-md hover:bg-blue-500 hover:text-white transition-colors"
+          className="mt-10 px-8 py-3 border border-blue-500 text-blue-500 rounded-md hover:bg-blue-500 hover:text-white transition-colors"
         >
           {buttonText}
         </Link>

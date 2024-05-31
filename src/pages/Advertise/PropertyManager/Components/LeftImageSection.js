@@ -9,7 +9,7 @@ export default function LeftImageSection({
   buttonLink,
 }) {
   return (
-    <div className="flex flex-col md:flex-row items-center p-4 gap-2">
+    <div className="flex flex-col md:flex-row items-center p-4 gap-2 ">
       {/* Image */}
       <div className="w-full lg:w-1/2">
         {" "}
@@ -27,7 +27,7 @@ export default function LeftImageSection({
           <p className="text-zinc-700 dark:text-zinc-300 mb-4">{description}</p>
           <Link
             to={buttonLink}
-            className="mt-10 px-8 py-2 border border-blue-500 text-blue-500 rounded-md hover:bg-blue-500 hover:text-white transition-colors"
+            className="mt-10 px-8 py-3 border border-blue-500 text-blue-500 rounded-md hover:bg-blue-500 hover:text-white transition-colors"
           >
             {buttonText}
           </Link>

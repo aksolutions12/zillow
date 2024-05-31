@@ -33,7 +33,7 @@ const CardsSection = () => {
     {
       heading: "I am a brand or local advertiser",
       buttonText: "Get Started",
-      link: "/renting-vs-buying",
+      link: "/brandadvertising",
     },
   ];
 

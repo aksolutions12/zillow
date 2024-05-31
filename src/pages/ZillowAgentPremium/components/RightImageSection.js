@@ -2,24 +2,25 @@ import React from "react";
 
 export default function RightImageSection({ imageUrl, title, description }) {
   return (
-    <div className="flex flex-col lg:flex-row justify-center items-center p-10 space-x-10 bg-white">
+    <div className="w-full flex flex-col md:flex-row items-center justify-between p-6 bg-white dark:bg-zinc-800 gap-2">
       {/* Image */}
-      <div className="w-full lg:w-1/2 md:w-full sm:w-full mb-6 lg:mb-0 md:mb-0 sm:mb-0 order-1 sm:order-2">
+      <div className="md:w-1/2 sm:order-1 lg:order-2 mb-6 md:mb-0 flex justify-center">
         <img
           src={imageUrl}
-          alt="Real Estate Interaction"
-          className="rounded-lg shadow-lg"
+          alt="Images"
+          className="w-full   object-cover rounded-lg "
         />
       </div>
+
       {/* Content */}
-      <div className="w-full lg:w-1/2 md:w-full sm:w-full pl-0 lg:pl-12 md:pl-0 sm:pl-0 order-2 sm:order-1 flex items-center">
-        <div>
-          <div className="mb-4 w-16 h-2 bg-yellow-500"></div>
-          <h1 className="text-xl lg:text-3xl font-bold mb-4">{title}</h1>
-          <p className="text-base mb-6 lg:w-3/4 md:w-full sm:w-full">
-            {description}
-          </p>
-        </div>
+      <div className="md:w-1/2 sm:order-2 lg:order-1 mb-6 md:mb-0 gap-2 pl-4 sm:text-center lg:text-start">
+        <div className="mb-4 w-16 h-2 bg-yellow-500"></div>
+        <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">
+          {title}
+        </h2>
+        <p className="mt-4 mb-3 text-zinc-600 dark:text-zinc-300">
+          {description}
+        </p>
       </div>
     </div>
   );
