@@ -22,7 +22,11 @@ const ManagerAdvertise = () => {
       <RowSection />
       <IncludedSection />
       <VideoSection />
-      <LastHero />
+      <LastHero
+        heading="Zillow Rental Property Advertising"
+        paragraph="    It’s easier than ever to get renters in the door. Save time and stress
+          — from start to finish — with Zillow Rentals."
+      />
       <Footer />
     </>
   );

@@ -242,7 +242,7 @@ const Navbar = ({ logoUrl }) => {
             onMouseOver={() => handleDropdownHover("manage")}
             onMouseLeave={handleDropdownLeave}
           >
-            Manage Rentals
+            <Link to="/zillowrentalManager">Manage Rentals</Link>
           </NavItem>
           <NavItem hideOnMobile>
             <Link to="/advertise">Advertise</Link>

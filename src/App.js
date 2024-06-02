@@ -53,6 +53,37 @@ import MediaPlacementPage from "./pages/Advertise/MediaPlacement/MediaPlacementP
 import CustomHome from "./pages/Advertise/Custom Home/CustomHome";
 import AdTargetingPage from "./pages/Advertise/Ad Targeting/AdTargetingPage";
 import LocalAdvertising from "./pages/Advertise/LocalAdvertising/LocalAdvertising";
+import GetStartedPage from "./pages/Advertise/GetStarted/GetStartedPage";
+import BuilderPage from "./pages/Advertise/Builder/BuilderPage";
+import NewConstrctuctionPage from "./pages/Advertise/Builder/NewContruction/NewConstrctuctionPage";
+import NewsandDataPage from "./pages/Advertise/Builder/New and Data/NewsandDataPage";
+import MarketingTips from "./pages/Advertise/Builder/OtherPages/MarketingTips";
+import SuccessStories from "./pages/Advertise/Builder/OtherPages/SuccessStories";
+import TrainingBuiler from "./pages/Advertise/Builder/OtherPages/TrainingBuiler";
+import Webinar from "./pages/Advertise/Builder/OtherPages/Webinar";
+import ProductPage from "./pages/Advertise/Builder/Product/ProductPage";
+import BuilderToolPage from "./pages/Advertise/Builder/BuilderTool/BuilderToolPage.js";
+import BuilderDisoveryPage from "./pages/Advertise/Builder/BuilderTool/BuilderDisoveryPage.js";
+import MultiFamilyResource from "./pages/Advertise/PropertyManager/MultiFamilyResource/MultiFamilyResource.js";
+import RentalMarketing from "./pages/Advertise/PropertyManager/MultiFamilyResource/RentalMarketing.js";
+import PropertyManagement from "./pages/Advertise/PropertyManager/MultiFamilyResource/PropertyManagement.js";
+import TrainingandDevelopment from "./pages/Advertise/PropertyManager/MultiFamilyResource/TrainingandDevelopment.js";
+import RenterInsights from "./pages/Advertise/PropertyManager/MultiFamilyResource/RenterInsights.js";
+import EmailMarketing from "./pages/Advertise/PropertyManager/MultiFamilyResource/EmailMarketing.js";
+import SocialMarketing from "./pages/Advertise/PropertyManager/MultiFamilyResource/SocialMarketing.js";
+import GeneralMarketing from "./pages/Advertise/PropertyManager/MultiFamilyResource/GeneralMarketing.js";
+import ResidentEngagement from "./pages/Advertise/PropertyManager/MultiFamilyResource/ResidentEngagement.js";
+import MultifamilySucessStories from "./pages/Advertise/PropertyManager/MultiFamilyResource/MultifamilySucessStories.js";
+import MarketTrend from "./pages/Advertise/PropertyManager/MultiFamilyResource/MarketTrend.js";
+import RentReconnect from "./pages/Advertise/PropertyManager/RentReconnect/RentReconnect.js";
+import LeaseConnect from "./pages/Advertise/PropertyManager/LeaseConnect/LeaseConnect.js";
+import BoostPage from "./pages/Advertise/PropertyManager/Boost/BoostPage.js";
+import ZillowManagerPage from "./pages/ZillowManager/ZillowManagerPage.js";
+import ManagerRentalResources from "./pages/ZillowManager/Resources/ManagerRentalResources.js";
+import LandlordingBasics from "./pages/ZillowManager/Resources/LandlordingBasics.js";
+import ToolsForms from "./pages/ZillowManager/Resources/ToolsForms.js";
+import ManagingYourRental from "./pages/ZillowManager/Resources/ManagingYourRental.js";
+import LandlordLawsRegulations from "./pages/ZillowManager/Resources/LandlordLawsRegulations.js";
 
 const App = () => {
   return (
@@ -108,12 +139,59 @@ const App = () => {
             {/* Advertise Section */}
             <Route path="/advertise" element={<Advertise />} />
             <Route path="/advertiseManager" element={<ManagerAdvertise />} />
+            <Route path="/rentReconnect" element={<RentReconnect />} />
+            <Route path="/leaseConnect" element={<LeaseConnect />} />
+            <Route path="/boost" element={<BoostPage />} />
+
             <Route path="/loanorLenderOfficer" element={<OfficerPage />} />
             <Route path="/brandadvertising" element={<BrandAdvertisngPage />} />
             <Route path="/mediaplacement" element={<MediaPlacementPage />} />
             <Route path="/customHome" element={<CustomHome />} />
             <Route path="/adtargeting" element={<AdTargetingPage />} />
             <Route path="/localAdvertising" element={<LocalAdvertising />} />
+            <Route path="/getStarted" element={<GetStartedPage />} />
+            <Route
+              path="/newconstructionadvertising"
+              element={<BuilderPage />}
+            />
+            <Route
+              path="/newconstructioncenter"
+              element={<NewConstrctuctionPage />}
+            />
+            <Route path="/newsanddata" element={<NewsandDataPage />} />
+            <Route path="/marketingtips" element={<MarketingTips />} />
+            <Route path="/successStories" element={<SuccessStories />} />
+            <Route path="/training" element={<TrainingBuiler />} />
+            <Route path="/webinars" element={<Webinar />} />
+            <Route path="/productadvertising" element={<ProductPage />} />
+            <Route path="/builderTool" element={<BuilderToolPage />} />
+            <Route path="/builderDiscovery" element={<BuilderDisoveryPage />} />
+            <Route
+              path="/multiFamilyResource"
+              element={<MultiFamilyResource />}
+            />
+            <Route path="/rentalMarketing" element={<RentalMarketing />} />
+            <Route
+              path="/propertyManagement"
+              element={<PropertyManagement />}
+            />
+            <Route
+              path="/trainingandDevelopment"
+              element={<TrainingandDevelopment />}
+            />
+            <Route path="/renterInsights" element={<RenterInsights />} />
+            <Route path="/emailMarketing" element={<EmailMarketing />} />
+            <Route path="/socialMarketing" element={<SocialMarketing />} />
+            <Route path="/generalMarketing" element={<GeneralMarketing />} />
+            <Route
+              path="/residentEngagement"
+              element={<ResidentEngagement />}
+            />
+            <Route
+              path="/multifamilySucessStories"
+              element={<MultifamilySucessStories />}
+            />
+            <Route path="/marketTrend" element={<MarketTrend />} />
 
             {/* HelpPage  Section */}
             <Route path="/help" element={<HelpPage />} />
@@ -168,6 +246,26 @@ const App = () => {
             <Route path="/agentPremium" element={<HomeAgentPremium />} />
             <Route path="/agentResources/blog" element={<BlogHome />} />
             <Route path="/category/:categoryName" element={<BlogCategory />} />
+
+            {/* Zillow Rental Manager */}
+            <Route
+              path="/zillowrentalManager"
+              element={<ZillowManagerPage />}
+            />
+            <Route
+              path="/managerRentalResources"
+              element={<ManagerRentalResources />}
+            />
+            <Route path="/landlordingBasics" element={<LandlordingBasics />} />
+            <Route path="/toolsandForms" element={<ToolsForms />} />
+            <Route
+              path="/managingYourRental"
+              element={<ManagingYourRental />}
+            />
+            <Route
+              path="/landlordLawsandRegulations"
+              element={<LandlordLawsRegulations />}
+            />
 
             <Route path="*" element={<NotFoundPage />} />
             {/* Catch-all route for not found */}

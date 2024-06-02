@@ -196,9 +196,17 @@ const BrandBelownav = ({ activeTab }) => {
             </a>
           </div>
         </div>
-        <a href="#" className="text-black">
+        <Link
+          to="/getStarted"
+          className={
+            isButtonActive("Get Started")
+              ? "text-blue-500 underline"
+              : "text-black"
+          }
+          onClick={() => handleButtonClick("Get Started")}
+        >
           Get Started
-        </a>
+        </Link>
       </div>
     </div>
   );

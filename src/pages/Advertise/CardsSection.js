@@ -28,7 +28,7 @@ const CardsSection = () => {
     {
       heading: "I’m a builder",
       buttonText: "Get Started",
-      link: "/interior-design-tips",
+      link: "/newconstructionadvertising",
     },
     {
       heading: "I am a brand or local advertiser",

@@ -8,7 +8,7 @@ import AboutRecommendations from "./AboutRecommendations";
 import logoUrl from "../../assets/images/zil-logo.png";
 import BuyDrop from "../../components/layout/Navbar/BuyDrop";
 import { useAuth } from "../../ContextApi/AuthContext";
-import ThreeCards from "../LearningCenter/Components/ThreeCards";
+import HomeCards from "./HomeCards";
 
 const HomePage = () => {
   const { isLoggedIn, logout } = useAuth();
@@ -44,7 +44,7 @@ const HomePage = () => {
 
       <Widget />
       {isLoggedIn ? (
-        <ThreeCards heading="Homes For You" />
+        <HomeCards heading="Homes For You" />
       ) : (
         <GetRecommendations />
       )}
