@@ -34,7 +34,7 @@ export default function SingleHomeView() {
   };
 
   return (
-    <div className="fixed top-0 left-24 max-w-5xl h-full overflow-y-auto bg-white z-50 flex flex-col">
+    <div className=" max-w-5xl h-full  bg-white z-50 flex flex-col">
       <div className="w-full mx-auto bg-white p-4 sticky">
         <div className="flex items-center justify-between mb-4  ">
           <div

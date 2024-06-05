@@ -91,6 +91,7 @@ import RentPayment from "./pages/ZillowManager/RentPayment/RentPayment.js";
 import RentalListings from "./pages/ZillowManager/RentalListings/RentalListings.js";
 import LoginManager from "./components/Login/LoginManager.js";
 import SingleBlog from "./pages/LearningCenter/SingleBlog.js";
+import SingleHomeView from "./components/SingleHomeView.js";
 
 const App = () => {
   return (
@@ -127,6 +128,8 @@ const App = () => {
 
             {/* Buy Section */}
             <Route path="/buyhome" element={<BuyPage />} />
+            <Route path="/singlehome/:id" element={<SingleHomeView />} />
+
             <Route path="/Foreclosures" element={<ForeclosuresPage />} />
             <Route path="/Homesforsale" element={<BuyPage />} />
             <Route path="/Openhouses" element={<Openhouses />} />

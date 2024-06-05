@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { FiChevronUp, FiChevronDown } from "react-icons/fi";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Footer from "../../../components/layout/Footer/Footer";
+import { Link } from "react-router-dom";
 
 export default function ListHomes({ heading, data }) {
   const [sortIcon, setSortIcon] = useState("down");
@@ -108,43 +109,41 @@ export default function ListHomes({ heading, data }) {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
         {data.map((home, index) => (
-          <div
-            key={home.id}
-            className="border rounded-lg overflow-hidden shadow-sm"
-            onClick={() => openModal(home)}
-          >
-            <div className="relative">
-              <img
-                src={home.image}
-                alt={`House ${home.id}`}
-                className="w-full h-48 object-cover"
-              />
-              {home.showcase && (
-                <div className="absolute top-2 left-2 bg-zinc-800 text-white text-xs px-2 py-1 rounded">
-                  ✨ Showcase
+          <Link key={home.id} to={`/singlehome/${home.id}`}>
+            <div className="border rounded-lg overflow-hidden shadow-sm">
+              <div className="relative">
+                <img
+                  src={home.image}
+                  alt={`House ${home.id}`}
+                  className="w-full h-48 object-cover"
+                />
+                {home.showcase && (
+                  <div className="absolute top-2 left-2 bg-zinc-800 text-white text-xs px-2 py-1 rounded">
+                    ✨ Showcase
+                  </div>
+                )}
+                <div className="absolute bg-transparent top-2 right-2 p-1 rounded-full ">
+                  <button onClick={() => toggleHeartIcon(index)}>
+                    {heartIcons[index] ? (
+                      <FaHeart size={30} color="red" />
+                    ) : (
+                      <FaRegHeart size={30} />
+                    )}
+                  </button>
                 </div>
-              )}
-              <div className="absolute bg-transparent top-2 right-2 p-1 rounded-full ">
-                <button onClick={() => toggleHeartIcon(index)}>
-                  {heartIcons[index] ? (
-                    <FaHeart size={30} color="red" />
-                  ) : (
-                    <FaRegHeart size={30} />
-                  )}
-                </button>
+              </div>
+              <div className="p-4">
+                <h2 className="text-xl font-bold">{home.price}</h2>
+                <p className="text-zinc-600">
+                  {home.beds} bds | {home.baths} ba |{" "}
+                  <span className="font-bold">{home.sqft}</span> sqft -{" "}
+                  {home.status}
+                </p>
+                <p className="text-zinc-600">{home.location}</p>
+                <p className="text-blue-500">{home.agency}</p>
               </div>
             </div>
-            <div className="p-4">
-              <h2 className="text-xl font-bold">{home.price}</h2>
-              <p className="text-zinc-600">
-                {home.beds} bds | {home.baths} ba |{" "}
-                <span className="font-bold">{home.sqft}</span> sqft -{" "}
-                {home.status}
-              </p>
-              <p className="text-zinc-600">{home.location}</p>
-              <p className="text-blue-500">{home.agency}</p>
-            </div>
-          </div>
+          </Link>
         ))}
       </div>
       <Footer />
