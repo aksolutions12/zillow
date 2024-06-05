@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Assuming you're using React Router for navigation
 
 export default function HorizontalCards({ headname, data }) {
   return (
@@ -7,19 +8,20 @@ export default function HorizontalCards({ headname, data }) {
         <h2 className="text-2xl font-bold text-blue-900 dark:text-blue-300">
           {headname}
         </h2>
-        <a
-          href="#"
+        <Link
+          to="/all-blogs"
           className="text-blue-600 dark:text-blue-400 hover:underline"
         >
           See all
-        </a>
+        </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 overflow-x-auto pb-10">
         {/* Render all cards */}
         {data.map((item, index) => (
-          <div
+          <Link
             key={index}
-            className="w-full md:w-600 mx-auto bg-white dark:bg-zinc-800 rounded-lg shadow-xl overflow-hidden  flex flex-col md:flex-row"
+            to={`/blog/${item.id}`}
+            className="w-full md:w-600 mx-auto bg-white dark:bg-zinc-800 rounded-lg shadow-xl overflow-hidden flex flex-col md:flex-row"
           >
             <img
               className="w-full md:w-2/5 object-cover rounded-lg"
@@ -34,7 +36,7 @@ export default function HorizontalCards({ headname, data }) {
                 {item.title}
               </h2>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

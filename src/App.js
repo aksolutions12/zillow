@@ -84,6 +84,13 @@ import LandlordingBasics from "./pages/ZillowManager/Resources/LandlordingBasics
 import ToolsForms from "./pages/ZillowManager/Resources/ToolsForms.js";
 import ManagingYourRental from "./pages/ZillowManager/Resources/ManagingYourRental.js";
 import LandlordLawsRegulations from "./pages/ZillowManager/Resources/LandlordLawsRegulations.js";
+import PriceMyRental from "./pages/ZillowManager/PriceMyRental/PriceMyRental.js";
+import Tenantscreening from "./pages/ZillowManager/Tenantscreening/Tenantscreening.js";
+import OnlineLease from "./pages/ZillowManager/OnlineLease/OnlineLease.js";
+import RentPayment from "./pages/ZillowManager/RentPayment/RentPayment.js";
+import RentalListings from "./pages/ZillowManager/RentalListings/RentalListings.js";
+import LoginManager from "./components/Login/LoginManager.js";
+import SingleBlog from "./pages/LearningCenter/SingleBlog.js";
 
 const App = () => {
   return (
@@ -135,6 +142,7 @@ const App = () => {
             <Route path="/selling" element={<SellingPage />} />
             <Route path="/financing" element={<FinancingPage />} />
             <Route path="/owning" element={<OwningPage />} />
+            <Route path="//blog/:id" element={<SingleBlog />} />
 
             {/* Advertise Section */}
             <Route path="/advertise" element={<Advertise />} />
@@ -266,6 +274,12 @@ const App = () => {
               path="/landlordLawsandRegulations"
               element={<LandlordLawsRegulations />}
             />
+            <Route path="/priceMyRental" element={<PriceMyRental />} />
+            <Route path="/tenantscreening" element={<Tenantscreening />} />
+            <Route path="/onlineLease" element={<OnlineLease />} />
+            <Route path="/rentPayment" element={<RentPayment />} />
+            <Route path="/rentListings" element={<RentalListings />} />
+            <Route path="/managerlogin" element={<LoginManager />} />
 
             <Route path="*" element={<NotFoundPage />} />
             {/* Catch-all route for not found */}

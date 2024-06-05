@@ -111,6 +111,7 @@ export default function ListHomes({ heading, data }) {
           <div
             key={home.id}
             className="border rounded-lg overflow-hidden shadow-sm"
+            onClick={() => openModal(home)}
           >
             <div className="relative">
               <img

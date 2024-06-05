@@ -10,6 +10,9 @@ function ToolCarousel() {
 
   return (
     <div className="py-24 bg-blue-900">
+      <h1 className="font-bold text-center text-3xl text-white pb-5">
+        Here’s what others are saying
+      </h1>
       <Carousel activeIndex={index} onSelect={handleSelect}>
         <Carousel.Item>
           <div className="flex justify-center">

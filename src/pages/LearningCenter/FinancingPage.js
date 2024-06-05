@@ -16,22 +16,26 @@ import AboutRecommendations from "../Home/AboutRecommendations";
 const FinancingPage = () => {
   const data = [
     {
+      id: 1,
       imageUrl: houseimg,
       duration: "13 min read",
       title: "10 Steps to Buying a House",
     },
     {
+      id: 2,
       imageUrl: house2img,
       duration: "7 min read",
       title:
         "6 Causes of Buyer's Remorse After Buying a House, According to Homeowners",
     },
     {
+      id: 3,
       imageUrl: houseimg,
       duration: "13 min read",
       title: "10 Steps to Buying a House",
     },
     {
+      id: 4,
       imageUrl: house2img,
       duration: "7 min read",
       title:

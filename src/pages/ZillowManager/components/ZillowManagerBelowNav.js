@@ -1,9 +1,11 @@
 import { FaChevronDown } from "react-icons/fa";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../../ContextApi/AuthContext";
 
 const ZillowManagerBelowNav = ({ activeTab }) => {
   const [activeButton, setActiveButton] = useState(activeTab);
+  const { isLoggedIn, logout } = useAuth();
 
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);
@@ -27,7 +29,7 @@ const ZillowManagerBelowNav = ({ activeTab }) => {
       <div className="flex flex-wrap items-center gap-4">
         <div className="relative group">
           <div className="flex items-center">
-            <Link to="/rentalMarketing">
+            <Link to="/zillowrentalManager">
               <button
                 className={
                   isButtonActive("Zillow Rental Manager")
@@ -43,25 +45,25 @@ const ZillowManagerBelowNav = ({ activeTab }) => {
 
           <div className="absolute left-0 mt-2 w-48 bg-white border rounded shadow-lg hidden group-hover:block z-50">
             <Link
-              to="/emailMarketing"
+              to="/rentListings"
               className="block px-4 py-2 text-blue-500 hover:bg-zinc-100"
             >
               Rental Listings
             </Link>
             <Link
-              to="/socialMarketing"
+              to="/tenantscreening"
               className="block px-4 py-2 text-blue-500 hover:bg-zinc-100"
             >
               Tenant Screening
             </Link>
             <Link
-              to="/generalMarketing"
+              to="/onlineLease"
               className="block px-4 py-2 text-blue-500 hover:bg-zinc-100"
             >
               Online Leases
             </Link>
             <Link
-              to="/generalMarketing"
+              to="/rentPayment"
               className="block px-4 py-2 text-blue-500 hover:bg-zinc-100"
             >
               Rent Payments
@@ -124,28 +126,41 @@ const ZillowManagerBelowNav = ({ activeTab }) => {
         </div>
 
         <Link
-          to="/trainingandDevelopment"
+          to="/priceMyRental"
           className={
-            isButtonActive("Training and Development")
+            isButtonActive("Price My Rental")
               ? "text-blue-500 underline"
               : "text-black"
           }
-          onClick={() => handleButtonClick("Training and Development")}
+          onClick={() => handleButtonClick("Price My Rental")}
         >
           Price My Rental
         </Link>
-
-        <Link
-          to="/trainingandDevelopment"
-          className={
-            isButtonActive("Training and Development")
-              ? "text-blue-500 underline"
-              : "text-black"
-          }
-          onClick={() => handleButtonClick("Training and Development")}
-        >
-          Post a Listing
-        </Link>
+        {isLoggedIn ? (
+          <Link
+            to="/post"
+            className={
+              isButtonActive("Post a Listing")
+                ? "text-blue-500 underline"
+                : "text-black"
+            }
+            onClick={() => handleButtonClick("Post a Listing")}
+          >
+            Post a Listing
+          </Link>
+        ) : (
+          <Link
+            to="/managerlogin"
+            className={
+              isButtonActive("Post a Listing")
+                ? "text-blue-500 underline"
+                : "text-black"
+            }
+            onClick={() => handleButtonClick("Post a Listing")}
+          >
+            Post a Listing
+          </Link>
+        )}
       </div>
     </div>
   );

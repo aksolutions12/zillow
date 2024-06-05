@@ -240,7 +240,6 @@ const Navbar = ({ logoUrl }) => {
           <NavItem
             hideOnMobile
             onMouseOver={() => handleDropdownHover("manage")}
-            onMouseLeave={handleDropdownLeave}
           >
             <Link to="/zillowrentalManager">Manage Rentals</Link>
           </NavItem>

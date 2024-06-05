@@ -18,7 +18,7 @@ const CardsSection = () => {
     {
       heading: "I’m a landlord",
       buttonText: "Get Started",
-      link: "/home-buying-guide",
+      link: "/zillowrentalManager",
     },
     {
       heading: "I’m a lender or loan officer",
