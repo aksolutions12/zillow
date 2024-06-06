@@ -34,7 +34,8 @@ export default function ListHomes({ heading, data }) {
     setIsDropdownOpen(false);
   };
 
-  const toggleHeartIcon = (index) => {
+  const toggleHeartIcon = (index, e) => {
+    e.preventDefault(); // Prevent navigation
     setHeartIcons((prevIcons) => {
       const newIcons = [...prevIcons];
       newIcons[index] = !newIcons[index];
@@ -123,7 +124,7 @@ export default function ListHomes({ heading, data }) {
                   </div>
                 )}
                 <div className="absolute bg-transparent top-2 right-2 p-1 rounded-full ">
-                  <button onClick={() => toggleHeartIcon(index)}>
+                  <button onClick={(e) => toggleHeartIcon(index, e)}>
                     {heartIcons[index] ? (
                       <FaHeart size={30} color="red" />
                     ) : (
