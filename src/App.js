@@ -92,6 +92,10 @@ import RentalListings from "./pages/ZillowManager/RentalListings/RentalListings.
 import LoginManager from "./components/Login/LoginManager.js";
 import SingleBlog from "./pages/LearningCenter/SingleBlog.js";
 import SingleHomeView from "./components/SingleHomeView.js";
+import SavedHomesPage from "./pages/Profile/SavedHome/SavedHomesPage.js";
+import SavedSearchesPage from "./pages/Profile/SavedSearches/SavedSearchesPage.js";
+import YourTeamPage from "./pages/Profile/YourTeam/YourTeamPage.js";
+import YourHomePage from "./pages/Profile/YourHome/YourHomePage.js";
 
 const App = () => {
   return (
@@ -283,6 +287,12 @@ const App = () => {
             <Route path="/rentPayment" element={<RentPayment />} />
             <Route path="/rentListings" element={<RentalListings />} />
             <Route path="/managerlogin" element={<LoginManager />} />
+
+            {/* Profile Section */}
+            <Route path="/savedHomes" element={<SavedHomesPage />} />
+            <Route path="/savedSearches" element={<SavedSearchesPage />} />
+            <Route path="/yourteam" element={<YourTeamPage />} />
+            <Route path="/yourhome" element={<YourHomePage />} />
 
             <Route path="*" element={<NotFoundPage />} />
             {/* Catch-all route for not found */}

@@ -134,6 +134,7 @@ const Navbar = ({ logoUrl }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // New state for dropdown
   const { isLoggedIn, logout } = useAuth();
 
   const handleSignInClick = () => {
@@ -183,19 +184,124 @@ const Navbar = ({ logoUrl }) => {
 
   return (
     <NavbarWrapper transparent={!mobileMenuOpen}>
-      {mobileMenuOpen && (
+      {mobileMenuOpen ? (
         <HamburgerIcon onClick={toggleMobileMenu}>
           <Close />
         </HamburgerIcon>
-      )}
-      {!mobileMenuOpen && (
+      ) : (
         <HamburgerIcon onClick={toggleMobileMenu}>
           <Menu />
         </HamburgerIcon>
       )}
 
       {isMobile && mobileMenuOpen && <RespNav closeMenu={closeMobileMenu} />}
-      <SignInLink onClick={handleSignInClick}>Sign in</SignInLink>
+
+      {isLoggedIn ? (
+        <SignInLink>
+          <>
+            <button
+              id="dropdownUserAvatarButton"
+              className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+              type="button"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <span className="sr-only">Open user menu</span>
+              <img
+                className="w-8 h-8 rounded-full"
+                src="/docs/images/people/profile-picture-3.jpg"
+                alt="user photo"
+              />
+            </button>
+
+            {isDropdownOpen && (
+              <div
+                id="dropdownAvatar"
+                className="absolute right-0 mt-5 lef-2 w-44 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+              >
+                <ul
+                  className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                  aria-labelledby="dropdownUserAvatarButton"
+                >
+                  <li>
+                    <Link
+                      to="/savedHomes"
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Saved Homes
+                    </Link>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Saved Searches
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Manage Tours
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Recently Viewed
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Your Team
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Your Home
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Renter Hub
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Account Settings
+                    </a>
+                  </li>
+                </ul>
+                <div className="py-2">
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >
+                    Sign out
+                  </button>
+                </div>
+              </div>
+            )}
+          </>
+        </SignInLink>
+      ) : (
+        <SignInLink onClick={handleSignInClick}>Sign in</SignInLink>
+      )}
 
       {isModalOpen && <LoginSignUp onClose={handleCloseModal} />}
 
@@ -249,11 +355,112 @@ const Navbar = ({ logoUrl }) => {
           <NavItem hideOnMobile>
             <Link to="/help">Help</Link>
           </NavItem>
-          <NavItem
-            hideOnMobile
-            onClick={isLoggedIn ? handleLogout : handleSignInClick}
-          >
-            {isLoggedIn ? "Logout" : "Sign in"}
+
+          <NavItem hideOnMobile>
+            {isLoggedIn ? (
+              <>
+                <button
+                  id="dropdownUserAvatarButton"
+                  className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                  type="button"
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                >
+                  <span className="sr-only">Open user menu</span>
+                  <img
+                    className="w-8 h-8 rounded-full"
+                    src="/docs/images/people/profile-picture-3.jpg"
+                    alt="user photo"
+                  />
+                </button>
+
+                {isDropdownOpen && (
+                  <div
+                    id="dropdownAvatar"
+                    className="absolute right-0 mt-2 w-44 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                  >
+                    <ul
+                      className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                      aria-labelledby="dropdownUserAvatarButton"
+                    >
+                      <li>
+                        <Link
+                          to="/savedHomes"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Saved Homes
+                        </Link>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Saved Searches
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Manage Tours
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Recently Viewed
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Your Team
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Your Home
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Renter Hub
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Account Settings
+                        </a>
+                      </li>
+                    </ul>
+                    <div className="py-2">
+                      <button
+                        onClick={handleLogout}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        Sign out
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </>
+            ) : (
+              <button onClick={handleSignInClick}>Sign in</button>
+            )}
           </NavItem>
         </NavList>
       )}

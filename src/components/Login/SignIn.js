@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import { useAuth } from "../../ContextApi/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { FaFacebookF } from "react-icons/fa";
-import { GrGoogle } from "react-icons/gr";
-import { AiFillApple } from "react-icons/ai";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 const SignIn = ({ onClose }) => {
-  const { login } = useAuth(); // Accessing login function from AuthContext
+  const { login, googleLogin, facebookLogin } = useAuth(); // Accessing login, googleLogin, and facebookLogin functions from AuthContext
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false); // State for Snackbar
+  const [snackbarMessage, setSnackbarMessage] = useState(""); // State for Snackbar message
 
   const navigate = useNavigate();
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
     // Perform validation if needed
     if (!email || !password) {
@@ -21,18 +23,84 @@ const SignIn = ({ onClose }) => {
       return;
     }
 
-    // Simulating login process (replace with your actual login logic)
-    if (email === "omar@gmail.com" && password === "12345") {
-      login(); // Call the login function from AuthContext
-      onClose();
-      navigate("/");
-    } else {
+    try {
+      await login(email, password); // Call the login function from AuthContext with email and password
+      setSnackbarMessage("Login successfully!");
+      setOpenSnackbar(true);
+      console.log("Login Successfully");
+      setTimeout(() => {
+        onClose();
+        navigate("/");
+      }, 1500);
+    } catch (error) {
       setError("Invalid email or password.");
+      // Show error message in Snackbar
+      setSnackbarMessage("Invalid email or password.");
+      setOpenSnackbar(true);
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      await googleLogin(); // Use googleLogin function from AuthContext
+      setSnackbarMessage("Login successfully!");
+      setOpenSnackbar(true);
+      setTimeout(() => {
+        onClose();
+        navigate("/");
+      }, 1500);
+    } catch (error) {
+      setError("Google sign-in failed.");
+      // Show error message in Snackbar
+      setSnackbarMessage("Google sign-in failed.");
+      setOpenSnackbar(true);
+    }
+  };
+
+  const handleFacebookSignIn = async () => {
+    try {
+      await facebookLogin(); // Use facebookLogin function from AuthContext
+      setSnackbarMessage("Login successfully!");
+      setOpenSnackbar(true);
+      setTimeout(() => {
+        onClose();
+        navigate("/");
+      }, 1500);
+    } catch (error) {
+      setError("Facebook sign-in failed.");
+      // Show error message in Snackbar
+      setSnackbarMessage("Facebook sign-in failed.");
+      setOpenSnackbar(true);
+    }
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
+
+  const action = (
+    <IconButton
+      size="small"
+      aria-label="close"
+      color="inherit"
+      onClick={handleCloseSnackbar}
+    >
+      <CloseIcon fontSize="small" />
+    </IconButton>
+  );
+
   return (
     <div className="w-full mx-auto bg-white dark:bg-zinc-800 lg:max-w-md">
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        message={snackbarMessage}
+        action={action}
+      />
       <form className="space-y-4" onSubmit={handleSignIn}>
         <div>
           <label
@@ -97,18 +165,38 @@ const SignIn = ({ onClose }) => {
             </span>
           </div>
         </div>
-        <div className="mt-6 space-y-3 w-full">
-          <button className="w-full py-2 px-4 border border-zinc-300 dark:border-zinc-600 rounded-md shadow-lg bg-white dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 flex items-center justify-center gap-5">
-            <AiFillApple className="mr-2" color="black" />
+        <div className="mt-7 flex flex-col gap-2">
+          <button className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
+            <img
+              src="https://www.svgrepo.com/show/511330/apple-173.svg"
+              alt="Apple"
+              className="h-[18px] w-[18px]"
+            />
             Continue with Apple
           </button>
-          <button className="w-full py-2 px-4 border border-zinc-300 dark:border-zinc-600 rounded-md shadow-lg bg-white dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 flex items-center justify-center  gap-5">
-            <FaFacebookF className="mr-2" color="blue" />
-            Continue with Facebook
-          </button>
-          <button className="w-full py-2 px-4 border border-zinc-300 dark:border-zinc-600 rounded-md shadow-lg bg-white dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 flex items-center justify-center  gap-5">
-            <GrGoogle className="mr-2" color="red" />
+
+          <button
+            onClick={handleGoogleSignIn}
+            className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#c24242] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <img
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              alt="Google"
+              className="h-[18px] w-[18px]"
+            />
             Continue with Google
+          </button>
+
+          <button
+            onClick={handleFacebookSignIn}
+            className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#3e6fa4] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <img
+              src="https://www.svgrepo.com/show/475647/facebook-color.svg"
+              alt="Facebook"
+              className="h-[18px] w-[18px]"
+            />
+            Continue with Facebook
           </button>
         </div>
       </div>

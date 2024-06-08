@@ -1,9 +1,16 @@
 import React, { useState } from "react";
-import { FaFacebookF } from "react-icons/fa";
-import { GrGoogle } from "react-icons/gr";
-import { AiFillApple } from "react-icons/ai";
+import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import { auth, db } from "../../Firebase/firebase";
+import { setDoc, doc } from "firebase/firestore";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useAuth } from "../../ContextApi/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-export default function NewAccount() {
+export default function NewAccount({ onClose }) {
+  const { googleLogin, facebookLogin } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isProfessional, setIsProfessional] = useState(false);
@@ -11,6 +18,10 @@ export default function NewAccount() {
   const [lastName, setLastName] = useState("");
   const [zip, setZip] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(["", "", "", ""]);
+  const [openSnackbar, setOpenSnackbar] = useState(false); // State for Snackbar
+  const [snackbarMessage, setSnackbarMessage] = useState(""); // State for Snackbar message
+
+  const navigate = useNavigate();
 
   const handleProfessionalCheck = () => {
     setIsProfessional(!isProfessional);
@@ -22,13 +33,111 @@ export default function NewAccount() {
     setPhoneNumber(newPhoneNumber);
   };
 
-  const handleSubmit = () => {
-    // Validation logic for email and phone number can be added here
-    console.log("Form submitted!");
+  const handleSubmit = async () => {
+    try {
+      // Create user with email and password
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      console.log("User created:", user);
+
+      if (user) {
+        await setDoc(doc(db, "Users", user.uid), {
+          email: user.email,
+          isProfessional: isProfessional,
+          firstName: firstName,
+          lastName: lastName,
+          zip: zip,
+          phoneNumber: phoneNumber,
+        });
+      }
+
+      // Show success message in Snackbar
+      setSnackbarMessage("User registered successfully!");
+      setOpenSnackbar(true);
+
+      // Clear form fields
+      setEmail("");
+      setPassword("");
+      setIsProfessional(false);
+      setFirstName("");
+      setLastName("");
+      setZip("");
+      setPhoneNumber(["", "", "", ""]);
+    } catch (error) {
+      // Handle errors
+
+      console.error("Error signing up:", error.message);
+      setSnackbarMessage("Error signing up: " + error.message);
+      setOpenSnackbar(true);
+    }
   };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await googleLogin(); // Use googleLogin function from AuthContext
+      setSnackbarMessage("Login successfully!");
+      setOpenSnackbar(true);
+      setTimeout(() => {
+        onClose();
+        navigate("/");
+      }, 1500);
+    } catch (error) {
+      setError("Google sign-in failed.");
+      // Show error message in Snackbar
+      setSnackbarMessage("Google sign-in failed.");
+      setOpenSnackbar(true);
+    }
+  };
+
+  const handleFacebookSignIn = async () => {
+    try {
+      await facebookLogin(); // Use facebookLogin function from AuthContext
+      setSnackbarMessage("Login successfully!");
+      setOpenSnackbar(true);
+      setTimeout(() => {
+        setOpenSnackbar(false); // Close snackbar
+        // Navigate to home page after successful sign-in
+        navigate("/");
+      }, 1500);
+    } catch (error) {
+      console.error("Facebook sign-in failed:", error.message);
+      // Show error message in Snackbar
+      setSnackbarMessage("Facebook sign-in failed: " + error.message);
+      setOpenSnackbar(true);
+    }
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
+
+  const action = (
+    <IconButton
+      size="small"
+      aria-label="close"
+      color="inherit"
+      onClick={handleCloseSnackbar}
+    >
+      <CloseIcon fontSize="small" />
+    </IconButton>
+  );
 
   return (
     <div className="w-full mx-auto sm:max-w-md">
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        message={snackbarMessage}
+        action={action}
+      />
       <div className="mb-4">
         <label
           htmlFor="email"
@@ -174,18 +283,38 @@ export default function NewAccount() {
       <div className="text-center text-sm text-zinc-700 dark:text-zinc-300 mb-4">
         Or connect with:
       </div>
-      <div className="mt-6 space-y-3 w-full">
-        <button className="w-full py-2 px-4 border border-zinc-300 dark:border-zinc-600 rounded-md shadow-lg bg-white dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 flex items-center justify-center gap-5">
-          <AiFillApple className="mr-2" color="black" />
+      <div class="mt-7 flex flex-col gap-2">
+        <button class="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
+          <img
+            src="https://www.svgrepo.com/show/511330/apple-173.svg"
+            alt="GitHub"
+            class="h-[18px] w-[18px] "
+          />
           Continue with Apple
         </button>
-        <button className="w-full py-2 px-4 border border-zinc-300 dark:border-zinc-600 rounded-md shadow-lg bg-white dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 flex items-center justify-center  gap-5">
-          <FaFacebookF className="mr-2" color="blue" />
-          Continue with Facebook
-        </button>
-        <button className="w-full py-2 px-4 border border-zinc-300 dark:border-zinc-600 rounded-md shadow-lg bg-white dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 flex items-center justify-center  gap-5">
-          <GrGoogle className="mr-2" color="red" />
+
+        <button
+          onClick={handleGoogleSignIn}
+          class="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#c24242] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          <img
+            src="https://www.svgrepo.com/show/475656/google-color.svg"
+            alt="Google"
+            class="h-[18px] w-[18px] "
+          />
           Continue with Google
+        </button>
+
+        <button
+          onClick={handleFacebookSignIn}
+          class="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#3e6fa4] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          <img
+            src="https://www.svgrepo.com/show/475647/facebook-color.svg"
+            alt="Google"
+            class="h-[18px] w-[18px] "
+          />
+          Continue with Facebook
         </button>
       </div>
     </div>

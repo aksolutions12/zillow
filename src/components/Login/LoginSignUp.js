@@ -34,7 +34,7 @@ export default function LoginSignUp({ onClose }) {
               <SignIn onClose={onClose} />
             </TabPanel>
             <TabPanel value="newAccount">
-              <NewAccount />
+              <NewAccount onClose={onClose} />
             </TabPanel>
           </TabContext>
         </div>
