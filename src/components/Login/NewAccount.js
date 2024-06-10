@@ -45,8 +45,10 @@ export default function NewAccount({ onClose }) {
       console.log("User created:", user);
 
       if (user) {
+        const screenName = user.email.split("@")[0]; // Extract screen name from email
         await setDoc(doc(db, "Users", user.uid), {
           email: user.email,
+          screenName: screenName, // Save the screen name
           isProfessional: isProfessional,
           firstName: firstName,
           lastName: lastName,
@@ -199,6 +201,10 @@ export default function NewAccount({ onClose }) {
             </label>
             <select className="w-full p-2.5 bg-zinc-100 dark:bg-zinc-700 border border-zinc-300 dark:border-zinc-600 rounded-lg">
               <option>Select your category</option>
+              <option>Real Estate Agent/Broker</option>
+              <option>Mortgage Lender</option>
+              <option>Home Improvement Services</option>
+              <option>Lanlord</option>
             </select>
           </div>
           <div className="grid grid-cols-2 gap-4 mb-4">

@@ -13,6 +13,8 @@ import { Menu, Close } from "@mui/icons-material"; // Importing icons from MUI
 import RespNav from "./RespNav";
 import LoginSignUp from "../../Login/LoginSignUp";
 import { useAuth } from "../../../ContextApi/AuthContext";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../Firebase/firebase";
 
 const NavbarWrapper = styled.nav`
   position: relative;
@@ -135,7 +137,39 @@ const Navbar = ({ logoUrl }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // New state for dropdown
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, logout, userid } = useAuth();
+  const [userPhotoURL, setUserPhotoURL] = useState("");
+
+  const getUserPhotoURL = async (userId) => {
+    try {
+      // Reference to the user document in Firestore
+      const userDocRef = doc(db, "Users", userId);
+
+      // Get the user document
+      const userDocSnapshot = await getDoc(userDocRef);
+
+      // Check if the user document exists and contains the photoURL field
+      if (userDocSnapshot.exists()) {
+        const userData = userDocSnapshot.data();
+        if (userData && userData.photoURL) {
+          setUserPhotoURL(userData.photoURL);
+        } else {
+          console.error("User document does not contain photoURL field");
+        }
+      } else {
+        console.error("User document does not exist");
+      }
+    } catch (error) {
+      console.error("Error fetching user photo URL:", error);
+    }
+  };
+
+  useEffect(() => {
+    // Fetch user photo URL when user ID changes
+    if (userid) {
+      getUserPhotoURL(userid);
+    }
+  }, [userid]);
 
   const handleSignInClick = () => {
     setIsModalOpen(true);
@@ -208,7 +242,9 @@ const Navbar = ({ logoUrl }) => {
               <span className="sr-only">Open user menu</span>
               <img
                 className="w-8 h-8 rounded-full"
-                src="/docs/images/people/profile-picture-3.jpg"
+                src={
+                  userPhotoURL || "/docs/images/people/profile-picture-3.jpg"
+                }
                 alt="user photo"
               />
             </button>
@@ -368,7 +404,10 @@ const Navbar = ({ logoUrl }) => {
                   <span className="sr-only">Open user menu</span>
                   <img
                     className="w-8 h-8 rounded-full"
-                    src="/docs/images/people/profile-picture-3.jpg"
+                    src={
+                      userPhotoURL ||
+                      "/docs/images/people/profile-picture-3.jpg"
+                    }
                     alt="user photo"
                   />
                 </button>

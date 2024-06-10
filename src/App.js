@@ -101,8 +101,9 @@ import ManagetoursPage from "./pages/Profile/Managetours/ManagetoursPage.js";
 import AccountsettingsPage from "./pages/Profile/Account settings/AccountsettingsPage.js";
 import RenterHubPage from "./pages/Profile/RenterHub/RenterHubPage.js";
 import HiddenhomesPage from "./pages/Profile/SavedHome/HiddenhomesPage.js";
-import ProfileSettings from "./pages/Profile/SavedHome/ProfileSettings.js";
-import DocumentSettings from "./pages/Profile/SavedHome/DocumentSettings.js";
+import ProfileSettings from "./pages/Profile/Account settings/ProfileSettings.js";
+import DocumentSettings from "./pages/Profile/Account settings/DocumentSettings.js";
+import EditPhoto from "./pages/Profile/Account settings/EditPhoto.js";
 
 const App = () => {
   return (
@@ -306,6 +307,7 @@ const App = () => {
             <Route path="/managetours" element={<ManagetoursPage />} />
             <Route path="/accountsettings" element={<AccountsettingsPage />} />
             <Route path="/profilesettings" element={<ProfileSettings />} />
+            <Route path="/editphoto" element={<EditPhoto />} />
             <Route
               path="/document-preferences"
               element={<DocumentSettings />}
