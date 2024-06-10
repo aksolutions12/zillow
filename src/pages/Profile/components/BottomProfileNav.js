@@ -21,6 +21,14 @@ export default function BottomProfileNav({ defaultActiveTab }) {
       navigate("/yourteam");
     } else if (newValue === "6") {
       navigate("/yourhome");
+    } else if (newValue === "4") {
+      navigate("/recentlyViewed");
+    } else if (newValue === "3") {
+      navigate("/managetours");
+    } else if (newValue === "8") {
+      navigate("/accountsettings");
+    } else if (newValue === "7") {
+      navigate("/renterHub");
     } else {
       navigate("*");
     }

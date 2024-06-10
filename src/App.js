@@ -96,6 +96,13 @@ import SavedHomesPage from "./pages/Profile/SavedHome/SavedHomesPage.js";
 import SavedSearchesPage from "./pages/Profile/SavedSearches/SavedSearchesPage.js";
 import YourTeamPage from "./pages/Profile/YourTeam/YourTeamPage.js";
 import YourHomePage from "./pages/Profile/YourHome/YourHomePage.js";
+import RecentlyViewedPage from "./pages/Profile/RecentlyViewed/RecentlyViewedPage.js";
+import ManagetoursPage from "./pages/Profile/Managetours/ManagetoursPage.js";
+import AccountsettingsPage from "./pages/Profile/Account settings/AccountsettingsPage.js";
+import RenterHubPage from "./pages/Profile/RenterHub/RenterHubPage.js";
+import HiddenhomesPage from "./pages/Profile/SavedHome/HiddenhomesPage.js";
+import ProfileSettings from "./pages/Profile/SavedHome/ProfileSettings.js";
+import DocumentSettings from "./pages/Profile/SavedHome/DocumentSettings.js";
 
 const App = () => {
   return (
@@ -290,9 +297,20 @@ const App = () => {
 
             {/* Profile Section */}
             <Route path="/savedHomes" element={<SavedHomesPage />} />
+            <Route path="/hiddenhomes" element={<HiddenhomesPage />} />
+
             <Route path="/savedSearches" element={<SavedSearchesPage />} />
             <Route path="/yourteam" element={<YourTeamPage />} />
             <Route path="/yourhome" element={<YourHomePage />} />
+            <Route path="/recentlyViewed" element={<RecentlyViewedPage />} />
+            <Route path="/managetours" element={<ManagetoursPage />} />
+            <Route path="/accountsettings" element={<AccountsettingsPage />} />
+            <Route path="/profilesettings" element={<ProfileSettings />} />
+            <Route
+              path="/document-preferences"
+              element={<DocumentSettings />}
+            />
+            <Route path="/renterHub" element={<RenterHubPage />} />
 
             <Route path="*" element={<NotFoundPage />} />
             {/* Catch-all route for not found */}
