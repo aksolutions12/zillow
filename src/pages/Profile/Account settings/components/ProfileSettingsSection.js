@@ -6,6 +6,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db, storage } from "../../../../Firebase/firebase";
+import { sendEmailVerification, updatePassword } from "firebase/auth";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 export default function ProfileSettingsSection() {
   const navigate = useNavigate();
@@ -19,11 +22,51 @@ export default function ProfileSettingsSection() {
   const [userId, setUserId] = useState("");
   const [newScreenName, setNewScreenName] = useState("");
   const [photoURL, setPhotoURL] = useState("");
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const [emailVerified, setEmailVerified] = useState(false);
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+
+  const handleCreatePasswordClick = () => {
+    setIsPasswordModalOpen(true); // Open the password modal
+  };
+
+  const handleApplyPassword = async () => {
+    if (!newPassword) {
+      console.error("New password is missing.");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      const user = auth.currentUser;
+      if (user) {
+        await updatePassword(user, newPassword);
+        setSnackbarMessage("Password updated successfully!");
+        setSnackbarSeverity("success");
+      } else {
+        console.error("No user is currently signed in.");
+        setSnackbarMessage("Failed to update password.");
+        setSnackbarSeverity("error");
+      }
+      handleCloseModal();
+    } catch (error) {
+      console.error("Error updating password:", error);
+      setSnackbarMessage("Failed to update password.");
+      setSnackbarSeverity("error");
+    } finally {
+      setIsLoading(false);
+      setSnackbarOpen(true);
+    }
+  };
 
   const fetchUserData = async () => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         setUserId(user.uid);
+        setEmailVerified(user.emailVerified);
         const docRef = doc(db, "Users", user.uid);
         const docSnap = await getDoc(docRef);
 
@@ -50,9 +93,17 @@ export default function ProfileSettingsSection() {
       setIsLoading(false);
     });
   };
+
   useEffect(() => {
     fetchUserData();
   }, []);
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackbarOpen(false);
+  };
 
   // Event handler to handle Apply button click
   const handleApplyName = async () => {
@@ -129,10 +180,28 @@ export default function ProfileSettingsSection() {
     setIsNameModalOpen(false); // Close the name modal
     setIsScreenNameModalOpen(false); // Close the screen name modal
     setIsVerifyEmailModalOpen(false); // Close the email verification modal
+    setIsPasswordModalOpen(false);
   };
 
-  const handleVerifyEmailClick = () => {
+  const handleVerifyEmailModal = () => {
     setIsVerifyEmailModalOpen(true); // Open the email verification modal
+  };
+
+  const handleVerifyEmailClick = async () => {
+    if (auth.currentUser) {
+      try {
+        await sendEmailVerification(auth.currentUser);
+        setSnackbarMessage("Verification email sent!");
+        setSnackbarSeverity("success");
+        setSnackbarOpen(true);
+        setIsVerifyEmailModalOpen(false);
+      } catch (error) {
+        console.error("Error sending email verification:", error);
+        setSnackbarMessage("Failed to send verification email.");
+        setSnackbarSeverity("error");
+        setSnackbarOpen(true);
+      }
+    }
   };
 
   // Other functions remain unchanged...
@@ -381,17 +450,23 @@ export default function ProfileSettingsSection() {
                     </div>
                     <div className="flex items-center space-x-2">
                       {userDetails && <span>{userDetails.email}</span>}
-                      <span className="text-sm text-zinc-500">unverified</span>
+                      <span
+                        className={`text-sm ${
+                          emailVerified ? "text-green-500" : "text-red-500"
+                        }`}
+                      >
+                        {emailVerified ? "verified" : "unverified"}
+                      </span>
                       <a
                         href="#"
-                        onClick={handleVerifyEmailClick}
+                        onClick={handleVerifyEmailModal}
                         className="text-blue-600 cursor-pointer"
                       >
                         Verify
                       </a>
                       <a
                         href="#"
-                        onClick={handleVerifyEmailClick}
+                        onClick={handleVerifyEmailModal}
                         className="text-blue-600 cursor-pointer"
                       >
                         Edit
@@ -427,7 +502,10 @@ export default function ProfileSettingsSection() {
                             >
                               Cancel
                             </button>
-                            <button className="bg-blue-600 text-white px-4 py-2 rounded-md">
+                            <button
+                              onClick={handleVerifyEmailClick}
+                              className="bg-blue-600 text-white px-4 py-2 rounded-md"
+                            >
                               Send verification email
                             </button>
                           </div>
@@ -446,12 +524,63 @@ export default function ProfileSettingsSection() {
                     </div>
                     <a
                       href="#"
-                      onClick={handleVerifyEmailClick}
+                      onClick={handleCreatePasswordClick}
                       className="text-blue-600 border border-blue-600 px-4 py-2 rounded"
                     >
                       Create password
                     </a>
                   </div>
+
+                  {/* Password Modal */}
+                  {isPasswordModalOpen && (
+                    <div className="fixed inset-0 flex items-center justify-center bg-zinc-800 bg-opacity-50">
+                      <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-lg w-96 p-6">
+                        <div className="flex justify-between items-center mb-4">
+                          <h2 className="text-xl font-semibold text-zinc-900 dark:text-white">
+                            Create Password
+                          </h2>
+                          <button
+                            onClick={handleCloseModal}
+                            className="text-zinc-900 dark:text-white"
+                          >
+                            <span className="sr-only">Close</span>
+                            <FiX className="w-5 h-5" />
+                          </button>
+                        </div>
+                        <hr className="border-zinc-300 dark:border-zinc-700 mb-4" />
+                        <div className="mb-4">
+                          <label
+                            htmlFor="new-password"
+                            className="block text-zinc-700 dark:text-zinc-300 mb-2"
+                          >
+                            New Password
+                          </label>
+                          <input
+                            type="password"
+                            id="new-password"
+                            className="w-full p-2 border rounded-lg bg-zinc-50 dark:bg-zinc-700 dark:text-white border-zinc-300 dark:border-zinc-600"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                          />
+                        </div>
+                        <div className="flex justify-end space-x-4">
+                          <button
+                            onClick={handleCloseModal}
+                            className="text-zinc-700 dark:text-zinc-300"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            onClick={handleApplyPassword}
+                            className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                          >
+                            Update
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   <hr color="text-gray-300" />
 
                   <div className="flex flex-col md:flex-row justify-between md:items-center">
@@ -525,6 +654,20 @@ export default function ProfileSettingsSection() {
               </div>
             </div>
           </div>
+
+          <Snackbar
+            open={snackbarOpen}
+            autoHideDuration={6000}
+            onClose={handleSnackbarClose}
+          >
+            <MuiAlert
+              onClose={handleSnackbarClose}
+              severity={snackbarSeverity}
+              sx={{ width: "100%" }}
+            >
+              {snackbarMessage}
+            </MuiAlert>
+          </Snackbar>
         </>
       )}
     </div>
