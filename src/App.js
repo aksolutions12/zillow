@@ -104,6 +104,8 @@ import HiddenhomesPage from "./pages/Profile/SavedHome/HiddenhomesPage.js";
 import ProfileSettings from "./pages/Profile/Account settings/ProfileSettings.js";
 import DocumentSettings from "./pages/Profile/Account settings/DocumentSettings.js";
 import EditPhoto from "./pages/Profile/Account settings/EditPhoto.js";
+import NotificationPage from "./pages/Profile/Account settings/Notification/NotificationPage.js";
+import PostListing from "./pages/ZillowManager/Post Listing/PostListing.js";
 
 const App = () => {
   return (
@@ -309,10 +311,15 @@ const App = () => {
             <Route path="/profilesettings" element={<ProfileSettings />} />
             <Route path="/editphoto" element={<EditPhoto />} />
             <Route
+              path="/notificationssettings"
+              element={<NotificationPage />}
+            />
+            <Route
               path="/document-preferences"
               element={<DocumentSettings />}
             />
             <Route path="/renterHub" element={<RenterHubPage />} />
+            <Route path="/postalisting" element={<PostListing />} />
 
             <Route path="*" element={<NotFoundPage />} />
             {/* Catch-all route for not found */}

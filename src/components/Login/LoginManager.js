@@ -10,7 +10,7 @@ import NewAccount from "./NewAccount";
 import Navbar from "../layout/Navbar/Navbar";
 import Footer from "../layout/Footer/Footer";
 
-export default function LoginManager() {
+export default function LoginManager({ onClose }) {
   const [value, setValue] = useState("signIn");
 
   const handleChange = (event, newValue) => {
@@ -37,10 +37,10 @@ export default function LoginManager() {
                   <Tab label="New Account" value="newAccount" />
                 </TabList>
                 <TabPanel value="signIn">
-                  <SignIn />
+                  <SignIn onClose={onClose} />
                 </TabPanel>
                 <TabPanel value="newAccount">
-                  <NewAccount />
+                  <NewAccount onClose={onClose} />
                 </TabPanel>
               </TabContext>
             </div>

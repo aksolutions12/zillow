@@ -136,31 +136,18 @@ const ZillowManagerBelowNav = ({ activeTab }) => {
         >
           Price My Rental
         </Link>
-        {isLoggedIn ? (
-          <Link
-            to="/post"
-            className={
-              isButtonActive("Post a Listing")
-                ? "text-blue-500 underline"
-                : "text-black"
-            }
-            onClick={() => handleButtonClick("Post a Listing")}
-          >
-            Post a Listing
-          </Link>
-        ) : (
-          <Link
-            to="/managerlogin"
-            className={
-              isButtonActive("Post a Listing")
-                ? "text-blue-500 underline"
-                : "text-black"
-            }
-            onClick={() => handleButtonClick("Post a Listing")}
-          >
-            Post a Listing
-          </Link>
-        )}
+
+        <Link
+          to="/postalisting"
+          className={
+            isButtonActive("Post a Listing")
+              ? "text-blue-500 underline"
+              : "text-black"
+          }
+          onClick={() => handleButtonClick("Post a Listing")}
+        >
+          Post a Listing
+        </Link>
       </div>
     </div>
   );

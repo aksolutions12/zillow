@@ -16,7 +16,7 @@ const settingsData = [
     profileImg: img2,
     heading: "Notifications",
     description: "Manage the content and frequency of your Zillow emails.",
-    link: "/notifications",
+    link: "/notificationssettings",
   },
   {
     profileImg: img3,

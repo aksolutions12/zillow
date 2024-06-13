@@ -20,6 +20,7 @@ export default function NewAccount({ onClose }) {
   const [phoneNumber, setPhoneNumber] = useState(["", "", "", ""]);
   const [openSnackbar, setOpenSnackbar] = useState(false); // State for Snackbar
   const [snackbarMessage, setSnackbarMessage] = useState(""); // State for Snackbar message
+  const [error, setError] = useState(""); // State for error message
 
   const navigate = useNavigate();
 
