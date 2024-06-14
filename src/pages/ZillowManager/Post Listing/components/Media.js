@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
 import { IoMdPhotos } from "react-icons/io";
 
-export default function Media() {
-  const [selectedFiles, setSelectedFiles] = useState([]);
-  const fileInputRef = React.createRef();
+const Media = ({ formData, setFormData }) => {
+  const { selectedFiles } = formData.media;
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -12,11 +11,19 @@ export default function Media() {
 
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
-    setSelectedFiles(files);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      media: {
+        ...prevFormData.media,
+        selectedFiles: files,
+      },
+    }));
   };
 
+  const fileInputRef = React.createRef();
+
   return (
-    <div className="lg:px-16 sm:px-5  p-6">
+    <div className="lg:px-16 sm:px-5 p-6">
       <h1 className="text-2xl font-bold">Add photos</h1>
       <p className="text-zinc-600 dark:text-zinc-400">
         Photos help renters imagine living in your place.
@@ -64,4 +71,6 @@ export default function Media() {
       </div>
     </div>
   );
-}
+};
+
+export default Media;

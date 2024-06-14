@@ -1,36 +1,69 @@
 import React, { useState } from "react";
 
-export default function Amenities() {
-  const [laundry, setLaundry] = useState("");
-  const [cooling, setCooling] = useState([]);
-  const [heating, setHeating] = useState([]);
-  const [appliances, setAppliances] = useState([]);
-  const [flooring, setFlooring] = useState([]);
-  const [otherAmenities, setOtherAmenities] = useState([]);
+export default function Amenities({ formData, setFormData }) {
+  const {
+    laundry,
+    cooling,
+    heating,
+    appliances,
+    flooring,
+    parking,
+    outdoorAmenities,
+    accessibility,
+    otheramenities,
+    additionalAmenities: amenitiesList,
+    newAmenityDescription: newAmenity,
+  } = formData.amenities;
 
-  const [parking, setParking] = useState([]);
-  const [outdoorAmenities, setOutdoorAmenities] = useState([]);
-  const [accessibility, setAccessibility] = useState([]);
-  const [additionalAmenities, setAdditionalAmenities] = useState([]);
   const [newAmenityDescription, setNewAmenityDescription] = useState("");
 
-  const handleRadioChange = (e, setState) => {
-    setState(e.target.value);
+  const handleRadioChange = (e) => {
+    const value = e.target.value;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      amenities: {
+        ...prevFormData.amenities,
+        laundry: value,
+      },
+    }));
   };
 
-  const handleCheckboxChange = (e, state, setState) => {
+  const handleCheckboxChange = (e, stateKey) => {
     const value = e.target.value;
     if (e.target.checked) {
-      setState([...state, value]);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        amenities: {
+          ...prevFormData.amenities,
+          [stateKey]: [...prevFormData.amenities[stateKey], value],
+        },
+      }));
     } else {
-      setState(state.filter((item) => item !== value));
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        amenities: {
+          ...prevFormData.amenities,
+          [stateKey]: prevFormData.amenities[stateKey].filter(
+            (item) => item !== value
+          ),
+        },
+      }));
     }
   };
 
-  // Function to handle adding a new amenity
   const handleAddAmenity = () => {
     if (newAmenityDescription.trim() !== "") {
-      setAdditionalAmenities([...additionalAmenities, newAmenityDescription]);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        amenities: {
+          ...prevFormData.amenities,
+          additionalAmenities: [
+            ...amenitiesList,
+            newAmenity,
+            newAmenityDescription,
+          ],
+        },
+      }));
       setNewAmenityDescription("");
     }
   };
@@ -57,7 +90,7 @@ export default function Amenities() {
                   value="Washer-dryer included"
                   className="mr-2"
                   checked={laundry === "Washer-dryer included"}
-                  onChange={(e) => handleRadioChange(e, setLaundry)}
+                  onChange={handleRadioChange}
                 />
                 Washer-dryer included
               </label>
@@ -68,7 +101,7 @@ export default function Amenities() {
                   value="Washer-dryer hookups"
                   className="mr-2"
                   checked={laundry === "Washer-dryer hookups"}
-                  onChange={(e) => handleRadioChange(e, setLaundry)}
+                  onChange={handleRadioChange}
                 />
                 Washer-dryer hookups
               </label>
@@ -79,7 +112,7 @@ export default function Amenities() {
                   value="Shared or in building"
                   className="mr-2"
                   checked={laundry === "Shared or in building"}
-                  onChange={(e) => handleRadioChange(e, setLaundry)}
+                  onChange={handleRadioChange}
                 />
                 Shared or in building
               </label>
@@ -90,7 +123,7 @@ export default function Amenities() {
                   value="No laundry facilities"
                   className="mr-2"
                   checked={laundry === "No laundry facilities"}
-                  onChange={(e) => handleRadioChange(e, setLaundry)}
+                  onChange={handleRadioChange}
                 />
                 No laundry facilities
               </label>
@@ -105,7 +138,7 @@ export default function Amenities() {
                   value="Central"
                   className="mr-2"
                   checked={cooling.includes("Central")}
-                  onChange={(e) => handleCheckboxChange(e, cooling, setCooling)}
+                  onChange={(e) => handleCheckboxChange(e, "cooling")}
                 />
                 Central
               </label>
@@ -115,7 +148,7 @@ export default function Amenities() {
                   value="Wall"
                   className="mr-2"
                   checked={cooling.includes("Wall")}
-                  onChange={(e) => handleCheckboxChange(e, cooling, setCooling)}
+                  onChange={(e) => handleCheckboxChange(e, "cooling")}
                 />
                 Wall
               </label>
@@ -125,7 +158,7 @@ export default function Amenities() {
                   value="Window"
                   className="mr-2"
                   checked={cooling.includes("Window")}
-                  onChange={(e) => handleCheckboxChange(e, cooling, setCooling)}
+                  onChange={(e) => handleCheckboxChange(e, "cooling")}
                 />
                 Window
               </label>
@@ -140,7 +173,7 @@ export default function Amenities() {
                   value="Baseboard"
                   className="mr-2"
                   checked={heating.includes("Baseboard")}
-                  onChange={(e) => handleCheckboxChange(e, heating, setHeating)}
+                  onChange={(e) => handleCheckboxChange(e, "heating")}
                 />
                 Baseboard
               </label>
@@ -150,7 +183,7 @@ export default function Amenities() {
                   value="Forced air"
                   className="mr-2"
                   checked={heating.includes("Forced air")}
-                  onChange={(e) => handleCheckboxChange(e, heating, setHeating)}
+                  onChange={(e) => handleCheckboxChange(e, "heating")}
                 />
                 Forced air
               </label>
@@ -160,7 +193,7 @@ export default function Amenities() {
                   value="Heat pump"
                   className="mr-2"
                   checked={heating.includes("Heat pump")}
-                  onChange={(e) => handleCheckboxChange(e, heating, setHeating)}
+                  onChange={(e) => handleCheckboxChange(e, "heating")}
                 />
                 Heat pump
               </label>
@@ -170,7 +203,7 @@ export default function Amenities() {
                   value="Wall"
                   className="mr-2"
                   checked={heating.includes("Wall")}
-                  onChange={(e) => handleCheckboxChange(e, heating, setHeating)}
+                  onChange={(e) => handleCheckboxChange(e, "heating")}
                 />
                 Wall
               </label>
@@ -185,9 +218,7 @@ export default function Amenities() {
                   value="Dishwasher"
                   className="mr-2"
                   checked={appliances.includes("Dishwasher")}
-                  onChange={(e) =>
-                    handleCheckboxChange(e, appliances, setAppliances)
-                  }
+                  onChange={(e) => handleCheckboxChange(e, "appliances")}
                 />
                 Dishwasher
               </label>
@@ -197,9 +228,7 @@ export default function Amenities() {
                   value="Freezer"
                   className="mr-2"
                   checked={appliances.includes("Freezer")}
-                  onChange={(e) =>
-                    handleCheckboxChange(e, appliances, setAppliances)
-                  }
+                  onChange={(e) => handleCheckboxChange(e, "appliances")}
                 />
                 Freezer
               </label>
@@ -209,9 +238,7 @@ export default function Amenities() {
                   value="Microwave"
                   className="mr-2"
                   checked={appliances.includes("Microwave")}
-                  onChange={(e) =>
-                    handleCheckboxChange(e, appliances, setAppliances)
-                  }
+                  onChange={(e) => handleCheckboxChange(e, "appliances")}
                 />
                 Microwave
               </label>
@@ -221,9 +248,7 @@ export default function Amenities() {
                   value="Oven"
                   className="mr-2"
                   checked={appliances.includes("Oven")}
-                  onChange={(e) =>
-                    handleCheckboxChange(e, appliances, setAppliances)
-                  }
+                  onChange={(e) => handleCheckboxChange(e, "appliances")}
                 />
                 Oven
               </label>
@@ -233,9 +258,7 @@ export default function Amenities() {
                   value="Refrigerator"
                   className="mr-2"
                   checked={appliances.includes("Refrigerator")}
-                  onChange={(e) =>
-                    handleCheckboxChange(e, appliances, setAppliances)
-                  }
+                  onChange={(e) => handleCheckboxChange(e, "appliances")}
                 />
                 Refrigerator
               </label>
@@ -250,9 +273,7 @@ export default function Amenities() {
                   value="Carpet"
                   className="mr-2"
                   checked={flooring.includes("Carpet")}
-                  onChange={(e) =>
-                    handleCheckboxChange(e, flooring, setFlooring)
-                  }
+                  onChange={(e) => handleCheckboxChange(e, "flooring")}
                 />
                 Carpet
               </label>
@@ -262,9 +283,7 @@ export default function Amenities() {
                   value="Hardwood"
                   className="mr-2"
                   checked={flooring.includes("Hardwood")}
-                  onChange={(e) =>
-                    handleCheckboxChange(e, flooring, setFlooring)
-                  }
+                  onChange={(e) => handleCheckboxChange(e, "flooring")}
                 />
                 Hardwood
               </label>
@@ -274,9 +293,7 @@ export default function Amenities() {
                   value="Tile"
                   className="mr-2"
                   checked={flooring.includes("Tile")}
-                  onChange={(e) =>
-                    handleCheckboxChange(e, flooring, setFlooring)
-                  }
+                  onChange={(e) => handleCheckboxChange(e, "flooring")}
                 />
                 Tile
               </label>
@@ -290,10 +307,8 @@ export default function Amenities() {
                   type="checkbox"
                   value="Furnished"
                   className="mr-2"
-                  checked={otherAmenities.includes("Furnished")}
-                  onChange={(e) =>
-                    handleCheckboxChange(e, otherAmenities, setOtherAmenities)
-                  }
+                  checked={otheramenities.includes("Furnished")}
+                  onChange={(e) => handleCheckboxChange(e, "otheramenities")}
                 />
                 Furnished
               </label>
@@ -308,108 +323,109 @@ export default function Amenities() {
         <p className="mb-6">
           Sharing more will help renters see themselves in your home
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div>
-            <h3 className="font-semibold mb-2">Parking</h3>
-            <label className="block mb-2">
-              <input
-                type="checkbox"
-                className="mr-2"
-                onChange={(e) => handleCheckboxChange(e, parking, setParking)}
-              />{" "}
-              Attached garage
-            </label>
-            <label className="block mb-2">
-              <input
-                type="checkbox"
-                className="mr-2"
-                onChange={(e) => handleCheckboxChange(e, parking, setParking)}
-              />{" "}
-              Detached garage
-            </label>
-            <label className="block mb-2">
-              <input
-                type="checkbox"
-                className="mr-2"
-                onChange={(e) => handleCheckboxChange(e, parking, setParking)}
-              />{" "}
-              Off-street parking
-            </label>
-          </div>
-          <div>
-            <h3 className="font-semibold mb-2">Outdoor amenities</h3>
-            <label className="block mb-2">
-              <input
-                type="checkbox"
-                className="mr-2"
-                onChange={(e) =>
-                  handleCheckboxChange(e, outdoorAmenities, setOutdoorAmenities)
-                }
-              />{" "}
-              Balcony or deck
-            </label>
-            <label className="block mb-2">
-              <input
-                type="checkbox"
-                className="mr-2"
-                onChange={(e) =>
-                  handleCheckboxChange(e, outdoorAmenities, setOutdoorAmenities)
-                }
-              />{" "}
-              Pool
-            </label>
-          </div>
-          <div>
-            <h3 className="font-semibold mb-2">Accessibility</h3>
-            <label className="block mb-2">
-              <input
-                type="checkbox"
-                className="mr-2"
-                onChange={(e) =>
-                  handleCheckboxChange(e, accessibility, setAccessibility)
-                }
-              />{" "}
-              Disabled access
-            </label>
-          </div>
-        </div>
         <div className="mb-6">
-          <h3 className="font-semibold mb-2">Additional amenities</h3>
-          <label className="block mb-2">
-            <input
-              type="checkbox"
-              className="mr-2"
-              onChange={(e) =>
-                handleCheckboxChange(
-                  e,
-                  additionalAmenities,
-                  setAdditionalAmenities
-                )
-              }
-            />{" "}
-            Bicycle storage
-          </label>
-          <label className="block mb-2">
-            <input
-              type="checkbox"
-              className="mr-2"
-              onChange={(e) =>
-                handleCheckboxChange(
-                  e,
-                  additionalAmenities,
-                  setAdditionalAmenities
-                )
-              }
-            />{" "}
-            EV charging station
-          </label>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div>
+              <h3 className="font-semibold mb-2">Parking</h3>
+              <label className="block mb-2">
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  value="Attached garage"
+                  checked={parking.includes("Attached garage")}
+                  onChange={(e) => handleCheckboxChange(e, "parking")}
+                />{" "}
+                Attached garage
+              </label>
+              <label className="block mb-2">
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  value="Detached garage"
+                  checked={parking.includes("Detached garage")}
+                  onChange={(e) => handleCheckboxChange(e, "parking")}
+                />{" "}
+                Detached garage
+              </label>
+              <label className="block mb-2">
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  value="Off-street parking"
+                  checked={parking.includes("Off-street parking")}
+                  onChange={(e) => handleCheckboxChange(e, "parking")}
+                />{" "}
+                Off-street parking
+              </label>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Outdoor amenities</h3>
+              <label className="block mb-2">
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  value="Balcony or deck"
+                  checked={outdoorAmenities.includes("Balcony or deck")}
+                  onChange={(e) => handleCheckboxChange(e, "outdoorAmenities")}
+                />{" "}
+                Balcony or deck
+              </label>
+              <label className="block mb-2">
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  value="Pool"
+                  checked={outdoorAmenities.includes("Pool")}
+                  onChange={(e) => handleCheckboxChange(e, "outdoorAmenities")}
+                />{" "}
+                Pool
+              </label>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Accessibility</h3>
+              <label className="block mb-2">
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  value="Disabled access"
+                  checked={accessibility.includes("Disabled access")}
+                  onChange={(e) => handleCheckboxChange(e, "accessibility")}
+                />{" "}
+                Disabled access
+              </label>
+            </div>
+          </div>
+          <div className="mb-6">
+            <h3 className="font-semibold mb-2">Other amenities</h3>
+            <label className="block mb-2">
+              <input
+                type="checkbox"
+                className="mr-2"
+                value="Bicycle storage"
+                checked={otheramenities.includes("Bicycle storage")}
+                onChange={(e) => handleCheckboxChange(e, "otheramenities")}
+              />{" "}
+              Bicycle storage
+            </label>
+            <label className="block mb-2">
+              <input
+                type="checkbox"
+                className="mr-2"
+                value="EV charging station"
+                checked={otheramenities.includes("EV charging station")}
+                onChange={(e) => handleCheckboxChange(e, "otheramenities")}
+              />{" "}
+              EV charging station
+            </label>
+          </div>
         </div>
+
         <div className="mb-6">
           <h3 className="font-semibold mb-2">Additional amenities</h3>
           {/* Display additional amenities */}
-          {additionalAmenities.length > 0 && (
+          {amenitiesList.length > 0 && (
             <ul className="mb-2 font-bold italic">
-              {additionalAmenities.map((amenity, index) => (
+              {amenitiesList.map((amenity, index) => (
                 <li key={index}>{amenity}</li>
               ))}
             </ul>

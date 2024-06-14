@@ -1,6 +1,19 @@
 import React from "react";
 
-const ListingDetails = () => {
+const ListingDetails = ({ formData, setFormData }) => {
+  const { monthlyRent, securityDeposit } = formData.listingDetails;
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      listingDetails: {
+        ...prevFormData.listingDetails,
+        [name]: value,
+      },
+    }));
+  };
+
   return (
     <div className="lg:px-16 sm:px-5 mx-auto p-6 bg-white dark:bg-zinc-800">
       <div>
@@ -18,8 +31,11 @@ const ListingDetails = () => {
           <input
             type="text"
             id="monthly-rent"
+            name="monthlyRent"
             className="flex-1 border-none focus:ring-0 focus:outline-none bg-transparent mx-2"
             placeholder="0.00"
+            value={monthlyRent}
+            onChange={handleChange}
           />
           <span className="text-zinc-500 dark:text-zinc-400">/month</span>
         </div>
@@ -29,7 +45,7 @@ const ListingDetails = () => {
           How much is the security deposit?
         </h2>
         <label
-          htmlFor="monthly-rent"
+          htmlFor="security-deposit"
           className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1"
         >
           Security deposit <span className="text-red-500">*</span>
@@ -39,8 +55,11 @@ const ListingDetails = () => {
           <input
             type="text"
             id="security-deposit"
+            name="securityDeposit"
             className="flex-1 border-none focus:ring-0 focus:outline-none bg-transparent mx-2"
             placeholder="0.00"
+            value={securityDeposit}
+            onChange={handleChange}
           />
         </div>
       </div>

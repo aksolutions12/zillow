@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -10,6 +10,8 @@ import ListingDetails from "./components/ListingDetails";
 import Lease from "./components/Lease";
 import Media from "./components/Media";
 import Amenities from "./components/Amenities";
+import FinalDetail from "./components/FinalDetail";
+import dayjs from "dayjs";
 
 const steps = [
   "Property info",
@@ -26,6 +28,60 @@ export default function PostListing() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
 
+  const [formData, setFormData] = useState({
+    propertyInfo: {
+      streetAddress: "",
+      propertyType: "",
+      unitNumber: "",
+      sharedLivingSpace: false,
+      squareFootage: "",
+      totalBedrooms: "",
+      totalBathrooms: "",
+      propertyDescription: "",
+    },
+    listingDetails: {
+      monthlyRent: "",
+      securityDeposit: "",
+    },
+    lease: {
+      petPolicy: {
+        noPets: null,
+        cats: null,
+        smallDogs: null,
+        largeDogs: null,
+      },
+      leaseDescription: "",
+    },
+    media: {
+      selectedFiles: [],
+    },
+    amenities: {
+      laundry: "",
+      cooling: [],
+      heating: [],
+      appliances: [],
+      flooring: [],
+      parking: [],
+      outdoorAmenities: [],
+      accessibility: [],
+      additionalAmenities: [],
+      otheramenities: [],
+      newAmenityDescription: [],
+    },
+    finalDetails: {
+      listedBy: "",
+      name: "",
+      email: "",
+      selectedDays: [],
+      hideAddress: "",
+      selectedDate: dayjs(),
+      leaseDuration: "",
+      acceptOnlineApplications: "",
+    },
+
+    // Add more sections as needed (Lease, Media, Amenities, etc.)
+  });
+
   const totalSteps = () => steps.length;
 
   const completedSteps = () => Object.keys(completed).length;
@@ -39,6 +95,7 @@ export default function PostListing() {
       isLastStep() && !allStepsCompleted()
         ? steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
+
     setActiveStep(newActiveStep);
   };
 
@@ -54,6 +111,11 @@ export default function PostListing() {
     const newCompleted = { ...completed };
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
+
+    // Log formData when "Publish" is clicked
+    if (isLastStep()) {
+      console.log(formData);
+    }
     handleNext();
   };
 
@@ -79,15 +141,26 @@ export default function PostListing() {
           ))}
         </Stepper>
         <hr className="text-gray-500 my-3" />
-        <Typography className="mt-2 mb-1 py-1">
-          Step {activeStep + 1}
-        </Typography>
+
         {/* Conditionally render PropertyInfo component */}
-        {activeStep === 0 && <PropertyInfo />}
-        {activeStep === 1 && <ListingDetails />}
-        {activeStep === 2 && <Lease />}
-        {activeStep === 3 && <Media />}
-        {activeStep === 4 && <Amenities />}
+        {activeStep === 0 && (
+          <PropertyInfo formData={formData} setFormData={setFormData} />
+        )}
+        {activeStep === 1 && (
+          <ListingDetails formData={formData} setFormData={setFormData} />
+        )}
+        {activeStep === 2 && (
+          <Lease formData={formData} setFormData={setFormData} />
+        )}
+        {activeStep === 3 && (
+          <Media formData={formData} setFormData={setFormData} />
+        )}
+        {activeStep === 4 && (
+          <Amenities formData={formData} setFormData={setFormData} />
+        )}
+        {activeStep === 5 && (
+          <FinalDetail formData={formData} setFormData={setFormData} />
+        )}
       </Box>
       <Box className="flex-none p-2 bg-white">
         {allStepsCompleted() ? (

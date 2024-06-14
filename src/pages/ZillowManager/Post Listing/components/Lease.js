@@ -1,22 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
 
-const Lease = () => {
-  const [petPolicy, setPetPolicy] = useState({
-    noPets: null,
-    cats: null,
-    smallDogs: null,
-    largeDogs: null,
-  });
-
-  const [leaseDescription, setLeaseDescription] = useState("");
+const Lease = ({ formData, setFormData }) => {
+  const { petPolicy, leaseDescription } = formData.lease;
 
   const handleCheckboxChange = (e) => {
     const { id, checked } = e.target;
-    const value = checked ? id : null;
-    setPetPolicy((prevPolicy) => ({
-      ...prevPolicy,
-      [id]: value,
+    const updatedPetPolicy = {
+      ...petPolicy,
+      [id]: checked ? id : null,
+    };
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      lease: {
+        ...prevFormData.lease,
+        petPolicy: updatedPetPolicy,
+      },
+    }));
+  };
+
+  const handleLeaseDescriptionChange = (e) => {
+    const { value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      lease: {
+        ...prevFormData.lease,
+        leaseDescription: value,
+      },
     }));
   };
 
@@ -35,7 +45,7 @@ const Lease = () => {
             <div>
               <input
                 id="noPets"
-                name="pets"
+                name="petPolicy"
                 type="checkbox"
                 checked={petPolicy.noPets === "noPets"}
                 onChange={handleCheckboxChange}
@@ -48,7 +58,7 @@ const Lease = () => {
             <div>
               <input
                 id="cats"
-                name="pets"
+                name="petPolicy"
                 type="checkbox"
                 checked={petPolicy.cats === "cats"}
                 onChange={handleCheckboxChange}
@@ -61,7 +71,7 @@ const Lease = () => {
             <div>
               <input
                 id="smallDogs"
-                name="pets"
+                name="petPolicy"
                 type="checkbox"
                 checked={petPolicy.smallDogs === "smallDogs"}
                 onChange={handleCheckboxChange}
@@ -74,7 +84,7 @@ const Lease = () => {
             <div>
               <input
                 id="largeDogs"
-                name="pets"
+                name="petPolicy"
                 type="checkbox"
                 checked={petPolicy.largeDogs === "largeDogs"}
                 onChange={handleCheckboxChange}
@@ -104,8 +114,9 @@ const Lease = () => {
           </label>
           <textarea
             id="property-description"
+            name="leaseDescription"
             value={leaseDescription}
-            onChange={(e) => setLeaseDescription(e.target.value)}
+            onChange={handleLeaseDescriptionChange}
             className="w-full mt-2 p-4 border border-zinc-300 dark:border-zinc-700 rounded-lg bg-zinc-50 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200"
             rows="4"
             placeholder="Example: Owner pays for water. Renter is responsible for gas and electric. Last month’s rent due at signing. No smoking allowed. Small pets (up to 20 pounds) permitted."

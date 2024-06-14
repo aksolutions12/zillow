@@ -2,15 +2,29 @@ import * as React from "react";
 import img1 from "../../../../assets/images/sellyourself.png";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
 
-export default function PropertyInfo() {
-  const [streetAddress, setStreetAddress] = React.useState("");
-  const [propertyType, setPropertyType] = React.useState("");
-  const [unitNumber, setUnitNumber] = React.useState("");
-  const [sharedLivingSpace, setSharedLivingSpace] = React.useState(false);
-  const [squareFootage, setSquareFootage] = React.useState("");
-  const [totalBedrooms, setTotalBedrooms] = React.useState("");
-  const [totalBathrooms, setTotalBathrooms] = React.useState("");
-  const [propertyDescription, setPropertyDescription] = React.useState("");
+export default function PropertyInfo({ formData, setFormData }) {
+  const {
+    streetAddress,
+    propertyType,
+    unitNumber,
+    sharedLivingSpace,
+    squareFootage,
+    totalBedrooms,
+    totalBathrooms,
+    propertyDescription,
+  } = formData.propertyInfo;
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      propertyInfo: {
+        ...prevFormData.propertyInfo,
+        [name]: type === "checkbox" ? checked : value,
+      },
+    }));
+  };
 
   return (
     <div className="lg:px-16 sm:px-5 mx-auto p-6 bg-white dark:bg-zinc-800">
@@ -35,8 +49,9 @@ export default function PropertyInfo() {
           <input
             type="text"
             id="street-address"
+            name="streetAddress"
             value={streetAddress}
-            onChange={(e) => setStreetAddress(e.target.value)}
+            onChange={handleChange}
             className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 dark:bg-zinc-700 dark:text-zinc-300"
             placeholder="Enter the USPS-validated address. You won’t be able to edit the address once you create the listing."
           />
@@ -50,8 +65,9 @@ export default function PropertyInfo() {
           </label>
           <select
             id="property-type"
+            name="propertyType"
             value={propertyType}
-            onChange={(e) => setPropertyType(e.target.value)}
+            onChange={handleChange}
             className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 dark:bg-zinc-700 dark:text-zinc-300"
           >
             <option value="">Please select</option>
@@ -71,8 +87,9 @@ export default function PropertyInfo() {
           <input
             type="text"
             id="unit-number"
+            name="unitNumber"
             value={unitNumber}
-            onChange={(e) => setUnitNumber(e.target.value)}
+            onChange={handleChange}
             className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 dark:bg-zinc-700 dark:text-zinc-300"
             placeholder="Enter apartment, suite, or unit number."
           />
@@ -81,8 +98,9 @@ export default function PropertyInfo() {
           <input
             type="checkbox"
             id="shared-living-space"
+            name="sharedLivingSpace"
             checked={sharedLivingSpace}
-            onChange={(e) => setSharedLivingSpace(e.target.checked)}
+            onChange={handleChange}
             className="h-4 w-4 text-blue-600 border-zinc-300 rounded focus:ring-blue-500 dark:bg-zinc-700 dark:border-zinc-600"
           />
           <label
@@ -109,10 +127,10 @@ export default function PropertyInfo() {
             <div className="mt-1 relative rounded-md shadow-sm">
               <input
                 type="text"
-                name="square-footage"
+                name="squareFootage"
                 id="square-footage"
                 value={squareFootage}
-                onChange={(e) => setSquareFootage(e.target.value)}
+                onChange={handleChange}
                 className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 dark:bg-zinc-700 dark:text-zinc-300"
                 placeholder="sq. ft."
               />
@@ -134,9 +152,9 @@ export default function PropertyInfo() {
             </label>
             <select
               id="total-bedrooms"
-              name="total-bedrooms"
+              name="totalBedrooms"
               value={totalBedrooms}
-              onChange={(e) => setTotalBedrooms(e.target.value)}
+              onChange={handleChange}
               className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 dark:bg-zinc-700 dark:text-zinc-300"
             >
               <option value="">Please select</option>
@@ -158,9 +176,9 @@ export default function PropertyInfo() {
             </label>
             <select
               id="total-bathrooms"
-              name="total-bathrooms"
+              name="totalBathrooms"
               value={totalBathrooms}
-              onChange={(e) => setTotalBathrooms(e.target.value)}
+              onChange={handleChange}
               className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 dark:bg-zinc-700 dark:text-zinc-300"
             >
               <option value="">Please select</option>
@@ -190,8 +208,9 @@ export default function PropertyInfo() {
             </label>
             <textarea
               id="property-description"
+              name="propertyDescription"
               value={propertyDescription}
-              onChange={(e) => setPropertyDescription(e.target.value)}
+              onChange={handleChange}
               className="w-full mt-2 p-4 border border-zinc-300 dark:border-zinc-700 rounded-lg bg-zinc-50 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200"
               rows="4"
               placeholder="Example: Freshly painted home with new appliances and carpeting. Easy walking to public transit and a great neighborhood."
