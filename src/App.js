@@ -142,7 +142,7 @@ const App = () => {
 
             {/* Buy Section */}
             <Route path="/buyhome" element={<BuyPage />} />
-            <Route path="/singlehome/:id" element={<SingleHomeView />} />
+            <Route path="/singlehome/:postId" element={<SingleHomeView />} />
 
             <Route path="/Foreclosures" element={<ForeclosuresPage />} />
             <Route path="/Homesforsale" element={<BuyPage />} />

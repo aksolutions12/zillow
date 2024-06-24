@@ -7,11 +7,6 @@ const MapSection = () => {
     height: "100%",
   };
 
-  const markerPositions = [
-    { lat: -32.1877, lng: 74.1945 },
-    { lat: -34.0, lng: 150.0 }, // Add more marker positions as needed
-  ];
-
   const center = {
     lat: 32.1877,
     lng: 74.1945,
@@ -25,11 +20,7 @@ const MapSection = () => {
         mapContainerStyle={mapContainerStyle}
         center={center}
         zoom={zoomLevel}
-      >
-        {markerPositions.map((position, index) => (
-          <Marker key={index} position={position} />
-        ))}
-      </GoogleMap>
+      ></GoogleMap>
     </LoadScript>
   );
 };

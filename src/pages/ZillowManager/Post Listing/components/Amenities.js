@@ -12,7 +12,6 @@ export default function Amenities({ formData, setFormData }) {
     accessibility,
     otheramenities,
     additionalAmenities: amenitiesList,
-    newAmenityDescription: newAmenity,
   } = formData.amenities;
 
   const [newAmenityDescription, setNewAmenityDescription] = useState("");
@@ -57,11 +56,7 @@ export default function Amenities({ formData, setFormData }) {
         ...prevFormData,
         amenities: {
           ...prevFormData.amenities,
-          additionalAmenities: [
-            ...amenitiesList,
-            newAmenity,
-            newAmenityDescription,
-          ],
+          additionalAmenities: [...amenitiesList, newAmenityDescription],
         },
       }));
       setNewAmenityDescription("");
@@ -424,9 +419,14 @@ export default function Amenities({ formData, setFormData }) {
           <h3 className="font-semibold mb-2">Additional amenities</h3>
           {/* Display additional amenities */}
           {amenitiesList.length > 0 && (
-            <ul className="mb-2 font-bold italic">
+            <ul className="mb-2 font-semibold italic">
               {amenitiesList.map((amenity, index) => (
-                <li key={index}>{amenity}</li>
+                <li
+                  key={index}
+                  className="bg-cyan-100 p-2 mr-2 inline-block rounded-lg"
+                >
+                  {amenity}
+                </li>
               ))}
             </ul>
           )}

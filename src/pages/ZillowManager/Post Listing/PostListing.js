@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { doc, setDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 as uuidv4 } from "uuid";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -12,6 +15,14 @@ import Media from "./components/Media";
 import Amenities from "./components/Amenities";
 import FinalDetail from "./components/FinalDetail";
 import dayjs from "dayjs";
+import ReviewListing from "./components/ReviewListing";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import { CircularProgress } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { auth, storage, db } from "../../../Firebase/firebase";
+import { useAuth } from "../../../ContextApi/AuthContext";
 
 const steps = [
   "Property info",
@@ -21,12 +32,16 @@ const steps = [
   "Amenities",
   "Final details",
   "Review",
-  "Publish",
 ];
 
 export default function PostListing() {
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [completed, setCompleted] = React.useState({});
+  const [activeStep, setActiveStep] = useState(0);
+  const [completed, setCompleted] = useState({});
+  const [openSnackbar, setOpenSnackbar] = useState(false); // State for Snackbar
+  const [snackbarMessage, setSnackbarMessage] = useState(""); // State for Snackbar message
+  const [loading, setLoading] = useState(false); // State for loading
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     propertyInfo: {
@@ -64,9 +79,8 @@ export default function PostListing() {
       parking: [],
       outdoorAmenities: [],
       accessibility: [],
-      additionalAmenities: [],
       otheramenities: [],
-      newAmenityDescription: [],
+      additionalAmenities: [],
     },
     finalDetails: {
       listedBy: "",
@@ -74,12 +88,10 @@ export default function PostListing() {
       email: "",
       selectedDays: [],
       hideAddress: "",
-      selectedDate: dayjs(),
+      selectedDate: "",
       leaseDuration: "",
       acceptOnlineApplications: "",
     },
-
-    // Add more sections as needed (Lease, Media, Amenities, etc.)
   });
 
   const totalSteps = () => steps.length;
@@ -107,14 +119,84 @@ export default function PostListing() {
     setActiveStep(step);
   };
 
-  const handleComplete = () => {
+  const handleComplete = async () => {
     const newCompleted = { ...completed };
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
 
-    // Log formData when "Publish" is clicked
+    // When "Publish" is clicked
     if (isLastStep()) {
-      console.log(formData);
+      const user = auth.currentUser;
+      if (isLoggedIn) {
+        setLoading(true); // Start loading
+        const userId = user.uid;
+        const postId = uuidv4(); // Generate a unique ID for the post
+
+        try {
+          // Flatten nested arrays in amenities
+          const flattenedAmenities = {
+            ...formData.amenities,
+            cooling: Object.values(formData.amenities.cooling),
+            heating: Object.values(formData.amenities.heating),
+            appliances: Object.values(formData.amenities.appliances),
+            flooring: Object.values(formData.amenities.flooring),
+            parking: Object.values(formData.amenities.parking),
+            outdoorAmenities: Object.values(
+              formData.amenities.outdoorAmenities
+            ),
+            accessibility: Object.values(formData.amenities.accessibility),
+            additionalAmenities: Object.values(
+              formData.amenities.additionalAmenities
+            ),
+            otheramenities: Object.values(formData.amenities.otheramenities),
+          };
+
+          // Flatten selectedDays array
+          const flattenedSelectedDays = Object.values(
+            formData.finalDetails.selectedDays
+          );
+
+          // Upload images to Firebase Storage
+          const imageUrls = await Promise.all(
+            formData.media.selectedFiles.map(async (file) => {
+              const storageRef = ref(storage, `posts/${postId}/${file.name}`);
+              await uploadBytes(storageRef, file);
+              return await getDownloadURL(storageRef);
+            })
+          );
+
+          // Add post data to Firestore
+          await setDoc(doc(db, "posts", postId), {
+            propertyInfo: formData.propertyInfo,
+            listingDetails: formData.listingDetails,
+            lease: formData.lease,
+            media: { selectedFiles: imageUrls },
+            amenities: flattenedAmenities, // Replace nested arrays with flattened versions
+            finalDetails: {
+              ...formData.finalDetails,
+              selectedDays: flattenedSelectedDays, // Replace selectedDays with flattened array
+            },
+            userId,
+            postId,
+            timestamp: new Date(),
+          });
+
+          console.log("Post successfully created!");
+          setSnackbarMessage("Post successfully created!");
+          setOpenSnackbar(true);
+          navigate("/forrent"); // Navigate to /forrent
+        } catch (error) {
+          console.error("Error creating post: ", error);
+          setSnackbarMessage("Error creating post.");
+          setOpenSnackbar(true);
+        } finally {
+          setLoading(false); // End loading
+        }
+      } else {
+        setSnackbarMessage("You need to be logged in to publish a post.");
+        setOpenSnackbar(true);
+        console.error("No user is logged in");
+      }
     }
     handleNext();
   };
@@ -123,6 +205,40 @@ export default function PostListing() {
     setActiveStep(0);
     setCompleted({});
   };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
+
+  const action = (
+    <IconButton
+      size="small"
+      aria-label="close"
+      color="inherit"
+      onClick={handleCloseSnackbar}
+    >
+      <CloseIcon fontSize="small" />
+    </IconButton>
+  );
+
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <h1 className="italic mr-1">Post Uploading..</h1>
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <Box className="flex flex-col h-screen">
@@ -142,7 +258,6 @@ export default function PostListing() {
         </Stepper>
         <hr className="text-gray-500 my-3" />
 
-        {/* Conditionally render PropertyInfo component */}
         {activeStep === 0 && (
           <PropertyInfo formData={formData} setFormData={setFormData} />
         )}
@@ -161,6 +276,7 @@ export default function PostListing() {
         {activeStep === 5 && (
           <FinalDetail formData={formData} setFormData={setFormData} />
         )}
+        {activeStep === 6 && <ReviewListing formData={formData} />}
       </Box>
       <Box className="flex-none p-2 bg-white">
         {allStepsCompleted() ? (
@@ -187,21 +303,23 @@ export default function PostListing() {
             <Button onClick={handleNext} className="mr-1">
               Next
             </Button>
-            {activeStep !== steps.length &&
-              (completed[activeStep] ? (
-                <Typography variant="caption" className="inline-block">
-                  Step {activeStep + 1} already completed
-                </Typography>
-              ) : (
-                <Button onClick={handleComplete}>
-                  {completedSteps() === totalSteps() - 1 || isLastStep()
-                    ? "Publish"
-                    : "Complete Step"}
-                </Button>
-              ))}
+            {activeStep !== steps.length && (
+              <Button onClick={handleComplete}>
+                {completedSteps() === totalSteps() - 1 || isLastStep()
+                  ? "Publish"
+                  : "Complete Step"}
+              </Button>
+            )}
           </Box>
         )}
       </Box>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        message={snackbarMessage}
+        action={action}
+      />
     </Box>
   );
 }

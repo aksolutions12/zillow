@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
-const PropertyDetails = () => {
+const PropertyDetails = ({ data }) => {
   const [showMore, setShowMore] = useState(false);
 
   const toggleShowMore = () => {
@@ -18,26 +18,23 @@ const PropertyDetails = () => {
             <div>
               <h4 className="font-semibold mb-2">Bedrooms & bathrooms</h4>
               <ul className="list-disc list-inside ">
-                <li>Bedrooms: 5</li>
-                <li>Bathrooms: 4</li>
-                <li>Full bathrooms: 3</li>
+                <li>Bedrooms: {data.propertyInfo.totalBedrooms}</li>
+                <li>Bathrooms: {data.propertyInfo.totalBathrooms}</li>
+                <li>Full bathrooms: {data.propertyInfo.totalBathrooms}</li>
                 <li>1/2 bathrooms: 1</li>
               </ul>
               <h4 className="font-semibold mt-4 mb-2">Heating</h4>
               <ul className="list-disc list-inside">
-                <li>Forced Air, Zoned</li>
+                <li>{data.amenities.heating.join(", ")}</li>
               </ul>
               <h4 className="font-semibold mt-4 mb-2">Cooling</h4>
               <ul className="list-disc list-inside">
-                <li>Ceiling Fan(s), Central Air, Heat Pump</li>
+                <li>{data.amenities.cooling.join(", ")}</li>
               </ul>
               <h4 className="font-semibold mt-4 mb-2">Appliances</h4>
               <ul className="list-disc list-inside">
-                <li>
-                  Included: Dishwasher, Disposal, Gas Range, Ice Maker,
-                  Microwave, Plumbed For Ice Maker, Refrigerator
-                </li>
-                <li>Laundry: Laundry Room, Upper Level</li>
+                <li>Included: {data.amenities.appliances.join(", ")}</li>
+                <li>Laundry: {data.amenities.laundry}</li>
               </ul>
             </div>
             <div>
@@ -57,9 +54,14 @@ const PropertyDetails = () => {
               </ul>
               <h4 className="font-semibold mt-4 mb-2">Interior area</h4>
               <ul className="list-disc list-inside">
-                <li>Total structure area: 3,154</li>
-                <li>Total interior livable area: 3,154 sqft</li>
-                <li>Finished area above ground: 3,154</li>
+                <li>Total structure area: {data.propertyInfo.squareFootage}</li>
+                <li>
+                  Total interior livable area: {data.propertyInfo.squareFootage}{" "}
+                  sqft
+                </li>
+                <li>
+                  Finished area above ground: {data.propertyInfo.squareFootage}
+                </li>
                 <li>Finished area below ground: 0</li>
               </ul>
               <h4 className="font-semibold mt-4 mb-2">Virtual tour</h4>
@@ -86,8 +88,7 @@ const PropertyDetails = () => {
                   <ul className="list-disc list-inside">
                     <li>Total spaces: 6</li>
                     <li>
-                      Parking features: Attached, Concrete, Garage, Garage Door
-                      Opener, Garage Faces Front
+                      Parking features: {data.amenities.parking.join(", ")}
                     </li>
                     <li>Garage spaces: 2</li>
                     <li>Covered spaces: 2</li>
@@ -107,7 +108,11 @@ const PropertyDetails = () => {
                 <div>
                   <h4 className="font-semibold mb-2">Lot</h4>
                   <ul className="list-disc list-inside">
-                    <li>Lot size: 0.34 Acres</li>
+                    <li>
+                      Lot size:{" "}
+                      {(data.propertyInfo.squareFootage / 43560).toFixed(2)}{" "}
+                      Acres
+                    </li>
                     <li>
                       Lot features: Back Yard, Cul-De-Sac, Front Yard, Hardwood
                       Trees, Landscaped, Many Trees

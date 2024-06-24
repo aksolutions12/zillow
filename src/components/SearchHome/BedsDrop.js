@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-export default function BedsDrop({ activeButton, handleToggle }) {
+export default function BedsDrop({
+  activeButton,
+  handleToggle,
+  onApplyFilters,
+}) {
   const [selectedBedrooms, setSelectedBedrooms] = useState("Any");
   const [selectedBathrooms, setSelectedBathrooms] = useState("Any");
 
@@ -14,11 +18,21 @@ export default function BedsDrop({ activeButton, handleToggle }) {
     setSelectedBathrooms(value);
   };
 
+  // Function to apply filters
+  const handleApplyFilters = () => {
+    const filters = {
+      selectedBedrooms,
+      selectedBathrooms,
+    };
+    onApplyFilters(filters);
+    handleToggle("Beds & Baths"); // Close the dropdown
+  };
+
   return (
     <div
       className={`absolute z-10 ${
         activeButton === "Beds & Baths" ? "block" : "hidden"
-      } `}
+      } left-1/2 transform -translate-x-1/4 md:left-auto md:transform-none `}
       style={{
         top: "calc(100% + 10px)",
         left: "calc(40% - 70px)", // Adjust left position to align with the button
@@ -42,50 +56,36 @@ export default function BedsDrop({ activeButton, handleToggle }) {
               </button>
               <button
                 className={`px-4 py-2 border rounded-md ${
-                  selectedBedrooms === "1+" ? "bg-blue-100" : ""
+                  selectedBedrooms === "1" ? "bg-blue-100" : ""
                 }`}
-                onClick={() => handleBedroomSelect("1+")}
+                onClick={() => handleBedroomSelect("1")}
               >
                 1+
               </button>
               <button
                 className={`px-4 py-2 border rounded-md ${
-                  selectedBedrooms === "2+" ? "bg-blue-100" : ""
+                  selectedBedrooms === "2" ? "bg-blue-100" : ""
                 }`}
-                onClick={() => handleBedroomSelect("2+")}
+                onClick={() => handleBedroomSelect("2")}
               >
                 2+
               </button>
               <button
                 className={`px-4 py-2 border rounded-md ${
-                  selectedBedrooms === "3+" ? "bg-blue-100" : ""
+                  selectedBedrooms === "3" ? "bg-blue-100" : ""
                 }`}
-                onClick={() => handleBedroomSelect("3+")}
+                onClick={() => handleBedroomSelect("3")}
               >
                 3+
               </button>
               <button
                 className={`px-4 py-2 border rounded-md ${
-                  selectedBedrooms === "4+" ? "bg-blue-100" : ""
+                  selectedBedrooms === "4" ? "bg-blue-100" : ""
                 }`}
-                onClick={() => handleBedroomSelect("4+")}
+                onClick={() => handleBedroomSelect("4")}
               >
                 4+
               </button>
-              <button
-                className={`px-4 py-2 border rounded-md ${
-                  selectedBedrooms === "5+" ? "bg-blue-100" : ""
-                }`}
-                onClick={() => handleBedroomSelect("5+")}
-              >
-                5+
-              </button>
-            </div>
-            <div className="flex items-center mb-4">
-              <input id="exact-match" type="checkbox" className="mr-2" />
-              <label htmlFor="exact-match" className="text-zinc-700">
-                Use exact match
-              </label>
             </div>
           </div>
         </div>
@@ -106,48 +106,43 @@ export default function BedsDrop({ activeButton, handleToggle }) {
               </button>
               <button
                 className={`px-4 py-2 border rounded-md ${
-                  selectedBathrooms === "1+" ? "bg-blue-100" : ""
+                  selectedBathrooms === "1" ? "bg-blue-100" : ""
                 }`}
-                onClick={() => handleBathroomSelect("1+")}
+                onClick={() => handleBathroomSelect("1")}
               >
                 1+
               </button>
               <button
                 className={`px-4 py-2 border rounded-md ${
-                  selectedBathrooms === "1.5+" ? "bg-blue-100" : ""
+                  selectedBathrooms === "2" ? "bg-blue-100" : ""
                 }`}
-                onClick={() => handleBathroomSelect("1.5+")}
-              >
-                1.5+
-              </button>
-              <button
-                className={`px-4 py-2 border rounded-md ${
-                  selectedBathrooms === "2+" ? "bg-blue-100" : ""
-                }`}
-                onClick={() => handleBathroomSelect("2+")}
+                onClick={() => handleBathroomSelect("2")}
               >
                 2+
               </button>
               <button
                 className={`px-4 py-2 border rounded-md ${
-                  selectedBathrooms === "3+" ? "bg-blue-100" : ""
+                  selectedBathrooms === "3" ? "bg-blue-100" : ""
                 }`}
-                onClick={() => handleBathroomSelect("3+")}
+                onClick={() => handleBathroomSelect("3")}
               >
                 3+
               </button>
               <button
                 className={`px-4 py-2 border rounded-md ${
-                  selectedBathrooms === "4+" ? "bg-blue-100" : ""
+                  selectedBathrooms === "4" ? "bg-blue-100" : ""
                 }`}
-                onClick={() => handleBathroomSelect("4+")}
+                onClick={() => handleBathroomSelect("4")}
               >
                 4+
               </button>
             </div>
           </div>
         </div>
-        <button className="w-full py-3 bg-blue-600 text-white rounded-md">
+        <button
+          className="w-full py-3 bg-blue-600 text-white rounded-md"
+          onClick={handleApplyFilters}
+        >
           Apply
         </button>
       </div>

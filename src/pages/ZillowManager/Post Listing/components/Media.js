@@ -64,7 +64,7 @@ const Media = ({ formData, setFormData }) => {
             <img
               src={URL.createObjectURL(file)}
               alt={`Selected file ${index + 1}`}
-              className="w-full h-40 object-cover rounded-lg"
+              className="w-full h-64 object-cover rounded-lg"
             />
           </div>
         ))}

@@ -73,8 +73,7 @@ export default function PropertyInfo({ formData, setFormData }) {
             <option value="">Please select</option>
             <option value="House">House</option>
             <option value="Apartment">Condo/Apartment</option>
-            <option value="Condo">Town House</option>
-            <option value="Condo">Entire Apartment Community</option>
+            <option value="Townhouse">Town House</option>
           </select>
         </div>
         <div className="mb-4">

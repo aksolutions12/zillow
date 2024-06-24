@@ -4,9 +4,11 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Footer from "../../../components/layout/Footer/Footer";
 import { Link } from "react-router-dom";
 
-export default function ListHomes({ heading, data }) {
+export default function ListHomes({ heading, dbData }) {
   const [sortIcon, setSortIcon] = useState("down");
-  const [heartIcons, setHeartIcons] = useState(Array(data.length).fill(false));
+  const [heartIcons, setHeartIcons] = useState(
+    Array(dbData.length).fill(false)
+  );
   const [selectedSort, setSelectedSort] = useState("Homes for You");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -42,13 +44,12 @@ export default function ListHomes({ heading, data }) {
       return newIcons;
     });
   };
-
   return (
     <div className="bg-white p-4">
       <div className="flex justify-between">
         <div>
           <h1 className="text-2xl font-bold">{heading}</h1>
-          <p className="text-zinc-600">{data.length} results</p>
+          <p className="text-zinc-600">{dbData.length} results</p>
         </div>
 
         <div className="relative">
@@ -109,12 +110,12 @@ export default function ListHomes({ heading, data }) {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-        {data.map((home, index) => (
-          <Link key={home.id} to={`/singlehome/${home.id}`}>
-            <div className="border rounded-lg overflow-hidden shadow-sm">
+        {dbData.map((home, index) => (
+          <Link key={home.id} to={`/singlehome/${home.postId}`}>
+            <div className="border rounded-lg overflow-hidden shadow-sm  h-full">
               <div className="relative">
                 <img
-                  src={home.image}
+                  src={home.media.selectedFiles[0]}
                   alt={`House ${home.id}`}
                   className="w-full h-48 object-cover"
                 />
@@ -134,14 +135,21 @@ export default function ListHomes({ heading, data }) {
                 </div>
               </div>
               <div className="p-4">
-                <h2 className="text-xl font-bold">{home.price}</h2>
+                <h2 className="text-xl font-bold">
+                  ${home.listingDetails.monthlyRent}
+                </h2>
                 <p className="text-zinc-600">
-                  {home.beds} bds | {home.baths} ba |{" "}
-                  <span className="font-bold">{home.sqft}</span> sqft -{" "}
-                  {home.status}
+                  {home.propertyInfo.totalBedrooms} bds |{" "}
+                  {home.propertyInfo.totalBathrooms} ba |{" "}
+                  <span className="font-bold">
+                    {home.propertyInfo.squareFootage}
+                  </span>{" "}
+                  sqft - {home.propertyInfo.propertyType}
                 </p>
-                <p className="text-zinc-600">{home.location}</p>
-                <p className="text-blue-500">{home.agency}</p>
+                <p className="text-zinc-600">
+                  {home.propertyInfo.streetAddress}
+                </p>
+                <p className="text-blue-500">{home.finalDetails.name}</p>
               </div>
             </div>
           </Link>

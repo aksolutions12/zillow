@@ -1,31 +1,35 @@
-import React from 'react';
-import Card from '../../components/Card/Card';
-import BrowseHouse from '../../assets/images/Browse.jpg'
-import RentHouse from '../../assets/images/House.jpg'
-import SaleStory from '../../assets/images/sale-story.png'
-
-
+import React from "react";
+import Card from "../../components/Card/Card";
+import BrowseHouse from "../../assets/images/Browse.jpg";
+import RentHouse from "../../assets/images/House.jpg";
+import SaleStory from "../../assets/images/sale-story.png";
 
 const CardsRow = () => {
   // Sample data for the cards
   const cardsData = [
     {
       imageUrl: BrowseHouse,
-      heading: 'Browse homes',
-      paragraph: 'Find your place with an immersive photo experience and the most listings, including things you won’t find anywhere else.',
-      buttonText: 'Browse homes',
+      heading: "Browse homes",
+      paragraph:
+        "Find your place with an immersive photo experience and the most listings, including things you won’t find anywhere else.",
+      buttonText: "Browse homes",
+      btnlink: "/buyhome",
     },
     {
       imageUrl: RentHouse,
-      heading: 'Rent a home',
-      paragraph: 'We’re creating a seamless online experience – from shopping on the largest rental network, to applying, to paying rent.',
-      buttonText: 'Find rentals',
+      heading: "Rent a home",
+      paragraph:
+        "We’re creating a seamless online experience – from shopping on the largest rental network, to applying, to paying rent.",
+      buttonText: "Find rentals",
+      btnlink: "/forrent",
     },
     {
       imageUrl: SaleStory,
-      heading: 'Sell a home',
-      paragraph: 'No matter what path you take to sell your home, we can help you navigate a successful sale.',
-      buttonText: 'See your Options',
+      heading: "Sell a home",
+      paragraph:
+        "No matter what path you take to sell your home, we can help you navigate a successful sale.",
+      buttonText: "See your Options",
+      btnlink: "/sell",
     },
   ];
 
@@ -40,10 +44,9 @@ const CardsRow = () => {
               heading={card.heading}
               paragraph={card.paragraph}
               buttonText={card.buttonText}
+              btnlink={card.btnlink}
             />
           ))}
-
-          
         </div>
       </div>
     </div>

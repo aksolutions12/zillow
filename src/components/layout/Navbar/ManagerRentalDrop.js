@@ -10,44 +10,7 @@ export default function ManagerRentalDrop() {
       }}
     >
       <div className="p-4 rounded-lg bg-white">
-        <div className="mb-6">
-          <h2 className="font-bold text-lg mb-2">Rental Management Tools</h2>
-          <ul>
-            <li className="mb-1">
-              <a href="#" className="text-blue-600 hover:underline">
-                List a rental
-              </a>
-            </li>
-            <li className="mb-1">
-              <a href="#" className="text-blue-600 hover:underline">
-                My Listings
-              </a>
-            </li>
-            <li className="mb-1">
-              <a href="#" className="text-blue-600 hover:underline">
-                Messages
-              </a>
-            </li>
-            <li className="mb-1">
-              <a href="#" className="text-blue-600 hover:underline">
-                Applications
-              </a>
-            </li>
-            <li className="mb-1">
-              <a href="#" className="text-blue-600 hover:underline">
-                Leases
-              </a>
-            </li>
-            <li className="mb-1">
-              <a href="#" className="text-blue-600 hover:underline">
-                Payments
-              </a>
-            </li>
-          </ul>
-        </div>
-        <hr className="my-4" />
         <div>
-          <h2 className="font-bold text-lg mb-2">Learn More</h2>
           <ul>
             <li className="mb-1">
               <a href="#" className="text-blue-600 hover:underline">

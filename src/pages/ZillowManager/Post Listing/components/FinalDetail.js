@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
 import {
   TextField,
@@ -20,7 +20,7 @@ export default function FinalDetail({ formData, setFormData }) {
     listedBy,
     name,
     email,
-    selectedDays = [], // Initialize selectedDays as an empty array if undefined
+    selectedDays = [],
     hideAddress,
     selectedDate,
     leaseDuration,
@@ -68,6 +68,17 @@ export default function FinalDetail({ formData, setFormData }) {
         selectedDays: days,
       },
     }));
+  };
+
+  const handleDateChange = (newValue) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      finalDetails: {
+        ...prevFormData.finalDetails,
+        selectedDate: newValue ? newValue.toDate() : null,
+      },
+    }));
+    console.log(selectedDate);
   };
 
   return (
@@ -206,15 +217,7 @@ export default function FinalDetail({ formData, setFormData }) {
             <DatePicker
               label="Date Available"
               value={dayjs(selectedDate)}
-              onChange={(newValue) =>
-                setFormData((prevFormData) => ({
-                  ...prevFormData,
-                  finalDetails: {
-                    ...prevFormData.finalDetails,
-                    selectedDate: newValue,
-                  },
-                }))
-              }
+              onChange={handleDateChange}
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>

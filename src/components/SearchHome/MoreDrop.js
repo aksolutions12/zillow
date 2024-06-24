@@ -74,7 +74,7 @@ export default function MoreDrop({ activeButton, handleToggle }) {
     <div
       className={`absolute z-10 ${
         activeButton === "More" ? "block" : "hidden"
-      } `}
+      } left-1/2 transform -translate-x-1/4 md:left-auto md:transform-none`}
       style={{
         top: "calc(100% + 10px)",
         left: "calc(50% - 70px)", // Adjust left position to align with the button

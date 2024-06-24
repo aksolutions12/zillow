@@ -1,16 +1,43 @@
 import React, { useState } from "react";
-export default function HomeTypeDrop({ activeButton, handleToggle }) {
-  const [selectAll, setSelectAll] = useState(true); // State to track select all status
 
-  // Function to handle select all/deselect all click
+export default function HomeTypeDrop({
+  activeButton,
+  handleToggle,
+  onApplyFilters,
+}) {
+  const [selectedTypes, setSelectedTypes] = useState({
+    houses: false,
+    apartments: false,
+    townhomes: false,
+  });
+
   const handleSelectAll = () => {
-    setSelectAll(!selectAll); // Toggle select all status
+    const newSelectAll = !Object.values(selectedTypes).every((value) => value);
+    setSelectedTypes({
+      houses: newSelectAll,
+      apartments: newSelectAll,
+      townhomes: newSelectAll,
+    });
   };
+
+  const handleCheckboxChange = (type) => {
+    setSelectedTypes((prevTypes) => ({
+      ...prevTypes,
+      [type]: !prevTypes[type],
+    }));
+  };
+
+  const selectAll = Object.values(selectedTypes).every((value) => value);
+
+  const handleApply = () => {
+    onApplyFilters(selectedTypes);
+  };
+
   return (
     <div
       className={`absolute z-10 ${
         activeButton === "Home Type" ? "block" : "hidden"
-      } `}
+      } left-1/2 transform -translate-x-1/4 md:left-auto md:transform-none `}
       style={{
         top: "calc(100% + 10px)",
         left: "calc(60% - 70px)", // Adjust left position to align with the button
@@ -24,16 +51,16 @@ export default function HomeTypeDrop({ activeButton, handleToggle }) {
           <div className="flex items-center mb-2">
             <input
               type="checkbox"
-              id="deselect-all"
+              id="select-all"
               className="form-checkbox h-5 w-5 text-blue-600"
-              checked // Invert checked status based on selectAll
+              checked={selectAll}
               onChange={handleSelectAll}
             />
             <label
-              htmlFor="deselect-all"
+              htmlFor="select-all"
               className="ml-2 text-blue-600 dark:text-blue-400 cursor-pointer"
             >
-              {selectAll ? "Select All" : "Deselect All"}
+              {selectAll ? "Deselect All" : "Select All"}
             </label>
           </div>
           <div className="flex items-center mb-2">
@@ -41,13 +68,14 @@ export default function HomeTypeDrop({ activeButton, handleToggle }) {
               type="checkbox"
               id="houses"
               className="form-checkbox h-5 w-5 text-blue-600"
-              checked={!selectAll}
+              checked={selectedTypes.houses}
+              onChange={() => handleCheckboxChange("houses")}
             />
             <label
               htmlFor="houses"
               className="ml-2 text-zinc-700 dark:text-zinc-300 cursor-pointer"
             >
-              Houses
+              House
             </label>
           </div>
           <div className="flex items-center mb-2">
@@ -55,13 +83,14 @@ export default function HomeTypeDrop({ activeButton, handleToggle }) {
               type="checkbox"
               id="apartments"
               className="form-checkbox h-5 w-5 text-blue-600"
-              checked={!selectAll}
+              checked={selectedTypes.apartments}
+              onChange={() => handleCheckboxChange("apartments")}
             />
             <label
               htmlFor="apartments"
               className="ml-2 text-zinc-700 dark:text-zinc-300 cursor-pointer"
             >
-              Apartments/Condos/Co-ops
+              Condo/Apartment
             </label>
           </div>
           <div className="flex items-center mb-2">
@@ -69,49 +98,22 @@ export default function HomeTypeDrop({ activeButton, handleToggle }) {
               type="checkbox"
               id="townhomes"
               className="form-checkbox h-5 w-5 text-blue-600"
-              checked={!selectAll}
+              checked={selectedTypes.townhomes}
+              onChange={() => handleCheckboxChange("townhomes")}
             />
             <label
               htmlFor="townhomes"
               className="ml-2 text-zinc-700 dark:text-zinc-300 cursor-pointer"
             >
-              Townhomes
+              Town House
             </label>
           </div>
         </div>
-        <div className="mb-4">
-          <h2 className="text-zinc-700 dark:text-zinc-300 font-semibold mb-2">
-            Space
-          </h2>
-          <div className="flex items-center mb-2">
-            <input
-              type="checkbox"
-              id="entire-place"
-              className="form-checkbox h-5 w-5 text-blue-600"
-              checked={!selectAll}
-            />
-            <label
-              htmlFor="entire-place"
-              className="ml-2 text-zinc-700 dark:text-zinc-300 cursor-pointer"
-            >
-              Entire place
-            </label>
-          </div>
-          <div className="flex items-center mb-2">
-            <input
-              type="checkbox"
-              id="private-room"
-              className="form-checkbox h-5 w-5 text-blue-600"
-            />
-            <label
-              htmlFor="private-room"
-              className="ml-2 text-zinc-700 dark:text-zinc-300 cursor-pointer"
-            >
-              Room
-            </label>
-          </div>
-        </div>
-        <button className="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg w-full">
+
+        <button
+          className="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg w-full"
+          onClick={handleApply}
+        >
           Apply
         </button>
       </div>
