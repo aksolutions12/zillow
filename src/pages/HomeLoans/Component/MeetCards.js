@@ -10,6 +10,7 @@ const MeetCards = () => {
       paragraph:
         "Try an affordability calculator below to see exactly how much home you can afford.",
       buttonText: "Try Affordabilty Calculator",
+      btnlink: "/mortgages/affordabilitycalculator",
     },
     {
       imageUrl: homeimg,
@@ -17,6 +18,8 @@ const MeetCards = () => {
       paragraph:
         "Get pre-qualified in as little as 3 minutesHelp, so you’re ready to make a move.",
       buttonText: "Get Pre-qualified",
+
+      btnlink: " /homeloans/eligibility",
     },
     {
       imageUrl: homeimg,
@@ -40,6 +43,7 @@ const MeetCards = () => {
             heading={card.heading}
             paragraph={card.paragraph}
             buttonText={card.buttonText}
+            btnlink={card.btnlink}
           />
         ))}
       </div>

@@ -3,9 +3,9 @@ import PriceTab from "./PriceTab";
 
 const CalculatorSection = () => {
   // State variables to hold the input values
-  const [annualIncome, setAnnualIncome] = useState("70,000");
+  const [annualIncome, setAnnualIncome] = useState("70000");
   const [monthlyDebts, setMonthlyDebts] = useState("250");
-  const [downPayment, setDownPayment] = useState("20,000");
+  const [downPayment, setDownPayment] = useState("20000");
 
   // State variables for advanced options
   const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
@@ -15,9 +15,49 @@ const CalculatorSection = () => {
   const [homeInsurance, setHomeInsurance] = useState("945");
   const [hoaDues, setHoaDues] = useState("0");
 
+  // State variable for calculation result
+  const [calculatedResult, setCalculatedResult] = useState(null);
+
   // Function to toggle advanced options visibility
   const toggleAdvancedOptions = () => {
     setShowAdvancedOptions(!showAdvancedOptions);
+  };
+
+  // Function to handle calculation
+  const calculateAffordability = () => {
+    const income = parseFloat(annualIncome.replace(/,/g, ""));
+    const debts = parseFloat(monthlyDebts.replace(/,/g, ""));
+    const downPaymentAmount = parseFloat(downPayment.replace(/,/g, ""));
+    const loanAmount = 250000; // Example home price
+    const interestRate = 0.04; // Example interest rate
+    const loanTerm = 30 * 12; // 30 years in months
+
+    let monthlyIncome = income / 12;
+    let monthlyInterestRate = interestRate / 12;
+
+    let principalAndInterest =
+      ((loanAmount - downPaymentAmount) *
+        (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, loanTerm))) /
+      (Math.pow(1 + monthlyInterestRate, loanTerm) - 1);
+
+    let totalMonthlyPayments = principalAndInterest + debts;
+
+    if (showAdvancedOptions) {
+      let propertyTaxAmount =
+        (loanAmount * (parseFloat(propertyTax) / 100)) / 12;
+      let homeInsuranceAmount = parseFloat(homeInsurance) / 12;
+      let hoaDuesAmount = parseFloat(hoaDues);
+
+      totalMonthlyPayments +=
+        propertyTaxAmount + homeInsuranceAmount + hoaDuesAmount;
+
+      if (includePMI) {
+        let pmi = ((loanAmount - downPaymentAmount) * 0.01) / 12; // Example PMI calculation
+        totalMonthlyPayments += pmi;
+      }
+    }
+
+    setCalculatedResult(totalMonthlyPayments.toFixed(2));
   };
 
   return (
@@ -188,9 +228,20 @@ const CalculatorSection = () => {
               Calculator disclaimer
             </a>
           </div>
+          <div className="mb-4">
+            <button
+              className="bg-blue-500 text-white font-bold py-2 px-4 rounded"
+              onClick={calculateAffordability}
+            >
+              Calculate
+            </button>
+          </div>
         </div>
         <div className="w-full lg:w-8/12 ">
-          <PriceTab />
+          <PriceTab
+            calculatedResult={calculatedResult}
+            dpayment={downPayment}
+          />
         </div>
       </div>
     </div>

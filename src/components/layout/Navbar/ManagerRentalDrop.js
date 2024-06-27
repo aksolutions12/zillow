@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function ManagerRentalDrop() {
   return (
@@ -13,19 +14,28 @@ export default function ManagerRentalDrop() {
         <div>
           <ul>
             <li className="mb-1">
-              <a href="#" className="text-blue-600 hover:underline">
+              <Link
+                to="/zillowrentalManager"
+                className="text-blue-600 hover:underline"
+              >
                 Zillow Rental Manager
-              </a>
+              </Link>
             </li>
             <li className="mb-1">
-              <a href="#" className="text-blue-600 hover:underline">
+              <Link
+                to="/priceMyRental"
+                className="text-blue-600 hover:underline"
+              >
                 Price My Rental
-              </a>
+              </Link>
             </li>
             <li className="mb-1">
-              <a href="#" className="text-blue-600 hover:underline">
+              <Link
+                to="/managerRentalResources"
+                className="text-blue-600 hover:underline"
+              >
                 Resource Center
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

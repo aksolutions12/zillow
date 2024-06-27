@@ -13,6 +13,7 @@ const RentPage = () => {
   const [dbData, setDbData] = useState([]); // State to hold fetched data
   const [filteredData, setFilteredData] = useState([]); // State to hold filtered data
   const [loading, setLoading] = useState(true); // State to manage loading state
+
   useEffect(() => {
     // Function to fetch data from Firestore
     const fetchPosts = async () => {
@@ -77,18 +78,15 @@ const RentPage = () => {
     setLoading(false); // Stop loading
   };
 
-  // Function to filter by bedrooms and bathrooms
   const filterByBedroomsAndBathrooms = (bedrooms, bathrooms) => {
     setLoading(true); // Start loading
 
     const filtered = dbData.filter((item) => {
-      // Filter by bedrooms
       let matchesBedrooms = true;
       if (bedrooms !== "Any") {
         matchesBedrooms = item.propertyInfo.totalBedrooms >= parseInt(bedrooms);
       }
 
-      // Filter by bathrooms
       let matchesBathrooms = true;
       if (bathrooms !== "Any") {
         matchesBathrooms =
@@ -96,6 +94,25 @@ const RentPage = () => {
       }
 
       return matchesBedrooms && matchesBathrooms;
+    });
+
+    setFilteredData(filtered);
+    setLoading(false); // Stop loading
+  };
+
+  const filterByHomeType = (selectedTypes) => {
+    setLoading(true); // Start loading
+
+    const filtered = dbData.filter((item) => {
+      const homeType = item.propertyInfo.propertyType;
+
+      const matchesHouses = selectedTypes.houses && homeType === "House";
+      const matchesApartments =
+        selectedTypes.apartments && homeType === "Apartment";
+      const matchesTownhomes =
+        selectedTypes.townhomes && homeType === "Townhouse";
+
+      return matchesHouses || matchesApartments || matchesTownhomes;
     });
 
     setFilteredData(filtered);
@@ -116,7 +133,6 @@ const RentPage = () => {
       </Box>
     );
   }
-
   return (
     <>
       <Navbar logoUrl={logoUrl} />
@@ -124,6 +140,7 @@ const RentPage = () => {
         onSearch={handleSearch}
         onFilterByPrice={filterByPrice}
         onFilterByBedroomsAndBathrooms={filterByBedroomsAndBathrooms}
+        onFilterByHomeType={filterByHomeType}
       />
       <div className="flex w-full bg-white p-2">
         <div className="w-full lg:w-2/5 sticky top-0 h-screen overflow-y-auto lg:block hidden">

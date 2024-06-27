@@ -15,9 +15,52 @@ const RefCalculatorSection = () => {
   const [cashOut, setCashOut] = useState("20000");
   const [rollFees, setRollFees] = useState(true);
 
+  // State variables for calculation results
+  const [monthlySavings, setMonthlySavings] = useState(0);
+  const [newPayment, setNewPayment] = useState(0);
+  const [breakEven, setBreakEven] = useState(0);
+
   // Function to toggle advanced options visibility
   const toggleAdvancedOptions = () => {
     setShowAdvancedOptions(!showAdvancedOptions);
+  };
+
+  // Function to handle calculation
+  const handleCalculate = () => {
+    // Convert input values to numbers
+    const currentLoan = parseFloat(currentLoanAmount);
+    const currentRate = parseFloat(interestRate) / 100 / 12; // Monthly interest rate
+    const currentMonths = parseInt(currentTerm);
+    const newLoan = parseFloat(newLoanAmount);
+    const newRate = parseFloat(newInterestRate) / 100 / 12; // Monthly interest rate
+    const newMonths = parseInt(newTerm);
+    const fees = parseFloat(refinanceFees);
+    const cash = parseFloat(cashOut);
+
+    // Calculate current monthly payment
+    const currentMonthlyPayment =
+      (currentLoan * currentRate) /
+      (1 - Math.pow(1 + currentRate, -currentMonths));
+
+    // Calculate new monthly payment
+    const newMonthlyPayment =
+      (newLoan * newRate) / (1 - Math.pow(1 + newRate, -newMonths));
+
+    // Calculate monthly savings
+    const savings = currentMonthlyPayment - newMonthlyPayment;
+    setMonthlySavings(savings.toFixed(2));
+
+    // Calculate new total loan amount including fees and cash out
+    let totalNewLoan = newLoan + (rollFees ? fees : 0) + cash;
+
+    // Calculate new total payment including fees and cash out
+    const newTotalPayment =
+      (totalNewLoan * newRate) / (1 - Math.pow(1 + newRate, -newMonths));
+    setNewPayment(newTotalPayment.toFixed(2));
+
+    // Calculate break-even point in months
+    const breakEvenMonths = fees / savings;
+    setBreakEven(breakEvenMonths.toFixed(0));
   };
 
   return (
@@ -215,9 +258,32 @@ const RefCalculatorSection = () => {
                 Calculator disclaimer
               </a>
             </div>
+            <div className="mt-4">
+              <button
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                onClick={handleCalculate}
+              >
+                Calculate
+              </button>
+            </div>
           </div>
           <div className="w-full lg:w-8/12 ">
-            <ChartsRef />
+            <div className="p-4 bg-white shadow-md rounded-lg dark:bg-gray-800 mt-4 rounded-lg">
+              <h2 className="text-2xl font-bold mb-2">Refinancing Results</h2>
+              <p className="mb-2">
+                <span className="font-bold text-zinc-600">Monthly Saving:</span>{" "}
+                ${monthlySavings}/m
+              </p>
+              <p className="mb-2">
+                <span className="font-bold text-zinc-600">NEW PAYMENT:</span> $
+                {newPayment}
+              </p>
+              <p>
+                <span className="font-bold text-zinc-600">BREAK EVEN:</span>{" "}
+                {breakEven} months
+              </p>
+            </div>
+            {/* <ChartsRef /> */}
           </div>
         </div>
       </div>

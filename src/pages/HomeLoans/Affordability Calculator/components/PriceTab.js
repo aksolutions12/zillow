@@ -3,7 +3,7 @@ import { PieChart } from "@mui/x-charts/PieChart";
 import { Slider, Tabs, Tab } from "@mui/material";
 import { GiPiggyBank, GiHouse } from "react-icons/gi";
 
-export default function PriceTab() {
+export default function PriceTab({ calculatedResult, dpayment }) {
   const [value, setValue] = React.useState(50);
   const [activeTab, setActiveTab] = React.useState(0);
 
@@ -13,6 +13,16 @@ export default function PriceTab() {
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
+  };
+
+  const getBudgetMessage = () => {
+    if (value <= 50) {
+      return <span className="text-green-600">should fit comfortably</span>;
+    } else {
+      return (
+        <span className="text-red-600">may stretch your budget too thin</span>
+      );
+    }
   };
 
   return (
@@ -32,13 +42,10 @@ export default function PriceTab() {
             <p className="text-lg font-semibold">
               You can afford a house up to
             </p>
-            <p className="text-4xl font-bold text-zinc-800">
-              ${(169351 * (value / 100)).toFixed(0)}
-            </p>
+            <p className="text-4xl font-bold text-zinc-800">${dpayment}</p>
             <p className="text-zinc-600">
-              Based on your income, a house at this price should{" "}
-              <span className="text-green-600">fit comfortably</span> within
-              your budget.
+              Based on your income, a house at this price {getBudgetMessage()}{" "}
+              within your budget.
             </p>
           </div>
           <div className="flex justify-between items-center mb-4">
@@ -57,7 +64,7 @@ export default function PriceTab() {
               />
               <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <div className="bg-white shadow-md px-4 py-2 rounded-full text-center">
-                  ${((169351 * (value / 100)) / 10).toFixed(0)}/mo
+                  ${((calculatedResult * (value / 100)) / 10).toFixed(0)}/mo
                 </div>
               </div>
             </div>

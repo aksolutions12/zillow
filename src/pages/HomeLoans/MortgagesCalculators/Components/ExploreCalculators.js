@@ -2,6 +2,7 @@ import { FaTag } from "react-icons/fa";
 import { FaPiggyBank } from "react-icons/fa6";
 import { AiFillDollarCircle } from "react-icons/ai";
 import { GoStarFill } from "react-icons/go";
+import { Link } from "react-router-dom";
 
 export default function ExploreCalculators() {
   return (
@@ -12,9 +13,11 @@ export default function ExploreCalculators() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="text-center p-4 ">
           <FaTag className="text-6xl text-blue-800 mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-blue-800">
-            Affordability calculator
-          </h3>
+          <Link to="/mortgages/affordabilitycalculator">
+            <h3 className="text-xl font-bold text-blue-800">
+              Affordability calculator
+            </h3>
+          </Link>
           <p className="text-zinc-600 mt-2">
             How much house can you afford? Use our affordability calculator to
             estimate what you can comfortably spend on your new home.
@@ -23,9 +26,11 @@ export default function ExploreCalculators() {
 
         <div className="text-center p-4 ">
           <FaPiggyBank className="text-6xl text-blue-800 mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-blue-800">
-            Refinance calculator
-          </h3>
+          <Link to="/mortgages/refinancecalculator">
+            <h3 className="text-xl font-bold text-blue-800">
+              Refinance calculator
+            </h3>
+          </Link>
           <p className="text-zinc-600 mt-2">
             Interested in refinancing your existing mortgage? Use our refinance
             calculator to see if refinancing makes sense for you.

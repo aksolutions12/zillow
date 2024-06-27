@@ -26,7 +26,7 @@ export const homeloandrop = [
         name: "Calculate your budget",
         link: "/mortgages/affordabilitycalculator",
       },
-      { name: "Learn about the mortgage process", link: "#" },
+      { name: "Refinance calculator", link: "/financing" },
     ],
   },
   {

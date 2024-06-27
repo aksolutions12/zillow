@@ -18,11 +18,11 @@ export const agentdropdata = [
     title: "I'm a pro",
     subpartsClass: "flex flex-col gap-2",
     subparts: [
-      { name: "Agent advertising", link: "#" },
-      { name: "Agent resource center", link: "#" },
-      { name: "Real estate business plan", link: "#" },
-      { name: "Real estate agent scripts", link: "#" },
-      { name: "Listing flyer templates", link: "#" },
+      { name: "Agent advertising", link: "/agentPremium" },
+      { name: "Agent resource center", link: "/agentResources/blog" },
+      { name: "Real estate business plan", link: "/agentResources/blog" },
+      { name: "Real estate agent scripts", link: "/agentResources/blog" },
+      { name: "Listing flyer templates", link: "/agentResources/blog" },
     ],
   },
 ];

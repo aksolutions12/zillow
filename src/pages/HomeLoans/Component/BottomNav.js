@@ -11,7 +11,13 @@ const BottomNav = ({ activeTab, scrollToSection }) => {
   ];
 
   const handleClick = (link) => {
-    scrollToSection(link);
+    if (link.startsWith("#")) {
+      // Scroll to section if link starts with #
+      scrollToSection(link);
+    } else {
+      // Navigate to external link using react-router-dom
+      window.location.href = link;
+    }
   };
 
   return (
