@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../../../ContextApi/AuthContext";
 
 export default function HeroRentalManager({
   imageUrl,
   title,
   description,
   btntxt,
+  btnlink,
 }) {
+  const { isLoggedIn } = useAuth();
   return (
     <div
       className="relative bg-cover bg-center text-white py-20"
@@ -17,16 +20,24 @@ export default function HeroRentalManager({
           {title}
         </h1>
         <p className="max-w-xl mb-6">{description}</p>
-        <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg mb-4">
-          {btntxt}
-        </button>
-        <p className="text-xs ">
-          Already have an account?{" "}
-          <strong>
-            {" "}
-            <Link to="/">Sign in</Link>
-          </strong>
-        </p>
+        <Link to={btnlink}>
+          {" "}
+          <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg mb-4">
+            {btntxt}
+          </button>
+        </Link>
+
+        {isLoggedIn ? (
+          " "
+        ) : (
+          <p className="text-xs ">
+            Already have an account?{" "}
+            <strong>
+              {" "}
+              <Link to="/">Sign in</Link>
+            </strong>
+          </p>
+        )}
       </div>
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
         <svg

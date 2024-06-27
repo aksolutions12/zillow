@@ -20,6 +20,7 @@ const ZillowManagerPage = () => {
         title={"List your rental. Screen tenants. Sign a lease. Get paid."}
         description={"All in one place with Zillow Rental Manager."}
         btntxt={"List Your Properties for Free"}
+        btnlink={"/postalisting"}
       />
       <TrustCardRow />
       <EasierLanlord />
