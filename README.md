@@ -10,11 +10,11 @@ Before you begin, ensure you have Node.js and npm installed on your machine. You
 
 To run this project locally on your machine, follow these steps:
 
-**1.Clone the repository**
+**1. Clone the repository**
 
-**2.Navigate into the project directory**
+**2. Navigate into the project directory**
 
-**3.Install dependencies:**
+**3. Install dependencies:**
 
 This project uses npm for package management. If you don't have npm installed globally, you can install it by following the instructions on the official [npm website](https://docs.npmjs.com/getting-started). The Other way is that you can give following command to install npm globally:
 
@@ -29,7 +29,7 @@ Once you have npm installed, run the following command to install all required d
   npm install
 ```
 
-**4.Start the development server:**
+**4. Start the development server:**
 
 After installing the dependencies, you can start the development server by running the following command:
 
