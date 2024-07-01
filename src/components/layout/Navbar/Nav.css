@@ -8,6 +8,7 @@ const MobileMenu = styled.nav`
   width: 100%;
   padding: 20px;
   border-bottom: 1px solid ${theme.colors.gray};
+  
 
   @media (min-width: ${theme.breakpoints.md}) {
     display: none;
@@ -15,3 +16,4 @@ const MobileMenu = styled.nav`
 `;
 
 // Rest of your styled-components and the getDropdownData function remain unchanged
+

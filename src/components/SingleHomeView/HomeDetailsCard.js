@@ -7,8 +7,16 @@ import {
   FiSquare,
   FiMap,
 } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 export default function HomeDetailsCard({ data }) {
+  const navigate = useNavigate();
+
+  const handleRequestTour = () => {
+    const userId = data.userId; // Replace with the actual user ID from the data
+    navigate(`/chat/${userId}`);
+  };
+
   return (
     <div className="p-4 w-full mx-auto bg-white dark:bg-zinc-800 rounded-lg shadow-md">
       <div className="flex justify-between items-start">
@@ -84,12 +92,12 @@ export default function HomeDetailsCard({ data }) {
         </div>
       </div>
       <div className="mt-6 flex flex-col space-y-2">
-        <a
-          href="#"
-          className="bg-blue-600 text-white text-center py-3 rounded-lg font-semibold"
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600"
+          onClick={handleRequestTour}
         >
           Request a tour
-        </a>
+        </button>
         <a
           href="#"
           className="text-blue-700 text-center py-3 rounded-lg font-semibold border border-blue-700"

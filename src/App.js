@@ -106,6 +106,15 @@ import DocumentSettings from "./pages/Profile/Account settings/DocumentSettings.
 import EditPhoto from "./pages/Profile/Account settings/EditPhoto.js";
 import NotificationPage from "./pages/Profile/Account settings/Notification/NotificationPage.js";
 import PostListing from "./pages/ZillowManager/Post Listing/PostListing.js";
+import ManagerProperties from "./pages/ZillowManager/Properties/ManagerProperties.js";
+import ManagerMessage from "./pages/ZillowManager/ManagerMessage/ManagerMessage.js";
+import Applications from "./pages/ZillowManager/Properties/Applications.js";
+import LeaseManage from "./pages/ZillowManager/Properties/LeaseManage.js";
+import PaymentsManage from "./pages/ZillowManager/Properties/PaymentsManage.js";
+import ApplicationDetails from "./pages/ZillowManager/Properties/components/ApplicationDetails.js";
+import LeaseDetails from "./pages/ZillowManager/Properties/components/LeaseDetails.js";
+import PaymentDetails from "./pages/ZillowManager/Properties/components/PaymentDetails.js";
+import ChatBox from "./pages/ZillowManager/ManagerMessage/components/ChatBox.js";
 
 const App = () => {
   return (
@@ -297,6 +306,21 @@ const App = () => {
             <Route path="/rentPayment" element={<RentPayment />} />
             <Route path="/rentListings" element={<RentalListings />} />
             <Route path="/managerlogin" element={<LoginManager />} />
+            <Route path="/managerproperties" element={<ManagerProperties />} />
+            <Route path="/inbox" element={<ManagerMessage />} />
+            <Route path="/applications" element={<Applications />} />
+            <Route path="/leasemanage" element={<LeaseManage />} />
+            <Route path="/paymentmanage" element={<PaymentsManage />} />
+            <Route
+              path="/applicationDetails/:postId"
+              element={<ApplicationDetails />}
+            />
+            <Route path="/leaseDetails/:postId" element={<LeaseDetails />} />
+            <Route
+              path="/paymentDetails/:postId"
+              element={<PaymentDetails />}
+            />
+            <Route path="/chat/:userId" element={<ChatBox />} />
 
             {/* Profile Section */}
             <Route path="/savedHomes" element={<SavedHomesPage />} />

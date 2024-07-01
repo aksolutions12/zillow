@@ -383,7 +383,11 @@ const Navbar = ({ logoUrl }) => {
             hideOnMobile
             onMouseOver={() => handleDropdownHover("manage")}
           >
-            <Link to="/zillowrentalManager">Manage Rentals</Link>
+            {isLoggedIn ? (
+              <Link to="/managerproperties">Manage Rentals</Link>
+            ) : (
+              <Link to="/zillowrentalManager">Manage Rentals</Link>
+            )}
           </NavItem>
           <NavItem hideOnMobile>
             <Link to="/advertise">Advertise</Link>
