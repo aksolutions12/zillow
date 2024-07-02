@@ -11,6 +11,7 @@ import {
   getDocs,
   query,
   where,
+  onSnapshot,
 } from "firebase/firestore";
 import { Box, CircularProgress } from "@mui/material";
 
@@ -22,21 +23,30 @@ const MessageList = ({ ptext1, linktxt }) => {
   useEffect(() => {
     const fetchChatUsers = async () => {
       try {
-        // Fetch chats involving the current user
         const chatsQuery = query(
           collection(db, "chats"),
           where("participants", "array-contains", userid)
         );
+
         const chatSnapshot = await getDocs(chatsQuery);
 
         const userIds = new Set();
+        const userLastMessages = {};
+
         chatSnapshot.forEach((doc) => {
-          const participants = doc.data().participants;
+          const chatData = doc.data();
+          const participants = chatData.participants;
+
           participants.forEach((id) => {
             if (id !== userid) {
               userIds.add(id);
             }
           });
+
+          userLastMessages[doc.id] = {
+            lastMessageTimestamp: chatData.lastMessageTimestamp,
+            participants,
+          };
         });
 
         const usersList = [];
@@ -47,6 +57,20 @@ const MessageList = ({ ptext1, linktxt }) => {
               id: userDoc.id,
               name: userDoc.data().screenName,
               img: userDoc.data().photoURL || chatimg,
+              chatId: `${userid}_${userDoc.id}`,
+              lastMessageTimestamp:
+                userLastMessages[`${userid}_${userDoc.id}`]
+                  ?.lastMessageTimestamp ||
+                userLastMessages[`${userDoc.id}_${userid}`]
+                  ?.lastMessageTimestamp,
+              lastSeenTimestamp:
+                userDoc.data().lastSeenTimestamps?.[
+                  `${userid}_${userDoc.id}`
+                ] ||
+                userDoc.data().lastSeenTimestamps?.[
+                  `${userDoc.id}_${userid}`
+                ] ||
+                null,
             });
           }
         }
@@ -55,11 +79,39 @@ const MessageList = ({ ptext1, linktxt }) => {
         setLoading(false);
       } catch (error) {
         console.error("Error fetching chat users:", error);
-        setLoading(false); // Set loading to false even if there's an error
+        setLoading(false);
       }
     };
 
     fetchChatUsers();
+  }, [userid]);
+
+  const handleNewMessage = (chatId, timestamp) => {
+    setUsers((prevUsers) =>
+      prevUsers.map((user) =>
+        user.chatId === chatId
+          ? { ...user, lastMessageTimestamp: timestamp }
+          : user
+      )
+    );
+  };
+
+  useEffect(() => {
+    const chatsQuery = query(
+      collection(db, "chats"),
+      where("participants", "array-contains", userid)
+    );
+
+    const unsubscribe = onSnapshot(chatsQuery, (snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === "modified") {
+          const chatData = change.doc.data();
+          handleNewMessage(change.doc.id, chatData.lastMessageTimestamp);
+        }
+      });
+    });
+
+    return () => unsubscribe();
   }, [userid]);
 
   if (loading) {
@@ -116,6 +168,16 @@ const MessageList = ({ ptext1, linktxt }) => {
                       <h1 className="ml-6 text-base font-semibold text-gray-800">
                         {user.name}
                       </h1>
+                    </div>
+                    <div className="flex items-center">
+                      {user.lastMessageTimestamp &&
+                        (!user.lastSeenTimestamp ||
+                          new Date(user.lastMessageTimestamp.seconds * 1000) >
+                            new Date(
+                              user.lastSeenTimestamp.seconds * 1000
+                            )) && (
+                          <span className="bg-red-500 h-3 w-3 rounded-full mr-2"></span>
+                        )}
                     </div>
                   </Link>
                 ))

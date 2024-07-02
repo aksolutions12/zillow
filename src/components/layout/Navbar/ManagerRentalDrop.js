@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../../ContextApi/AuthContext";
 
 export default function ManagerRentalDrop() {
+  const { isLoggedIn } = useAuth();
   return (
     <div
       className="absolute z-50"
@@ -15,46 +17,103 @@ export default function ManagerRentalDrop() {
           <h2 className="font-bold text-lg mb-2">Rental Management Tools</h2>
           <ul>
             <li className="mb-1">
-              <Link
-                to="/postalisting"
-                className="text-blue-600 hover:underline"
-              >
-                List a rental
-              </Link>
+              {isLoggedIn ? (
+                <Link
+                  className="text-blue-600 hover:underline"
+                  to="/postalisting"
+                >
+                  List a rental
+                </Link>
+              ) : (
+                <Link
+                  className="text-blue-600 hover:underline"
+                  to="/zillowrentalManager"
+                >
+                  List a rental
+                </Link>
+              )}
             </li>
             <li className="mb-1">
-              <Link
-                to="/managerproperties"
-                className="text-blue-600 hover:underline"
-              >
-                My Listings
-              </Link>
+              {isLoggedIn ? (
+                <Link
+                  className="text-blue-600 hover:underline"
+                  to="/managerproperties"
+                >
+                  My Listings
+                </Link>
+              ) : (
+                <Link
+                  className="text-blue-600 hover:underline"
+                  to="/zillowrentalManager"
+                >
+                  My Listings
+                </Link>
+              )}
             </li>
             <li className="mb-1">
-              <Link to="/inbox" className="text-blue-600 hover:underline">
-                Messages
-              </Link>
+              {isLoggedIn ? (
+                <Link className="text-blue-600 hover:underline" to="/inbox">
+                  Messages
+                </Link>
+              ) : (
+                <Link
+                  className="text-blue-600 hover:underline"
+                  to="/zillowrentalManager"
+                >
+                  Messages
+                </Link>
+              )}
             </li>
             <li className="mb-1">
-              <Link
-                to="/applications"
-                className="text-blue-600 hover:underline"
-              >
-                Applications
-              </Link>
+              {isLoggedIn ? (
+                <Link
+                  className="text-blue-600 hover:underline"
+                  to="/applications"
+                >
+                  Applications
+                </Link>
+              ) : (
+                <Link
+                  className="text-blue-600 hover:underline"
+                  to="/zillowrentalManager"
+                >
+                  Applications
+                </Link>
+              )}
             </li>
             <li className="mb-1">
-              <Link to="/leasemanage" className="text-blue-600 hover:underline">
-                Leases
-              </Link>
+              {isLoggedIn ? (
+                <Link
+                  className="text-blue-600 hover:underline"
+                  to="/leasemanage"
+                >
+                  Leases
+                </Link>
+              ) : (
+                <Link
+                  className="text-blue-600 hover:underline"
+                  to="/zillowrentalManager"
+                >
+                  Leases
+                </Link>
+              )}
             </li>
             <li className="mb-1">
-              <a
-                href="/paymentmanage"
-                className="text-blue-600 hover:underline"
-              >
-                Payments
-              </a>
+              {isLoggedIn ? (
+                <Link
+                  className="text-blue-600 hover:underline"
+                  to="/paymentmanage"
+                >
+                  Payments
+                </Link>
+              ) : (
+                <Link
+                  className="text-blue-600 hover:underline"
+                  to="/zillowrentalManager"
+                >
+                  Payments
+                </Link>
+              )}
             </li>
           </ul>
         </div>
