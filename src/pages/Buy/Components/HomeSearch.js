@@ -4,7 +4,6 @@ import ForSaleDrop from "../../../components/SearchHome/ForSaleDrop";
 import PriceDrop from "../../../components/SearchHome/PriceDrop";
 import HomeTypeDrop from "../../../components/SearchHome/HomeTypeDrop";
 import BedsDrop from "../../../components/SearchHome/BedsDrop";
-import MoreDrop from "../../../components/SearchHome/MoreDrop";
 
 export default function HomeSearch({
   onSearch,

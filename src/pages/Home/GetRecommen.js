@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import RecoPhot from "../../assets/images/Reccomendation.png";
 import OutlinedButton from "../../components/Button/OutlinedButton";
 
-import { theme, media } from "../../styles/theme/theme";
 import LoginSignUp from "../../components/Login/LoginSignUp";
 
 const GetRecommendations = () => {

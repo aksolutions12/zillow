@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled, { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 import { theme } from "../../../styles/theme/theme";
 import { Link } from "react-router-dom";
 import BuyDrop from "./BuyDrop";
@@ -15,6 +15,7 @@ import LoginSignUp from "../../Login/LoginSignUp";
 import { useAuth } from "../../../ContextApi/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../Firebase/firebase";
+import userimg1 from "../../../assets/images/YourTeamLO.png";
 
 const NavbarWrapper = styled.nav`
   position: relative;
@@ -242,10 +243,8 @@ const Navbar = ({ logoUrl }) => {
               <span className="sr-only">Open user menu</span>
               <img
                 className="w-8 h-8 rounded-full"
-                src={
-                  userPhotoURL || "/docs/images/people/profile-picture-3.jpg"
-                }
-                alt="user photo"
+                src={userPhotoURL || userimg1}
+                alt="user "
               />
             </button>
 
@@ -408,11 +407,8 @@ const Navbar = ({ logoUrl }) => {
                   <span className="sr-only">Open user menu</span>
                   <img
                     className="w-8 h-8 rounded-full"
-                    src={
-                      userPhotoURL ||
-                      "/docs/images/people/profile-picture-3.jpg"
-                    }
-                    alt="user photo"
+                    src={userPhotoURL || userimg1}
+                    alt="user "
                   />
                 </button>
 

@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../styles/theme/theme";
-import googlePlayIcon from "../../../assets/images/google-play-badge.svg";
-import appStoreIcon from "../../../assets/images/app-store-badge.svg";
+// import googlePlayIcon from "../../../assets/images/google-play-badge.svg";
+// import appStoreIcon from "../../../assets/images/app-store-badge.svg";
 import facebookIcon from "../../../assets/icons/facebook.svg";
 import instagramIcon from "../../../assets/icons/instagram.svg";
 import tiktokIcon from "../../../assets/icons/tiktok.svg";
 import logoImage from "../../../assets/images/zil-logo.png";
 import footerart from "../../../assets/images/footer-art.svg";
-import { Rowing } from "@mui/icons-material";
+
 import Icon from "@mui/material/Icon";
 const FooterWrapper = styled.footer`
   background-color: white;
@@ -79,21 +79,21 @@ const FollowUsContainer = styled.div`
   align-items: center;
   gap: 5px;
 `;
-const ResponsiveContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+// const ResponsiveContainer = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
 
-  @media (min-width: ${theme.breakpoints.md}) {
-    flex-direction: row;
-  }
-`;
+//   @media (min-width: ${theme.breakpoints.md}) {
+//     flex-direction: row;
+//   }
+// `;
 
-const SocialIconsContainer = styled.div`
-  display: flex;
-  gap: 5px;
-  margin-top: 10px;
-`;
+// const SocialIconsContainer = styled.div`
+//   display: flex;
+//   gap: 5px;
+//   margin-top: 10px;
+// `;
 
 const Footer = () => {
   return (

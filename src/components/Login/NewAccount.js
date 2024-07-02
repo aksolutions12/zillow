@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
@@ -294,7 +293,7 @@ export default function NewAccount({ onClose }) {
         <button class="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
           <img
             src="https://www.svgrepo.com/show/511330/apple-173.svg"
-            alt="GitHub"
+            alt="GitHub icon"
             class="h-[18px] w-[18px] "
           />
           Continue with Apple
@@ -306,7 +305,7 @@ export default function NewAccount({ onClose }) {
         >
           <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"
-            alt="Google"
+            alt="Google icon"
             class="h-[18px] w-[18px] "
           />
           Continue with Google
@@ -318,7 +317,7 @@ export default function NewAccount({ onClose }) {
         >
           <img
             src="https://www.svgrepo.com/show/475647/facebook-color.svg"
-            alt="Google"
+            alt="facebbok icon"
             class="h-[18px] w-[18px] "
           />
           Continue with Facebook

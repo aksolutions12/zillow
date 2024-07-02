@@ -169,7 +169,7 @@ const SignIn = ({ onClose }) => {
           <button className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
             <img
               src="https://www.svgrepo.com/show/511330/apple-173.svg"
-              alt="Apple"
+              alt="Apple icon"
               className="h-[18px] w-[18px]"
             />
             Continue with Apple
@@ -181,7 +181,7 @@ const SignIn = ({ onClose }) => {
           >
             <img
               src="https://www.svgrepo.com/show/475656/google-color.svg"
-              alt="Google"
+              alt="Google icon"
               className="h-[18px] w-[18px]"
             />
             Continue with Google
@@ -193,7 +193,7 @@ const SignIn = ({ onClose }) => {
           >
             <img
               src="https://www.svgrepo.com/show/475647/facebook-color.svg"
-              alt="Facebook"
+              alt="Facebook icon"
               className="h-[18px] w-[18px]"
             />
             Continue with Facebook

@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../components/layout/Navbar/Navbar";
 import Footer from "../../components/layout/Footer/Footer";
 import BottomNav from "./BottomNav/BottomNav";
-import HeroAgent from "./Components/HeroAgent";
-import FindSection from "./Components/FindSection";
 import AboutRecommendations from "../Home/AboutRecommendations";
-import FindGuideSection from "./Components/FindGuideSection";
-import findstory from "../../assets/images/find agent.png";
 import logoUrl from "../../assets/images/zil-logo.png";
 import SearchManagers from "./SearchComponents/SearchManagers";
 

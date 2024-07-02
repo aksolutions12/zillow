@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import styled, { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 import { theme } from "../../../styles/theme/theme";
 import { Link, useNavigate } from "react-router-dom";
 import { IoNotificationsOutline } from "react-icons/io5";
-import { Menu, Close } from "@mui/icons-material"; // Importing icons from MUI
-import RespNav from "./RespNav";
-import LoginSignUp from "../../Login/LoginSignUp";
+import { Menu, Close } from "@mui/icons-material";
 import { useAuth } from "../../../ContextApi/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../Firebase/firebase";
 import { IoChevronDown } from "react-icons/io5";
 import ResNavRental from "./ResNavRental";
 import { CiShare1 } from "react-icons/ci";
+import userimg1 from "../../../assets/images/YourTeamLO.png";
 
 const NavbarWrapper = styled.nav`
   position: relative;
@@ -131,12 +130,11 @@ const SignInLink = styled(Link)`
 `;
 
 const NavbarRentalManager = ({ logoUrl }) => {
-  const [activeDropdown, setActiveDropdown] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // New state for dropdown
-  const { isLoggedIn, logout, userid } = useAuth();
+  const { logout, userid } = useAuth();
   const [userPhotoURL, setUserPhotoURL] = useState("");
 
   const [isOpen, setIsOpen] = useState(false);
@@ -176,22 +174,6 @@ const NavbarRentalManager = ({ logoUrl }) => {
       getUserPhotoURL(userid);
     }
   }, [userid]);
-
-  const handleSignInClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleDropdownHover = (dropdown) => {
-    setActiveDropdown(dropdown);
-  };
-
-  const handleDropdownLeave = () => {
-    setActiveDropdown(null);
-  };
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -250,8 +232,8 @@ const NavbarRentalManager = ({ logoUrl }) => {
             <span className="sr-only">Open user menu</span>
             <img
               className="w-8 h-8 rounded-full"
-              src={userPhotoURL || "/docs/images/people/profile-picture-3.jpg"}
-              alt="user photo"
+              src={userPhotoURL || userimg1}
+              alt="user "
             />
           </button>
 
@@ -303,10 +285,7 @@ const NavbarRentalManager = ({ logoUrl }) => {
 
       {!mobileMenuOpen && (
         <NavList>
-          <NavItem
-            hideOnMobile
-            onMouseOver={() => handleDropdownHover("manage")}
-          >
+          <NavItem hideOnMobile>
             <Link to="/">Go to Zillow</Link>
           </NavItem>
           <NavItem onClick={toggleDropdown}>
@@ -352,10 +331,8 @@ const NavbarRentalManager = ({ logoUrl }) => {
               >
                 <img
                   className="w-8 h-8 rounded-full"
-                  src={
-                    userPhotoURL || "/docs/images/people/profile-picture-3.jpg"
-                  }
-                  alt="user photo"
+                  src={userPhotoURL || userimg1}
+                  alt="user "
                 />
               </button>
               <IoChevronDown color="blue" className="font-bold" />

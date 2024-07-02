@@ -136,7 +136,7 @@ export default function SingleHomeView() {
                     ? postData.media.selectedFiles[0]
                     : homimg
                 }
-                alt="Main house image"
+                alt="Main house "
                 className="w-full h-auto rounded-l-lg hover:brightness-50 transition duration-300"
               />
             </div>
@@ -149,7 +149,7 @@ export default function SingleHomeView() {
                     ? postData.media.selectedFiles[1]
                     : homin1
                 }
-                alt="House image 1"
+                alt="House  1"
                 className="w-full h-auto  hover:brightness-50 transition duration-300"
               />
               <img
@@ -160,7 +160,7 @@ export default function SingleHomeView() {
                     ? postData.media.selectedFiles[2]
                     : homin2
                 }
-                alt="House image 2"
+                alt="House  2"
                 className="w-full h-auto rounded-r-lg  hover:brightness-50 transition duration-300"
               />
               <img
@@ -171,7 +171,7 @@ export default function SingleHomeView() {
                     ? postData.media.selectedFiles[3]
                     : homin3
                 }
-                alt="House image 3"
+                alt="House  3"
                 className="w-full h-auto  hover:brightness-50 transition duration-300"
               />
               <div className="relative">
@@ -183,7 +183,7 @@ export default function SingleHomeView() {
                       ? postData.media.selectedFiles[4]
                       : homin4
                   }
-                  alt="House image 4"
+                  alt="House  4"
                   className="w-full h-auto rounded-r-lg hover:brightness-50 transition duration-300"
                 />
                 <div

@@ -4,9 +4,6 @@ import Footer from "../../../../components/layout/Footer/Footer";
 import logoUrl from "../../../../assets/images/zil-logo.png";
 import BuilderBelownav from "../components/BuilderBelownav";
 import HeroWithCard from "../Product/component/HeroWithCard";
-import CommunityRows from "./component/CommunityRows";
-import ToolCarousel from "./component/ToolCarousel";
-import BoostSection from "./component/BoostSection";
 import BuilderDashboard from "./component/BuilderDashboard";
 
 const BuilderToolPage = () => {

@@ -13,7 +13,7 @@ function BlogsResourceList({ dataList, imageUrls }) {
             <img
               key={index}
               src={imageUrl}
-              alt="Blog Image"
+              alt="Blog "
               className="w-full  mb-4 md:mb-2"
             />
           ))}

@@ -48,7 +48,7 @@ export default function LoginManager({ onClose }) {
           <div className="lg:w-1/2 hidden lg:block h-screen bg-cyan-200">
             {/* Place your image here */}
             <div className="p-5">
-              <img src={img1} alt="Image" className="w-96 h-full " />
+              <img src={img1} alt=" img1" className="w-96 h-full " />
             </div>
           </div>
         </div>

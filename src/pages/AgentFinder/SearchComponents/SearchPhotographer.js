@@ -3,8 +3,6 @@ import styled from "styled-components";
 import FindGuideSection from "../Components/FindGuideSection";
 
 import findstory from "../../../assets/images/find agent.png";
-import CommonList from "../Components/CommonList";
-import { detailscommon } from "../../../data/CommonListData";
 import PhotographerList from "../Components/PhotographerList";
 import { photographers } from "../../../data/photographerList";
 // Styled Components
